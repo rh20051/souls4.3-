@@ -1,0 +1,39 @@
+extends State
+class_name playerWalking
+@export var player: CharacterBody3D
+@export var animTree : AnimationTree
+
+@onready var cam = player.get_node("cameraPoint")
+func enter():
+	animTree["parameters/conditions/running"] = false
+	player.SPEED = 5
+func physics_update(delta: float):
+	animTree["parameters/conditions/walking"] = true
+	animTree["parameters/conditions/moving"] = true
+	animTree["parameters/conditions/idle"] = false
+	if cam.position.x != -1 * player.direction.x:
+		cam.position.x = lerp(cam.position.x, -1*player.direction.x, delta*2)
+	if cam.position.x != -1 * player.direction.z:
+		cam.position.z = lerp(cam.position.z, -1*player.direction.z, delta*2)
+	if player.climbing:
+		transitioned.emit(self,"playerClimbing")
+	if !player.canAttack:
+		transitioned.emit(self,"playerAttack")
+	if player.parrying == true:
+		transitioned.emit(self, "playerParry")
+	if player.rolling and player.stamina > 0:
+		transitioned.emit(self,"playerRolling")
+	if player.running and !player.lockedOn and !player.rolling :
+		player.SPEED = 8
+		animTree["parameters/conditions/walking"] = false
+		animTree["parameters/conditions/running"] = true
+		
+	elif player.canAttack and player.direction and !player.rolling:
+		animTree["parameters/conditions/running"] = false
+		player.SPEED = 5
+	elif !player.lockedOn:
+		transitioned.emit(self,"playerIdle")
+
+	
+	player.velocity.x = player.direction.x * player.SPEED
+	player.velocity.z = player.direction.z * player.SPEED

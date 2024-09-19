@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnkp8vslr2pbx"]
+
+[ext_resource type="Script" path="res://worldAssets/grass.gd" id="1_uge80"]
+[ext_resource type="ArrayMesh" uid="uid://bjkergedhefvi" path="res://worldAssets/new_array_mesh.tres" id="2_1ny4i"]
+
+[node name="grass" type="Node3D" groups=["healingItem"]]
+script = ExtResource("1_uge80")
+
+[node name="grass" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_1ny4i")
+skeleton = NodePath("")

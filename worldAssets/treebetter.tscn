@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgmqk0t4lduay"]
+
+[ext_resource type="PackedScene" uid="uid://8x3v8xlqmc2c" path="res://worldAssets/treebetter.glb" id="1_ylmyl"]
+
+[node name="treebetter" instance=ExtResource("1_ylmyl")]

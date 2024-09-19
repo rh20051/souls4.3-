@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jxn7q6kmpsbc"]
+
+[ext_resource type="PackedScene" uid="uid://bxqejx31s6y0g" path="res://locations/grassblade.glb" id="1_57bbn"]
+[ext_resource type="ArrayMesh" uid="uid://depuq4r3ycfyf" path="res://new_array_mesh.mesh" id="2_lqu3p"]
+
+[node name="grassblade" instance=ExtResource("1_57bbn")]
+
+[node name="Cube" parent="." index="0"]
+mesh = ExtResource("2_lqu3p")

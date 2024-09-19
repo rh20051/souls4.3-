@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://lfjrjjdfes1y"]
+
+[ext_resource type="ArrayMesh" uid="uid://ph4gmbsivrc0" path="res://misc/cloak.mesh" id="1_8c65i"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+mesh = ExtResource("1_8c65i")
+skeleton = NodePath("")

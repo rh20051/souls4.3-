@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://drkh6uhk4xph0"]
+
+[ext_resource type="PackedScene" uid="uid://dukg71k46hsd4" path="res://locations/ritualtree.glb" id="1_hhcvf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fh6gq"]
+height = 0.805024
+radius = 6.8632
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_awwic"]
+size = Vector3(1.72668, 6.27832, 2.00629)
+
+[node name="ritualtree" instance=ExtResource("1_hhcvf")]
+
+[node name="Area3D" type="Area3D" parent="Circle" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Circle/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0114136, -0.35428, -0.162673)
+shape = SubResource("CylinderShape3D_fh6gq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Circle/Area3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0983276, 2.63916, 0.0924377)
+shape = SubResource("BoxShape3D_awwic")

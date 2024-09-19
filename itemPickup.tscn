@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd8xepuvooxbb"]
+
+[ext_resource type="Script" path="res://itemPickup.gd" id="1_jhuit"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3pxtj"]
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bb6pa"]
+albedo_color = Color(1, 1, 0.631373, 1)
+emission_enabled = true
+emission = Color(0.898039, 0.898039, 0.898039, 1)
+emission_energy_multiplier = 1.97
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4fpii"]
+size = Vector3(3.23, 2.785, 3.495)
+
+[node name="item" type="Area3D" groups=["pickup"]]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
+script = ExtResource("1_jhuit")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3pxtj")
+surface_material_override/0 = SubResource("StandardMaterial3D_bb6pa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21318, 0)
+shape = SubResource("BoxShape3D_4fpii")
