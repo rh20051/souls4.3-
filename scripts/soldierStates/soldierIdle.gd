@@ -8,7 +8,8 @@ func _ready():
 	animPlayer.play("default")
 	
 func physics_update(_delta: float):
-
+	if enemy.damaged == true:
+		transitioned.emit(self, "soldierDamaged")
 	
 	enemy.velocity = Vector3()
 	print(enemy.direction.length())

@@ -10,9 +10,11 @@ var distance
 
 func physics_update(delta:float):
 	animPlayer.play("walk")
+	if enemy.damaged == true:
+		transitioned.emit(self, "soldierDamaged")
 
 	
-	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle, delta * 7)
+	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle + deg_to_rad(180), delta * 7)
 
 
 	enemy.rotation.x = 0

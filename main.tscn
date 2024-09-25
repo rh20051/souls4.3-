@@ -277,4 +277,4 @@ transform = Transform3D(6.77, 0, 0, 0, 6.77, 0, 0, 0, 6.77, 0, 0, 0)
 material = SubResource("StandardMaterial3D_yd4yr")
 
 [node name="footsoldier" parent="." instance=ExtResource("9_4pavx")]
-transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 55.8512, 2.82899, 0)
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 38.836, 2.82899, -5.3215)

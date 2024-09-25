@@ -295,24 +295,7 @@ func checkInventory():
 				var texture = ImageTexture.create_from_image(image)
 				inv.add_item(str(inventory[i]), texture, true)
 			
-func attack():
-	if wep.get_child_count() >0:
-		$AnimationPlayer.play("attack1")
-		wep.get_child(0).attack()
-		await get_tree().create_timer(1).timeout
-		if Input.is_action_pressed("attack"):
-			anim.play("attack2")
-			wep.get_child(0).attack()
-			await get_tree().create_timer(1).timeout
-			SPEED = 5
-			canAttack = true
-		else:
-			SPEED = 5
-			canAttack = true
-			return
-	else:
-		await get_tree().create_timer(1).timeout
-		canAttack = true
+
 func attackStart():
 	currentWeapon.get_node("hitbox").get_node("CollisionShape3D").disabled = false
 	

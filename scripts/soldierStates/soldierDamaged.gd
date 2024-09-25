@@ -1,11 +1,19 @@
 extends State
 class_name soldierDamaged
+@export var enemy: CharacterBody3D
+@export var animPlayer: AnimationPlayer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func enter():
+	enemy.damaged = false
+	enemy.velocity = Vector3()
+	animPlayer.play("damaged1")
+	
+	
+func physics_update(delta:float):
+	if enemy.damaged == true:
+		animPlayer.play("damaged2")
+		enemy.damaged = false
+	var currentRotation = enemy.transform.basis.get_rotation_quaternion()
+	enemy.velocity = (currentRotation.normalized() * animPlayer.get_root_motion_position()) / delta
+	await animPlayer.animation_finished
+	transitioned.emit(self, "soldierIdle")

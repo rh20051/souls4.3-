@@ -1,15 +1,19 @@
 extends CharacterBody3D
-
+var life = 100
 var player
 var target
 const SPEED = 5.0
 var direction 
+var damaged = false
 var angle
+
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	target = player.global_position
 	
 func _physics_process(delta: float) -> void:
+	if life <= 0:
+		queue_free()
 	target = player.global_position
 	direction = (target - global_position)
 	angle = atan2(direction.x,direction.z)
@@ -19,3 +23,8 @@ func _physics_process(delta: float) -> void:
 
 
 	move_and_slide()
+func hurted(damage):
+	life -= damage
+	damaged = true
+	
+	
