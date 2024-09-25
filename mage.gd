@@ -26,7 +26,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func hurted(damage):
-	print("Yup")
 	health -= damage
 	if health <= 0:
 		self.queue_free()

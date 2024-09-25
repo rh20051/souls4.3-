@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bajwjl0g57f7s"]
+[gd_scene load_steps=24 format=4 uid="uid://bajwjl0g57f7s"]
 
 [ext_resource type="Environment" uid="uid://0pesm0nbq1bn" path="res://world.tres" id="1_if1ff"]
 [ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://player.tscn" id="2_vviug"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://xux0cxjjolvu" path="res://locations/tent_table_wood2.png" id="4_0ot2m"]
 [ext_resource type="PackedScene" uid="uid://wxgsaynq1fjr" path="res://locations/chapel.tscn" id="5_ddbth"]
 [ext_resource type="PackedScene" uid="uid://csk1bkifgitd0" path="res://worldAssets/ladder.tscn" id="6_jrawr"]
-[ext_resource type="PackedScene" uid="uid://5al5og83uctk" path="res://mage.tscn" id="8_w1wxj"]
 [ext_resource type="PackedScene" uid="uid://vslx3bq44l2n" path="res://locations/enemies/footsoldier.tscn" id="9_4pavx"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sgb14"]
@@ -184,7 +183,7 @@ emission_on_uv2 = true
 environment = ExtResource("1_if1ff")
 
 [node name="player" parent="." instance=ExtResource("2_vviug")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.989, 16.7341, -0.792853)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7156, 0.13117, -0.792853)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_sgb14")
@@ -277,8 +276,5 @@ sky_mode = 1
 transform = Transform3D(6.77, 0, 0, 0, 6.77, 0, 0, 0, 6.77, 0, 0, 0)
 material = SubResource("StandardMaterial3D_yd4yr")
 
-[node name="mage" parent="." instance=ExtResource("8_w1wxj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6523, 1.31683, 0)
-
 [node name="footsoldier" parent="." instance=ExtResource("9_4pavx")]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 55.8512, 2.82899, 0)
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 55.8512, 2.82899, 0)

@@ -71,8 +71,6 @@ func physics_update(delta: float):
 			
 				
 			elif ((enemy.rotation.y) - (-angle)) <.005:
-				print(enemy.rotation.y)
-				print(-angle)
 				enemy.velocity = Vector3()
 				var rng = RandomNumberGenerator.new()
 				rand = rng.randf_range(0,10)

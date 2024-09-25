@@ -135,7 +135,7 @@ func _physics_process(delta):
 			global_position.z = ladder.get_node("CollisionShape3D").get_node("playerPos").global_position.z
 			$Armature.rotation.x = 0
 			$Armature.rotation.z = 0
-			print(input_dir.y)
+
 			if ladder.get_node("CollisionShape3D").get_node("Node3D").global_position.y < bottomPoint.global_position.y:
 				climbing = false
 			if ladder.get_node("CollisionShape3D").get_node("Node3D2").global_position.y > bottomPoint.global_position.y and input_dir.y > .5:

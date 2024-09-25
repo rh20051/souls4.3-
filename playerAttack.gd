@@ -2,6 +2,7 @@ extends State
 class_name playerAttack
 @export var animTree : AnimationTree
 @export var player: CharacterBody3D
+
 var chain = false
 var canMove
 func enter():

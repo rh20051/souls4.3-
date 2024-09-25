@@ -7,7 +7,7 @@ class_name playerIdle
 @onready var cam = player.get_node("cameraPoint")
 func enter():
 	player.canAttack = true
-	print("Hi")
+
 
 
 func physics_update(_delta: float):
