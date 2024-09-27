@@ -1,11 +1,15 @@
 extends State
 class_name soldierChase
 @export var enemy: CharacterBody3D
-@export var animPlayer : AnimationPlayer
 const accel = 10
+var animPlayer
 
 var distance
-
+func enter():
+	if enemy.type == "S":
+		animPlayer = enemy.get_node("SAnimationPlayer")
+	else:
+		animPlayer= enemy.get_node("SNSAnimationPlayer")
 
 
 func physics_update(delta:float):
@@ -14,7 +18,7 @@ func physics_update(delta:float):
 		transitioned.emit(self, "soldierDamaged")
 
 	
-	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle + deg_to_rad(180), delta * 7)
+	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle + deg_to_rad(180), delta * 4)
 
 
 	enemy.rotation.x = 0
@@ -28,7 +32,7 @@ func physics_update(delta:float):
 	distance = nav.get_next_path_position() - enemy.global_position
 	distance = distance.normalized()
 	#enemy.velocity.y -= enemy.gravity * delta
-	if enemy.global_position.distance_to(enemy.player.global_position) < 5:
+	if enemy.global_position.distance_to(enemy.player.global_position) < 3  and angle_difference(enemy.rotation.y, enemy.angle +deg_to_rad(180)) < .1 and angle_difference(enemy.rotation.y, enemy.angle +deg_to_rad(180)) >= -.1:
 		transitioned.emit(self, "soldierAttack")
 	else:
 		enemy.velocity = enemy.velocity.lerp(distance * 3, delta * accel)

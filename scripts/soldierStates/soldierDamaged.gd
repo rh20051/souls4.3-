@@ -1,9 +1,13 @@
 extends State
 class_name soldierDamaged
 @export var enemy: CharacterBody3D
-@export var animPlayer: AnimationPlayer
+var animPlayer
 
 func enter():
+	if enemy.type == "S":
+		animPlayer = enemy.get_node("SAnimationPlayer")
+	else:
+		animPlayer= enemy.get_node("SNSAnimationPlayer")
 	enemy.damaged = false
 	enemy.velocity = Vector3()
 	animPlayer.play("damaged1")
