@@ -13,7 +13,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="BoxMesh" id="BoxMesh_7j86f"]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D"]
-transform = Transform3D(-0.010594, 0, 0.999944, 0, 1, 0, -0.999944, 0, -0.010594, -0.00294576, -0.970597, -0.278044)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.00294576, -0.970597, -0.278044)
 multimesh = SubResource("MultiMesh_u0l2e")
 script = ExtResource("2_emqdc")
 
@@ -31,14 +31,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504137, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.513262, 0)
 
 [node name="playerPos" type="Node3D" parent="Area3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501004, -0.947986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23869e-10, 0.501004, -0.00422822)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D"]
 visible = false
 mesh = SubResource("BoxMesh_7j86f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.56267, -0.017208, 0.826503, 0.00659593, -0.999845, -0.0163266, 0.826656, -0.00373495, 0.562696, -0.0140386, -0.815694, -0.00304705)
-visible = false
+transform = Transform3D(0.0001097, -0.0157069, 0.999877, 0.00698037, -0.999852, -0.0157073, 0.999976, 0.00698123, -4.3706e-08, 0.630126, -0.825813, -0.00304708)
 mesh = ExtResource("1_3hngr")
 skeleton = NodePath("")

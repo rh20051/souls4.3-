@@ -10,6 +10,7 @@ var life = 30
 var recoverableLife = 0
 var rallyEnded = false
 var lastAction
+var inventoryCycle = 0
 var canMove = false
 var item
 var invItemSelected = 0
@@ -31,11 +32,13 @@ var canClimb = false
 var climbing = false
 var ladder = null
 var running = false
+@onready var weaponInv = $inventoryScreen/inventoryManager/weaponInventory
 @onready var camera = $cameraPoint
 @onready var armature = $Armature/Skeleton3D
 @onready var anim = $AnimationPlayer
 @onready var inv = $inventoryScreen/inventoryManager/inventory
 @onready var invArmor = $inventoryScreen/inventoryManager/inventoryArmor
+@onready var weaponDisplay = $inventoryScreen/inventoryManager/weaponsEquipped
 @onready var armorDisplay = $inventoryScreen/inventoryManager/armorEquipped
 @onready var itemDisplay = $inventoryScreen/inventoryManager/itemDisplay
 @onready var itemDisplayPoint = $inventoryScreen/inventoryManager/itemDisplay/SubViewportContainer/SubViewport/itemPoint
@@ -46,9 +49,10 @@ var running = false
 @onready var unequip = $inventoryScreen/VBoxContainer/unequip
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var inventory = ["longsword", "grass", "flamberge", "parryingdagger"]
+var inventory = ["grass"]
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
+var weaponInventory = ["longsword", "parryingdagger", "flamberge"]
 var acquiredArmor = [["flutedChest", "flutedGauntlets", "flutedHead", "flutedLegs"], ["nakedChest", "nakedGauntlets", "nakedHead", "nakedLegs"]]
 func _input(event):
 	if event is InputEventMouseMotion and !lockedOn:
@@ -130,7 +134,7 @@ func _physics_process(delta):
 			canClimb = false
 	if climbing:
 		if ladder != null:
-			$Armature.look_at(ladder.global_position, Vector3.LEFT)
+			$Armature.look_at(ladder.get_node("CollisionShape3D").get_node("MeshInstance3D").global_position, Vector3.UP)
 			global_position.x = ladder.get_node("CollisionShape3D").get_node("playerPos").global_position.x
 			global_position.z = ladder.get_node("CollisionShape3D").get_node("playerPos").global_position.z
 			$Armature.rotation.x = 0
@@ -155,6 +159,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_pressed("openInventory"):
 		if invOpen == false:
+			inventoryCycle = 0
 			inv.show()
 			invArmor.hide()
 			armorDisplay.hide()
@@ -187,19 +192,30 @@ func _physics_process(delta):
 			if inv.has_focus(): 
 				_on_inventory_item_activated(invItemSelected)
 		if Input.is_action_just_pressed("heavyAttack"):
-			if inv.visible == true:
-		
+			inventoryCycle += 1
+			if inventoryCycle == 3:
+				inventoryCycle = 0
+			if inventoryCycle == 1:
+					inv.hide()
+					invArmor.show()
+					armorDisplay.show()
+					inv.deselect_all()
+					weaponInv.hide()
+					invArmor.grab_focus()
+			elif inventoryCycle == 0:
+					inv.show()
+					invArmor.hide()
+					weaponDisplay.hide()
+					armorDisplay.hide()
+					weaponInv.hide()
+					inv.grab_focus()
+			elif inventoryCycle == 2:
 				inv.hide()
-				invArmor.show()
-				armorDisplay.show()
-				inv.deselect_all()
-				invArmor.grab_focus()
-			else:
-				inv.show()
 				invArmor.hide()
 				armorDisplay.hide()
-				inv.grab_focus()
-
+				weaponInv.show()
+				weaponDisplay.show()
+				weaponInv.grab_focus()
 		if Input.is_action_just_pressed("menuRight"):
 			if inv.has_focus():
 				if invItemSelected < len(inventory) -1:	
@@ -308,6 +324,15 @@ func parryStart():
 func parryEnd():
 	currentParryWeapon.get_node("hitbox").get_node("CollisionShape3D").disabled = true
 func updateArmorDisplay():
+	weaponDisplay.clear()
+	weaponInv.clear()
+	for i in weaponInventory:
+		weaponInv.add_item(i)
+	if currentWeapon:
+		weaponDisplay.add_item(currentWeapon.name)
+		
+	if currentParryWeapon:
+		weaponDisplay.add_item(currentParryWeapon.name)
 	armorDisplay.clear()
 	for i in equippedArmor.values():
 		armorDisplay.add_item(i)
@@ -375,16 +400,26 @@ func _on_equip_pressed():
 			leftwep.remove_child(i)
 	if Global.weapons.has(itemSelected):
 		wep.add_child(Global.weapons[itemSelected][0].instantiate())
+		
 		for i in wep.get_children():
 			currentWeapon = i
+			updateArmorDisplay()
 	if Global.leftHandWeapons.has(itemSelected):
-		leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())
-		for i in leftwep.get_children():
-			currentParryWeapon = i
+		if currentWeapon:
+			if currentWeapon.name == "flamberge":
+				pass
+			else:
+				leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())
+				
+				for i in leftwep.get_children():
+					currentParryWeapon = i
+					updateArmorDisplay()
 	armorDisplay.hide()
+	weaponDisplay.hide()
 	$inventoryScreen/VBoxContainer.hide()
 	itemDisplay.hide()
 	$inventoryScreen.hide()
+	weaponInv.hide()
 	
 	invOpen = false
 
@@ -426,3 +461,23 @@ func _on_rally_timer_timeout():
 func _on_pickup_area_area_exited(area: Area3D) -> void:
 	if area == ladder:
 		canClimb = false
+
+
+func _on_weapon_inventory_item_activated(index: int) -> void:
+	itemSelected = weaponInv.get_selected_items()[0]
+	itemSelected = weaponInv.get_item_text(itemSelected)
+	$inventoryScreen/VBoxContainer.show()
+	
+	$inventoryScreen/VBoxContainer.grab_focus()
+	if itemSelected not in Global.leftHandWeapons:
+		itemDisplayPoint.addSelectedItem(itemSelected)
+		itemDisplay.get_node("itemName").text = str(itemSelected)
+		itemDisplay.get_node("itemDesc").text = str(Global.weapons[itemSelected][1])
+		equip.disabled = false
+		$inventoryScreen/VBoxContainer/use.disabled = true
+	else:
+		itemDisplayPoint.addSelectedItem(itemSelected)
+		itemDisplay.get_node("itemName").text = str(itemSelected)
+		itemDisplay.get_node("itemDesc").text = str(Global.leftHandWeapons[itemSelected][1])
+		equip.disabled = false
+		$inventoryScreen/VBoxContainer/use.disabled = true

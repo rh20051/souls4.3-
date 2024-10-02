@@ -8,9 +8,7 @@ func enter():
 	animTree["parameters/conditions/running"] = false
 	player.SPEED = 5
 func physics_update(delta: float):
-	animTree["parameters/conditions/walking"] = true
-	animTree["parameters/conditions/moving"] = true
-	animTree["parameters/conditions/idle"] = false
+
 	if cam.position.x != -1 * player.direction.x:
 		cam.position.x = lerp(cam.position.x, -1*player.direction.x, delta*2)
 	if cam.position.x != -1 * player.direction.z:
@@ -30,9 +28,11 @@ func physics_update(delta: float):
 		
 	elif player.canAttack and player.direction and !player.rolling:
 		animTree["parameters/conditions/running"] = false
+		animTree["parameters/conditions/walking"] = true
 		player.SPEED = 5
 	elif !player.lockedOn:
 		transitioned.emit(self,"playerIdle")
+
 
 	
 	player.velocity.x = player.direction.x * player.SPEED
