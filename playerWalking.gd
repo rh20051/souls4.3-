@@ -28,6 +28,7 @@ func physics_update(delta: float):
 		
 	elif player.canAttack and player.direction and !player.rolling:
 		animTree["parameters/conditions/running"] = false
+
 		animTree["parameters/conditions/walking"] = true
 		player.SPEED = 5
 	elif !player.lockedOn:

@@ -52,7 +52,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var inventory = ["grass"]
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
-var weaponInventory = ["longsword", "parryingdagger", "flamberge"]
+var weaponInventory = ["longsword", "parryingdagger", "flamberge", "lamp"]
 var acquiredArmor = [["flutedChest", "flutedGauntlets", "flutedHead", "flutedLegs"], ["nakedChest", "nakedGauntlets", "nakedHead", "nakedLegs"]]
 func _input(event):
 	if event is InputEventMouseMotion and !lockedOn:
@@ -408,12 +408,12 @@ func _on_equip_pressed():
 		if currentWeapon:
 			if currentWeapon.name == "flamberge":
 				pass
-			else:
-				leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())
+		else:
+			leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())
 				
-				for i in leftwep.get_children():
-					currentParryWeapon = i
-					updateArmorDisplay()
+			for i in leftwep.get_children():
+				currentParryWeapon = i
+				updateArmorDisplay()
 	armorDisplay.hide()
 	weaponDisplay.hide()
 	$inventoryScreen/VBoxContainer.hide()

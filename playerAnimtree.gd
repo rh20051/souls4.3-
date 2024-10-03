@@ -9,6 +9,10 @@ extends AnimationTree
 # Called when the node enters the scene tree for the first time.
 
 func _physics_process(delta: float) -> void:
+	if player.currentParryWeapon:
+		if player.currentParryWeapon.name == "lamp":
+			
+			animTree["parameters/conditions/holdingLamp"] = true
 	if player.lockedOn:
 		if player.input_dir.x < -.2:
 			animTree["parameters/conditions/movingLeft"] = true
@@ -31,8 +35,12 @@ func _physics_process(delta: float) -> void:
 		animTree["parameters/conditions/movingRight"] = false
 		animTree["parameters/conditions/movingBack"] = false
 	if stateMachine.current_state.name == "playerIdle":
+		animTree["parameters/StateMachine/conditions/idle"] = true
+		animTree["parameters/StateMachine/conditions/moving"] = false
 		animTree["parameters/conditions/parrying"] = false
 		animTree["parameters/conditions/attack"] = false
+		animTree["parameters/StateMachine/conditions/attacking"] = false
+		animTree["parameters/StateMachine/conditions/chain"] = false
 		animTree["parameters/conditions/chain"] = false
 		animTree["parameters/conditions/moving"] = false
 		animTree["parameters/conditions/idle"] = true
@@ -45,14 +53,18 @@ func _physics_process(delta: float) -> void:
 				animTree["parameters/conditions/holdingFlamberge"] = false
 				animTree["parameters/conditions/notHoldingFlamberge"] = true
 	if stateMachine.current_state.name == "playerAttack":
+		animTree["parameters/StateMachine/conditions/moving"] = false
+		animTree["parameters/StateMachine/conditions/idle"] = false
 		animTree["parameters/conditions/moving"] = false
 		animTree["parameters/conditions/idle"] = false
 		animTree["parameters/conditions/running"] = false
 	if stateMachine.current_state.name == "playerWalking":
+		animTree["parameters/StateMachine/conditions/idle"] = false
 		animTree["parameters/conditions/parrying"] = false
 		animTree["parameters/conditions/attack"] = false
+		animTree["parameters/StateMachine/conditions/attacking"] = false
 		animTree["parameters/conditions/chain"] = false
-		
+		animTree["parameters/StateMachine/conditions/moving"] = true
 		animTree["parameters/conditions/moving"] = true
 		animTree["parameters/conditions/idle"] = false
 		if player.currentWeapon:
