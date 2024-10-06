@@ -8,6 +8,7 @@ func enter():
 	animTree["parameters/conditions/idle"] = false
 	animTree["parameters/conditions/running"] = false
 	animTree["parameters/conditions/rolling"] = true
+	animTree["parameters/StateMachine/conditions/dodging"] = true
 	player.stamina -=20
 	player.SPEED = 2
 	
@@ -15,13 +16,12 @@ func enter():
 	
 	await animTree.animation_finished
 	animTree["parameters/conditions/rolling"] = false
+	animTree["parameters/StateMachine/conditions/dodging"] = false
 	player.rolling = false
 
 	
-	if player.direction:
-		transitioned.emit(self, "playerWalking")
-	else:
-		transitioned.emit(self,"playerIdle")
+	
+	transitioned.emit(self,"playerIdle")
 
 func physics_update(delta:float):
 

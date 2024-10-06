@@ -16,25 +16,44 @@ func _physics_process(delta: float) -> void:
 	if player.lockedOn:
 		if player.input_dir.x < -.2:
 			animTree["parameters/conditions/movingLeft"] = true
+			animTree["parameters/StateMachine/conditions/movingLeft"] = true
 			animTree["parameters/conditions/movingRight"] = false
+			animTree["parameters/StateMachine/conditions/movingRight"] = false
 			animTree["parameters/conditions/movingBack"] = false
+			animTree["parameters/StateMachine/conditions/movingBack"] = false
 		elif player.input_dir.x > 0.2:
 			animTree["parameters/conditions/movingLeft"] = false
+			animTree["parameters/StateMachine/conditions/movingLeft"] = false
 			animTree["parameters/conditions/movingRight"] = true
+			animTree["parameters/StateMachine/conditions/movingRight"] = true
 			animTree["parameters/conditions/movingBack"] = false
+			animTree["parameters/StateMachine/conditions/movingBack"] = false
 		elif player.input_dir.y < 0:
 			animTree["parameters/conditions/movingLeft"] = false
+			animTree["parameters/StateMachine/conditions/movingLeft"] = false
 			animTree["parameters/conditions/movingRight"] = false
+			animTree["parameters/StateMachine/conditions/movingRight"]= false
 			animTree["parameters/conditions/movingBack"] = false
+			animTree["parameters/StateMachine/conditions/movingBack"] = false
 		else:
 			animTree["parameters/conditions/movingLeft"] = false
-			animTree["parameters/conditions/movingRight"] = true
+			animTree["parameters/StateMachine/conditions/movingLeft"] = false
+			animTree["parameters/conditions/movingRight"] = false
+			animTree["parameters/StateMachine/conditions/movingRight"] = false
 			animTree["parameters/conditions/movingBack"] = true
+			animTree["parameters/StateMachine/conditions/movingBack"] = true
+			
 	else:
 		animTree["parameters/conditions/movingLeft"] = false
+		animTree["parameters/StateMachine/conditions/movingLeft"] = false
 		animTree["parameters/conditions/movingRight"] = false
+		animTree["parameters/StateMachine/conditions/movingRight"] = false
 		animTree["parameters/conditions/movingBack"] = false
+		animTree["parameters/StateMachine/conditions/movingBack"] = false
 	if stateMachine.current_state.name == "playerIdle":
+		animTree["parameters/StateMachine/conditions/running"] = false
+		animTree["parameters/StateMachine/conditions/walking"] = false
+		animTree["parameters/StateMachine/conditions/dodging"] = false
 		animTree["parameters/StateMachine/conditions/idle"] = true
 		animTree["parameters/StateMachine/conditions/moving"] = false
 		animTree["parameters/conditions/parrying"] = false

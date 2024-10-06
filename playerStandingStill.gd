@@ -7,11 +7,11 @@ class_name playerIdle
 @onready var cam = player.get_node("cameraPoint")
 func enter():
 	player.canAttack = true
-
+	
 
 
 func physics_update(_delta: float):
-
+	
 	player.velocity = Vector3()
 	player.SPEED = 0
 	

@@ -35,7 +35,7 @@ var running = false
 @onready var weaponInv = $inventoryScreen/inventoryManager/weaponInventory
 @onready var camera = $cameraPoint
 @onready var armature = $Armature/Skeleton3D
-@onready var anim = $AnimationPlayer
+@onready var animTree = $AnimationTree
 @onready var inv = $inventoryScreen/inventoryManager/inventory
 @onready var invArmor = $inventoryScreen/inventoryManager/inventoryArmor
 @onready var weaponDisplay = $inventoryScreen/inventoryManager/weaponsEquipped
@@ -241,7 +241,8 @@ func _physics_process(delta):
 
 	
 	if running:
-		if Input.is_action_pressed("run"):
+		
+		if Input.is_action_pressed("run") and direction != Vector3():
 			running = true
 		else:
 			running = false
@@ -256,6 +257,7 @@ func _physics_process(delta):
 			rolling = true
 		if Input.is_action_pressed("run") and canAttack == true and invOpen == false:
 			running = true
+			
 		if direction:
 			
 			if !lockedEnemy and canAttack and !rolling:
