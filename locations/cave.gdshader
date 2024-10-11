@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode ambient_light_disabled, specular_toon, cull_back;
+render_mode ambient_light_disabled, cull_back;
 
 uniform sampler2D t;
 uniform vec3 color_albd = vec3(1, 1, 1);

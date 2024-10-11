@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://b75o07cgerh51"]
+
+[ext_resource type="Script" path="res://worldAssets/lamppost.gd" id="1_6x3sc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qnf2d"]
+lifetime_randomness = 0.33
+particle_flag_rotate_y = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+inherit_velocity_ratio = 2.295
+spread = 119.0
+flatness = 0.46
+angular_velocity_min = -720.0
+angular_velocity_max = 505.53
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0.415, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+turbulence_noise_scale = 0.77
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vi44"]
+cull_mode = 2
+albedo_color = Color(0.816667, 1, 0, 1)
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.375, 0.9, 0, 1)
+emission_energy_multiplier = 3.43
+backlight_enabled = true
+backlight = Color(1, 0.641667, 0.14, 1)
+texture_filter = 2
+distance_fade_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ll1p"]
+material = SubResource("StandardMaterial3D_7vi44")
+size = Vector3(0.02, 0.02, -0.015)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h3g4j"]
+size = Vector3(5.55, 5.145, 4.485)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_6x3sc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0706191, 1.29021, 0.0916452)
+size = Vector3(0.522705, 1.93268, 0.432739)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0685439, 1.13003, 0.00376415)
+visible = false
+amount = 16
+amount_ratio = 0.8975
+lifetime = 2.82
+randomness = 1.0
+trail_lifetime = 6.2
+process_material = SubResource("ParticleProcessMaterial_qnf2d")
+draw_pass_1 = SubResource("BoxMesh_5ll1p")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00167447, 1.29958, 0.013874)
+visible = false
+light_color = Color(8.42288e-08, 0.268048, 0.26809, 1)
+light_energy = 16.0
+light_indirect_energy = 0.0
+light_size = 1.0
+light_specular = 5.843
+shadow_enabled = true
+shadow_transmittance_bias = -0.387
+shadow_opacity = 0.21
+shadow_blur = 2.225
+distance_fade_begin = 0.0
+distance_fade_shadow = 0.0
+distance_fade_length = 8.83
+omni_range = 20.826
+
+[node name="Area3D" type="Area3D" parent="." groups=["interact"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73378, 0)
+shape = SubResource("BoxShape3D_h3g4j")

@@ -140,7 +140,7 @@ albedo_color = Color(0.19, 0.19, 0.19, 1)
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_is15x"]
 gravity = Vector3(0, 0.235, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vi44"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ste3w"]
 cull_mode = 2
 albedo_color = Color(0.816667, 1, 0, 1)
 metallic_specular = 0.0
@@ -149,9 +149,11 @@ emission = Color(0.375, 0.9, 0, 1)
 emission_energy_multiplier = 3.43
 backlight_enabled = true
 backlight = Color(1, 0.641667, 0.14, 1)
+texture_filter = 2
+distance_fade_mode = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_biywq"]
-material = SubResource("StandardMaterial3D_7vi44")
+material = SubResource("StandardMaterial3D_ste3w")
 size = Vector3(0.02, 0.02, -0.015)
 
 [node name="lamp" type="Node3D"]
@@ -170,19 +172,18 @@ draw_pass_1 = SubResource("BoxMesh_biywq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Cylinder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -34.3656, 0)
-light_color = Color(0.07, 1, 0.6745, 1)
-light_energy = 8.417
-light_indirect_energy = 13.9
-light_volumetric_fog_energy = 11.078
-light_specular = 0.0
-shadow_bias = 3.72
-shadow_normal_bias = 3.326
-shadow_transmittance_bias = 13.38
-shadow_opacity = 0.5
-shadow_blur = 10.0
+light_color = Color(8.42288e-08, 0.268048, 0.26809, 1)
+light_energy = 8.231
+light_indirect_energy = 0.0
+light_size = 0.326
+light_specular = 0.862
+shadow_enabled = true
+shadow_transmittance_bias = -0.387
+shadow_opacity = 0.21
+shadow_blur = 2.225
 distance_fade_enabled = true
 distance_fade_begin = 0.0
+distance_fade_shadow = 0.0
 distance_fade_length = 8.83
-omni_range = 12.21
-omni_attenuation = 1.44
-omni_shadow_mode = 0
+omni_range = 9.135
+omni_attenuation = -0.728

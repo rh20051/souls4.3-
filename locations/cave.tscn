@@ -1,7 +1,7 @@
-[gd_scene load_steps=29 format=4 uid="uid://cxo7nwbxuntud"]
+[gd_scene load_steps=26 format=4 uid="uid://cxo7nwbxuntud"]
 
 [ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://player.tscn" id="1_mra38"]
-[ext_resource type="Shader" path="res://locations/cave.gdshader" id="2_u4xa3"]
+[ext_resource type="PackedScene" uid="uid://b75o07cgerh51" path="res://worldAssets/lamppost.tscn" id="2_cnpkw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg71k"]
 
@@ -37,8 +37,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4pnvo")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4h427"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhg0p"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_aqx31"]
@@ -72,17 +70,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_aqx31")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sa4aa"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6pg0x"]
-noise = SubResource("FastNoiseLite_sa4aa")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rosx2"]
-render_priority = 0
-shader = ExtResource("2_u4xa3")
-shader_parameter/color_albd = Vector3(1, 1, 1)
-shader_parameter/t = SubResource("NoiseTexture2D_6pg0x")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glx8d"]
 
@@ -118,11 +105,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_r00pc")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ni6m"]
-render_priority = 0
-shader = ExtResource("2_u4xa3")
-shader_parameter/color_albd = Vector3(1, 1, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3pwr"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_emlh1"]
@@ -157,10 +139,23 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_emlh1")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wgur"]
-render_priority = 0
-shader = ExtResource("2_u4xa3")
-shader_parameter/color_albd = Vector3(0.13, 1.31, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fcain"]
+noise_type = 3
+seed = 4
+frequency = 0.5078
+fractal_type = 3
+domain_warp_enabled = true
+domain_warp_amplitude = 30.78
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_irnta"]
+width = 1996
+height = 1986
+noise = SubResource("FastNoiseLite_fcain")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2jshk"]
+albedo_color = Color(0.267988, 0.260239, 0.267814, 1)
+albedo_texture = SubResource("NoiseTexture2D_irnta")
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghm6a"]
 
@@ -208,7 +203,10 @@ data = PackedVector3Array(-26.5199, 39.5994, -44.8453, -27.6627, 36.3581, -51.96
 
 [sub_resource type="Environment" id="Environment_vw1dp"]
 background_mode = 1
-ambient_light_source = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+ambient_light_energy = 0.16
+volumetric_fog_density = 0.0015
 
 [node name="Node3D" type="Node3D"]
 
@@ -216,25 +214,22 @@ ambient_light_source = 1
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_jbypi")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_4h427")
 
 [node name="Cube_007" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.475673, 0.154061, 0, -0.154061, 0.475673, 0, 0, 0, 0.5, -0.999085, -6.55648, -0.196861)
 mesh = SubResource("ArrayMesh_s05to")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_rosx2")
 
 [node name="Cube_008" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.474647, -0.156939, -0.00895201, 0.156959, 0.474725, -0.000317363, 0.0085991, -0.00250893, 0.49992, 0.527191, -7.59607, -0.420811)
 mesh = SubResource("ArrayMesh_6yv1k")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_2ni6m")
 
 [node name="Cube_010" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ut4r")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_8wgur")
+surface_material_override/0 = SubResource("StandardMaterial3D_2jshk")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(20.865, 0, 0, 0, 0.468, 0, 0, 0, 30.915, 0, 13.3568, 0)
@@ -261,3 +256,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.84079, 27.2523)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vw1dp")
+
+[node name="Node3D" parent="." instance=ExtResource("2_cnpkw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.726657, 0.640149, 1.90712)
+
+[node name="Node3D2" parent="." instance=ExtResource("2_cnpkw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2398)

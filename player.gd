@@ -7,18 +7,16 @@ const JUMP_VELOCITY = 4.5
 const roll_distance = 130
 const roll_speed = 3.0
 var life = 30
+var interactable
 var recoverableLife = 0
 var rallyEnded = false
-var lastAction
-var inventoryCycle = 0
 var canMove = false
+var canInteract = false
 var item
-var invItemSelected = 0
 var newItem
 var stamina = 100
-var buttonSelected = 0
+
 var rolling = false
-var invOpen = false
 var lockedOn = false
 var parrying = false
 var itemSelected = null
@@ -32,16 +30,16 @@ var canClimb = false
 var climbing = false
 var ladder = null
 var running = false
-@onready var weaponInv = $inventoryScreen/inventoryManager/weaponInventory
+@onready var weaponInv = $inventoryScreen/inventoryManager/equipment/weaponInventory
 @onready var camera = $cameraPoint
 @onready var armature = $Armature/Skeleton3D
 @onready var animTree = $AnimationTree
 @onready var inv = $inventoryScreen/inventoryManager/inventory
-@onready var invArmor = $inventoryScreen/inventoryManager/inventoryArmor
-@onready var weaponDisplay = $inventoryScreen/inventoryManager/weaponsEquipped
-@onready var armorDisplay = $inventoryScreen/inventoryManager/armorEquipped
+@onready var invArmor = $inventoryScreen/inventoryManager/equipment/inventoryArmor
+@onready var weaponDisplay = $inventoryScreen/inventoryManager/equipment/weaponsEquipped
+@onready var armorDisplay = $inventoryScreen/inventoryManager/equipment/armorEquipped
 @onready var itemDisplay = $inventoryScreen/inventoryManager/itemDisplay
-@onready var itemDisplayPoint = $inventoryScreen/inventoryManager/itemDisplay/SubViewportContainer/SubViewport/itemPoint
+
 @onready var wep = $Armature/Skeleton3D/weaponHolder
 @onready var leftwep = $Armature/Skeleton3D/parryWeaponHolder
 @onready var bottomPoint = $pickupArea/CollisionShape3D/Node3D
@@ -56,30 +54,29 @@ var weaponInventory = ["longsword", "parryingdagger", "flamberge", "lamp"]
 var acquiredArmor = [["flutedChest", "flutedGauntlets", "flutedHead", "flutedLegs"], ["nakedChest", "nakedGauntlets", "nakedHead", "nakedLegs"]]
 func _input(event):
 	if event is InputEventMouseMotion and !lockedOn:
-		$cameraPoint.rotation.y += (-event.relative.x * SENSITIVITY)
-		$cameraPoint.rotation.x +=(event.relative.y * SENSITIVITY * 1.4)
-		$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.y += (-event.relative.x * SENSITIVITY)
+		camera.rotation.x +=(event.relative.y * SENSITIVITY * 1.4)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
 
 func _process(delta):
 	if Input.is_action_pressed("camStickDown"):
-		$cameraPoint.rotation.x -=(40 * SENSITIVITY * 1.4)
-		$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.x -=(40 * SENSITIVITY * 1.4)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
 	if Input.is_action_pressed("camStickUp"):
-		$cameraPoint.rotation.x +=(40 * SENSITIVITY * 1.4)
-		$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.x +=(40 * SENSITIVITY * 1.4)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
 	if Input.is_action_pressed("camJoystickLeft"):
-		$cameraPoint.rotation.y +=(40 * SENSITIVITY * 1.4)
-		$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.y +=(40 * SENSITIVITY * 1.4)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
 	if Input.is_action_pressed("camStickRight"):
-		$cameraPoint.rotation.y -=(40 * SENSITIVITY * 1.4)
-		$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
-	$cameraPoint.rotation.x = clamp($cameraPoint.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.y -=(40 * SENSITIVITY * 1.4)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
 		
 		
 		
 func _ready():
-	updateArmorDisplay()
-	checkInventory()
+	
 	$inventoryScreen.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -88,18 +85,14 @@ func _physics_process(delta):
 		recoverableLife -= .1
 		if recoverableLife == life:
 			rallyEnded = false
-	if Global.increment != Global.oldIncrement:
-		inventory.append(Global.newItem[0])
-		checkInventory()
-		Global.oldIncrement = 0
-		Global.increment = 0
+
 		
 	if Input.is_action_just_pressed("lockOn"):
 		if !lockedOn:
 			lockon()
 	
 		else:
-			$cameraPoint.look_at(lockedEnemy.get_node("lockonPoint").global_position)
+			camera.look_at(lockedEnemy.get_node("lockonPoint").global_position)
 			lockedEnemy.get_node("healthDisplay").visible = false
 			lockedEnemy.get_node("lockonPoint").get_node("Sprite3D").visible = false			
 			lockedEnemy = null
@@ -114,7 +107,7 @@ func _physics_process(delta):
 				if i != lockedEnemy and i.is_in_group("enemy"):
 					lockedEnemy = i
 					break
-		$cameraPoint.look_at(lockedEnemy.get_node("lockonPoint").global_position)
+		camera.look_at(lockedEnemy.get_node("lockonPoint").global_position)
 		
 		lockedEnemy.get_node("healthDisplay").visible = true
 		lockedEnemy.get_node("lockonPoint").get_node("Sprite3D").visible = true
@@ -151,93 +144,33 @@ func _physics_process(delta):
 			canPickUp = false
 			item = newItem.name
 			newItem = null
-			lastAction = "pickup"
-			headsUp(item)
+			$HeadsUp.lastAction = "pickup"
+			$HeadsUp.headsUp(item)
 			$interact.hide()
+	if canInteract == true:
+		if Input.is_action_just_pressed("interact") and inv.invOpen == false and interactable:
+			interactable.get_parent().interacted()
+			interactable = null
+			
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("openInventory"):
-		if invOpen == false:
-			inventoryCycle = 0
-			inv.show()
-			invArmor.hide()
-			armorDisplay.hide()
-			invOpen = true
-			invItemSelected = 0
-			$inventoryScreen.visible = true
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			invArmor.release_focus()
-			inv.grab_focus() #inventory takes input priority
-			inv.select(invItemSelected) #automatically select first item
-			
-		else:
-			invOpen = false
-			itemDisplay.hide()
-			$inventoryScreen/VBoxContainer.visible = false
-	if invOpen != true:
+
+	if inv.invOpen != true:
 		if camera.position.y != 2.78:
 				camera.position.y = lerp(camera.position.y, 2.78, delta*2)
-	if invOpen == true:
-		$lifeTexture/life.hide()
-		$staminaTexture/stamina.hide()
-		if invArmor.visible == true:
+	if invArmor.visible == true:
 			if camera.position.y != 1.4:
 				camera.position.y = lerp(camera.position.y, 1.4, delta*2)
 			if camera.position.z !=  3 * camera.basis.z.x:
 				camera.position.z = lerp(camera.position.z, 3 * camera.basis.z.x, delta*2)
 			if camera.position.x !=  3 * camera.basis.z.z:
 				camera.position.x = lerp(camera.position.x, 3 * -camera.basis.z.z, delta*2)
-		if Input.is_action_just_pressed("interact"): #interacting with item in inventory to open equip,unequip etc
-			if inv.has_focus(): 
-				_on_inventory_item_activated(invItemSelected)
-		if Input.is_action_just_pressed("heavyAttack"):
-			inventoryCycle += 1
-			if inventoryCycle == 3:
-				inventoryCycle = 0
-			if inventoryCycle == 1:
-					inv.hide()
-					invArmor.show()
-					armorDisplay.show()
-					inv.deselect_all()
-					weaponInv.hide()
-					invArmor.grab_focus()
-			elif inventoryCycle == 0:
-					inv.show()
-					invArmor.hide()
-					weaponDisplay.hide()
-					armorDisplay.hide()
-					weaponInv.hide()
-					inv.grab_focus()
-			elif inventoryCycle == 2:
-				inv.hide()
-				invArmor.hide()
-				armorDisplay.hide()
-				weaponInv.show()
-				weaponDisplay.show()
-				weaponInv.grab_focus()
-		if Input.is_action_just_pressed("menuRight"):
-			if inv.has_focus():
-				if invItemSelected < len(inventory) -1:	
-					invItemSelected += 1
-				inv.select(invItemSelected) #change currently selected inventory item
-			elif !invArmor.has_focus():
-				$inventoryScreen/VBoxContainer.get_child(buttonSelected +1).grab_focus() #if an inventory item is not selected,(but inventory is open) presume its equip/unequip selected and change between them
-		if Input.is_action_just_pressed("menuLeft"):
-			if invItemSelected > 0:
-				invItemSelected -= 1
-			inv.select(invItemSelected)#same but left
-
-	else:
-		$lifeTexture/life.show()
-		$staminaTexture/stamina.show()
-		$inventoryScreen.visible = false
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
 
 	input_dir = Input.get_vector("left", "right", "forward", "back")
 
-	direction = ($cameraPoint.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = (camera.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	
 	if running:
@@ -253,9 +186,9 @@ func _physics_process(delta):
 			canAttack = false
 		if Input.is_action_just_pressed("parry") and canAttack == true and leftwep.get_child_count() >0:
 			parrying = true
-		if Input.is_action_just_pressed("roll") and stamina > 0 and invOpen == false:
+		if Input.is_action_just_pressed("roll") and stamina > 0 and inv.invOpen == false:
 			rolling = true
-		if Input.is_action_pressed("run") and canAttack == true and invOpen == false:
+		if Input.is_action_pressed("run") and canAttack == true and inv.invOpen == false:
 			running = true
 			
 		if direction:
@@ -280,39 +213,14 @@ func lockon():
 			lockedOn = true
 			lockedEnemy = i 
 			break
-			
-func changeInventory():
-		inventory.append(Global.newItem)
+
 
 func hurted(dmg):
 	recoverableLife = life
 	life -= dmg
 
 	$rallyTimer.start(2)		
-func checkInventory():
-	var addArmor = true
-	var armorInventoryLength = len(acquiredArmor) * 4
 
-	for i in range(len(acquiredArmor)):
-		for a in acquiredArmor[i]:
-				for g in armorInventoryLength:
-					if a in invArmor.get_item_text(g):
-						addArmor = false
-						
-				if addArmor == true:
-					invArmor.add_item(a)
-					addArmor = true
-	for i in range(len(inventory)):
-	
-		if inventory[i] in Global.inventoryDisplays:
-			if inventory[i] in inv.get_item_text(i):
-				pass
-			else:
-				
-				var image = Image.load_from_file(Global.inventoryDisplays[inventory[i]][0])
-				var texture = ImageTexture.create_from_image(image)
-				inv.add_item(str(inventory[i]), texture, true)
-			
 
 func attackStart():
 	currentWeapon.get_node("hitbox").get_node("CollisionShape3D").disabled = false
@@ -325,105 +233,19 @@ func parryStart():
 	
 func parryEnd():
 	currentParryWeapon.get_node("hitbox").get_node("CollisionShape3D").disabled = true
-func updateArmorDisplay():
-	weaponDisplay.clear()
-	weaponInv.clear()
-	for i in weaponInventory:
-		weaponInv.add_item(i)
-	if currentWeapon:
-		weaponDisplay.add_item(currentWeapon.name)
-		
-	if currentParryWeapon:
-		weaponDisplay.add_item(currentParryWeapon.name)
-	armorDisplay.clear()
-	for i in equippedArmor.values():
-		armorDisplay.add_item(i)
-func headsUp(item):
-	$HeadsUp.show()
-	if lastAction == "pickup":
-		$HeadsUp.text = "picked up "+ str(item)
-	await get_tree().create_timer(2).timeout
-	$HeadsUp.hide()
 
-func _on_inventory_item_clicked(index, at_position, mouse_button_index):
-	if inv.has_focus():
-		itemSelected = inv.get_selected_items()[0]
-		itemSelected = inv.get_item_text(itemSelected)
+
+
 
 func consume(item):
 	if item.is_in_group("healingItem"):
 		life += item.restoredLife
 
 
-func _on_inventory_item_activated(index):
-	itemDisplay.show()
-	$inventoryScreen/VBoxContainer.show()
-	itemSelected = inv.get_selected_items()[0]
-	
-	itemSelected = inv.get_item_text(itemSelected)
-	
-	if itemSelected not in Global.weapons and itemSelected not in Global.leftHandWeapons:
-
-		equip.disabled = true
-		unequip.disabled = true
-	elif itemSelected not in Global.consumables and itemSelected not in Global.leftHandWeapons:
-		itemDisplayPoint.addSelectedItem(itemSelected)
-		itemDisplay.get_node("itemName").text = str(itemSelected)
-		itemDisplay.get_node("itemDesc").text = str(Global.weapons[itemSelected][1])
-		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
-	elif itemSelected in Global.leftHandWeapons:
-		itemDisplayPoint.addSelectedItem(itemSelected)
-		itemDisplay.get_node("itemName").text = str(itemSelected)
-		itemDisplay.get_node("itemDesc").text = str(Global.leftHandWeapons[itemSelected][1])
-		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
-	else:
-		$inventoryScreen/VBoxContainer/use.disabled = false
 
 
-func _on_equip_pressed():
 
-	for i in Global.armorSets:
-		for a in range(len(i)):
-			if itemSelected == i[a]:
-				var armorType = equippedArmor.values()[a]
-				armature.get_node(itemSelected).show()
-				if !itemSelected in armorType:
-					armature.get_node(armorType).hide()
-				equippedArmor[armorCatagories[a]] = itemSelected
-				updateArmorDisplay()
-				break
-	if wep.get_child_count() >0 and itemSelected in Global.weapons:
-		for i in wep.get_children():
-			wep.remove_child(i)
-	if leftwep.get_child_count() > 0 and itemSelected in Global.leftHandWeapons:
-		for i in leftwep.get_children():
-			leftwep.remove_child(i)
-	if Global.weapons.has(itemSelected):
-		wep.add_child(Global.weapons[itemSelected][0].instantiate())
-		
-		for i in wep.get_children():
-			currentWeapon = i
-			updateArmorDisplay()
-	if Global.leftHandWeapons.has(itemSelected):
-		if currentWeapon:
-			if currentWeapon.name == "flamberge":
-				pass
-		else:
-			leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())
-				
-			for i in leftwep.get_children():
-				currentParryWeapon = i
-				updateArmorDisplay()
-	armorDisplay.hide()
-	weaponDisplay.hide()
-	$inventoryScreen/VBoxContainer.hide()
-	itemDisplay.hide()
-	$inventoryScreen.hide()
-	weaponInv.hide()
-	
-	invOpen = false
+
 
 func _on_pickup_area_area_entered(area):
 	if area.is_in_group("pickup"):
@@ -432,28 +254,9 @@ func _on_pickup_area_area_entered(area):
 	if area.is_in_group("ladder"):
 		ladder = area
 		canClimb = true
-
-
-func _on_unequip_pressed():
-	if inv.visible == true:
-		if wep.get_child_count() >0:
-			for i in wep.get_children():
-				wep.remove_child(i)
-	elif invArmor.visible == true:
-		pass
-
-
-func _on_use_pressed():
-	var item = Global.consumables[itemSelected][0].instantiate()
-	leftwep.add_child(item)
-	consume(item)
-
-
-func _on_inventory_armor_item_activated(index):
-	$inventoryScreen/VBoxContainer.show()
-	itemSelected = invArmor.get_selected_items()[0]
-	itemSelected = invArmor.get_item_text(itemSelected)
-
+	if area.is_in_group("interact"):
+		canInteract = true
+		interactable = area
 
 
 func _on_rally_timer_timeout():
@@ -463,23 +266,6 @@ func _on_rally_timer_timeout():
 func _on_pickup_area_area_exited(area: Area3D) -> void:
 	if area == ladder:
 		canClimb = false
-
-
-func _on_weapon_inventory_item_activated(index: int) -> void:
-	itemSelected = weaponInv.get_selected_items()[0]
-	itemSelected = weaponInv.get_item_text(itemSelected)
-	$inventoryScreen/VBoxContainer.show()
-	
-	$inventoryScreen/VBoxContainer.grab_focus()
-	if itemSelected not in Global.leftHandWeapons:
-		itemDisplayPoint.addSelectedItem(itemSelected)
-		itemDisplay.get_node("itemName").text = str(itemSelected)
-		itemDisplay.get_node("itemDesc").text = str(Global.weapons[itemSelected][1])
-		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
-	else:
-		itemDisplayPoint.addSelectedItem(itemSelected)
-		itemDisplay.get_node("itemName").text = str(itemSelected)
-		itemDisplay.get_node("itemDesc").text = str(Global.leftHandWeapons[itemSelected][1])
-		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
+	if area.is_in_group("interact"):
+		canInteract = false
+		interactable = null

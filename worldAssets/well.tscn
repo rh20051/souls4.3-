@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://pdc7shn5t8nh"]
+[gd_scene load_steps=11 format=4 uid="uid://pdc7shn5t8nh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3dyk"]
 
@@ -75,6 +75,9 @@ shadow_mesh = SubResource("ArrayMesh_l02or")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0yobr"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mutys"]
+size = Vector3(3.765, 2.89, 4.135)
+
 [node name="well" type="Node3D"]
 
 [node name="well" type="MeshInstance3D" parent="."]
@@ -93,3 +96,9 @@ transform = Transform3D(0.93, 0, 0, 0, 0.93, 0, 0, 0, 0.93, 0, 0, -0.41025)
 mesh = SubResource("ArrayMesh_j812r")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_0yobr")
+
+[node name="cave" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cave"]
+shape = SubResource("BoxShape3D_mutys")
