@@ -56,7 +56,7 @@ func _on_inventory_armor_item_activated(index):
 	itemSelected = invArmor.get_item_text(itemSelected)
 	
 func _on_equip_pressed():
-
+	inv.invOpen = false
 	for i in Global.armorSets:
 		for a in range(len(i)):
 			if itemSelected == i[a]:
@@ -90,20 +90,23 @@ func _on_equip_pressed():
 				player.currentParryWeapon = i
 				updateArmorDisplay()
 	armorDisplay.hide()
+	invArmor.hide()
 	weaponDisplay.hide()
 	equipButtons.hide()
 	itemDisplay.hide()
 	get_parent().hide()
 	weaponInv.hide()
 	
-	inv.invOpen = false
+	
 	
 func _on_use_pressed():
+	inv.invOpen = false
 	var item = Global.consumables[itemSelected][0].instantiate()
 	player.leftwep.add_child(item)
 	player.consume(item)
 	
 func _on_unequip_pressed():
+	inv.invOpen = false
 	if inv.visible == true:
 		if player.wep.get_child_count() >0:
 			for i in player.wep.get_children():

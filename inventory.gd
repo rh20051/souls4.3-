@@ -4,6 +4,7 @@ extends ItemList
 @onready var armorDisplay = get_parent().get_node("equipment/armorEquipped")
 @onready var itemDisplay = get_parent().get_node("itemDisplay")
 @onready var inventoryScreen = get_parent().get_parent()
+@onready var equipButtons = get_parent().get_parent().get_node("VBoxContainer")
 @onready var weaponInv = get_parent().get_node("equipment/weaponInventory")
 @onready var weaponDisplay = get_parent().get_node("equipment/weaponsEquipped")
 @onready var equip = get_parent().get_parent().get_node("VBoxContainer").get_node("equip")
@@ -28,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		player.get_node("staminaTexture").get_node("stamina").hide()
 		if Input.is_action_just_pressed("interact"): #interacting with item in inventory to open equip,unequip etc
 			if self.has_focus(): 
-				player._on_inventory_item_activated(invItemSelected)
+				_on_item_activated(invItemSelected)
 		if Input.is_action_just_pressed("heavyAttack"):
 			inventoryCycle += 1
 			if inventoryCycle == 3:
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 					invItemSelected += 1
 				self.select(invItemSelected) #change currently selected inventory item
 			elif !invArmor.has_focus():
-				$inventoryScreen/VBoxContainer.get_child(1).grab_focus() #if an inventory item is not selected,(but inventory is open) presume its equip/unequip selected and change between them
+				equipButtons.get_child(1).grab_focus() #if an inventory item is not selected,(but inventory is open) presume its equip/unequip selected and change between them
 		if Input.is_action_just_pressed("menuLeft"):
 			if invItemSelected > 0:
 				invItemSelected -= 1
@@ -73,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Global.increment != Global.oldIncrement:
 		player.inventory.append(Global.newItem[0])
-		player.checkInventory()
+		checkInventory()
 		Global.oldIncrement = 0
 		Global.increment = 0
 func openInventory():
@@ -93,6 +94,10 @@ func openInventory():
 	else:
 		invOpen = false
 		itemDisplay.hide()
+		invArmor.hide()
+		armorDisplay.hide()
+		weaponDisplay.hide()
+		weaponInv.hide()
 		inventoryScreen.get_node("VBoxContainer").visible = false
 
 func _on_item_clicked(index, at_position, mouse_button_index):
@@ -102,7 +107,7 @@ func _on_item_clicked(index, at_position, mouse_button_index):
 		
 func _on_item_activated(index):
 	itemDisplay.show()
-	$inventoryScreen/VBoxContainer.show()
+	equipButtons.show()
 	itemSelected = get_selected_items()[0]
 	
 	itemSelected = get_item_text(itemSelected)
@@ -116,15 +121,15 @@ func _on_item_activated(index):
 		itemDisplay.get_node("itemName").text = str(itemSelected)
 		itemDisplay.get_node("itemDesc").text = str(Global.weapons[itemSelected][1])
 		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
+		use.disabled = true
 	elif itemSelected in Global.leftHandWeapons:
 		itemDisplayPoint.addSelectedItem(itemSelected)
 		itemDisplay.get_node("itemName").text = str(itemSelected)
 		itemDisplay.get_node("itemDesc").text = str(Global.leftHandWeapons[itemSelected][1])
 		equip.disabled = false
-		$inventoryScreen/VBoxContainer/use.disabled = true
+		use.disabled = true
 	else:
-		$inventoryScreen/VBoxContainer/use.disabled = false
+		use.disabled = false
 func checkInventory():
 	var addArmor = true
 	var armorInventoryLength = len(player.acquiredArmor) * 4

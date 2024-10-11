@@ -15,7 +15,6 @@ var canInteract = false
 var item
 var newItem
 var stamina = 100
-
 var rolling = false
 var lockedOn = false
 var parrying = false
@@ -30,21 +29,14 @@ var canClimb = false
 var climbing = false
 var ladder = null
 var running = false
-@onready var weaponInv = $inventoryScreen/inventoryManager/equipment/weaponInventory
 @onready var camera = $cameraPoint
 @onready var armature = $Armature/Skeleton3D
 @onready var animTree = $AnimationTree
 @onready var inv = $inventoryScreen/inventoryManager/inventory
 @onready var invArmor = $inventoryScreen/inventoryManager/equipment/inventoryArmor
-@onready var weaponDisplay = $inventoryScreen/inventoryManager/equipment/weaponsEquipped
-@onready var armorDisplay = $inventoryScreen/inventoryManager/equipment/armorEquipped
-@onready var itemDisplay = $inventoryScreen/inventoryManager/itemDisplay
-
 @onready var wep = $Armature/Skeleton3D/weaponHolder
 @onready var leftwep = $Armature/Skeleton3D/parryWeaponHolder
 @onready var bottomPoint = $pickupArea/CollisionShape3D/Node3D
-@onready var equip = $inventoryScreen/VBoxContainer/equip
-@onready var unequip = $inventoryScreen/VBoxContainer/unequip
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var inventory = ["grass"]

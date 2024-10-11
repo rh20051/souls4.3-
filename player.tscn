@@ -10070,6 +10070,7 @@ offset_bottom = 673.0
 [node name="inventoryManager" type="Node2D" parent="inventoryScreen"]
 
 [node name="inventory" type="ItemList" parent="inventoryScreen/inventoryManager"]
+visible = false
 offset_left = 21.0
 offset_top = 7.0
 offset_right = 1670.0
@@ -10123,6 +10124,7 @@ script = ExtResource("5_tkvsa")
 script = ExtResource("7_la8o6")
 
 [node name="armorEquipped" type="ItemList" parent="inventoryScreen/inventoryManager/equipment"]
+visible = false
 layout_direction = 3
 offset_left = 765.0
 offset_top = 70.0
@@ -10149,9 +10151,9 @@ theme_override_font_sizes/font_size = 56
 
 [node name="inventoryArmor" type="ItemList" parent="inventoryScreen/inventoryManager/equipment"]
 visible = false
-offset_left = 150.0
+offset_left = 40.0
 offset_top = 37.0
-offset_right = 1057.0
+offset_right = 557.0
 offset_bottom = 1022.0
 theme = SubResource("Theme_0cjv5")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -10901,7 +10903,7 @@ libraries = {
 
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory" to="inventoryScreen/inventoryManager/inventory" method="_on_item_activated"]
 [connection signal="item_clicked" from="inventoryScreen/inventoryManager/inventory" to="inventoryScreen/inventoryManager/inventory" method="_on_item_clicked"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/inventoryArmor" to="." method="_on_inventory_armor_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/inventoryArmor" to="inventoryScreen/inventoryManager/equipment" method="_on_inventory_armor_item_activated"]
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponInventory" to="inventoryScreen/inventoryManager/equipment" method="_on_weapon_inventory_item_activated"]
 [connection signal="pressed" from="inventoryScreen/VBoxContainer/equip" to="inventoryScreen/inventoryManager/equipment" method="_on_equip_pressed"]
 [connection signal="pressed" from="inventoryScreen/VBoxContainer/unequip" to="inventoryScreen/inventoryManager/equipment" method="_on_unequip_pressed"]
