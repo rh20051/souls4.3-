@@ -67,6 +67,7 @@ func _physics_process(delta: float) -> void:
 				invItemSelected -= 1
 			self.select(invItemSelected)#same but left
 
+
 	else:
 		player.get_node("lifeTexture").get_node("life").show()
 		player.get_node("staminaTexture").get_node("stamina").show()
@@ -98,6 +99,7 @@ func openInventory():
 		armorDisplay.hide()
 		weaponDisplay.hide()
 		weaponInv.hide()
+		self.hide()
 		inventoryScreen.get_node("VBoxContainer").visible = false
 
 func _on_item_clicked(index, at_position, mouse_button_index):

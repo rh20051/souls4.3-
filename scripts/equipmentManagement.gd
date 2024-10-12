@@ -94,7 +94,6 @@ func _on_equip_pressed():
 	weaponDisplay.hide()
 	equipButtons.hide()
 	itemDisplay.hide()
-	get_parent().hide()
 	weaponInv.hide()
 	
 	
