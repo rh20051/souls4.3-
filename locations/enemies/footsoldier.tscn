@@ -537,7 +537,7 @@ cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_eikt2"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_5wl7l"]
 _surfaces = [{
 "aabb": AABB(-0.486287, -1.37134, -1.13447, 0.59893, 2.97652, 2.35482),
 "format": 34896613377,
@@ -591,7 +591,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("TbEVvkwwn74KMsC9TbEVvkwwn74KMsC9WfUdvkwwn74H8us8fdkVvkwwn76GFRs+fdkVvkwwn76GFRs+gKXMPbK7SzyFFRs+gKXMPbK7SzyFFRs+pN0cvXmsqz7Alr29pN0cvXmsqz7Alr295NMnvQjsqz738es85NMnvQjsqz738es8BFYdvQjsqz6EFRs+BFYdvQjsqz6EFRs+CeF0Psq7SzwKMsC9CeF0Psq7SzwKMsC9CeF0Psq7SzwKMsC9CeF0Psq7SzwKMsC9mUNwPr+7Szz/8es8mUNwPr+7Szz/8es8mUNwPr+7Szz/8es8mUNwPr+7Szz/8es8Ucp0Pq+7SzyFFRs+Ucp0Pq+7SzyFFRs+Ucp0Pq+7SzyFFRs+3eKGPgjsqz738es83eKGPgjsqz738es83eKGPgjsqz738es83eKGPgjsqz738es8OhpuPkwwn74H8us8OhpuPkwwn74H8us8OhpuPkwwn74H8us8MjF0Pkwwn74IMsC9MjF0Pkwwn74IMsC9MjF0Pkwwn74IMsC9qhN0Pkwwn76GFRs+qhN0Pkwwn76GFRs+qhN0Pkwwn76GFRs+8FSIPgjsqz4MMsC98FSIPgjsqz4MMsC98FSIPgjsqz4MMsC9yE2IPgjsqz6EFRs+yE2IPgjsqz6EFRs+yE2IPgjsqz6EFRs+lFs0vR3kYz7Hab+9lFs0vR3kYz7Hab+9VEZbvbMKRz6EFRs+VEZbvbMKRz6EFRs+gEMLPsu7SzwKMsC9gEMLPsu7SzwKMsC9gEMLPsu7SzwKMsC92hz4veybbb4HMsC92hz4veybbb4HMsC9Gs3qvZ60W76GFRs+Gs3qvZ60W76GFRs+2TMKPllnRj6EFRs+2TMKPllnRj6EFRs+2TMKPllnRj6EFRs+sFfIPQQfV76GFRs+sFfIPQQfV76GFRs+sFfIPQQfV76GFRs+qnwIPojvab4JMsC9qnwIPojvab4JMsC9qnwIPojvab4JMsC9cOgyPjSGYz4LMsC9cOgyPjSGYz4LMsC9cOgyPjSGYz4LMsC9/////////7//fwAA////v/9/AAD///+//3//f////z//fwAA////v/9//3/SmekMgwmDmFCLmPqkf+T/////v14Ax/8thrz8/3///////7+kf+T/////v/9//3////8//3///////7//////////v6TyEnYziuX6Qfp4f4uAt/9eAMf/4YkaBaTyEnY0iuX6Efa0cjOK5fpB+nh/i4C3/3j/WnqMgLf//3//f3k1u9oR9rRyNIrl+nj/WnqLgLf//3///////7+k8hJ2MYrl+hH2tHIxiuT6pH/k/////7//fwAA////v0H6eH+PgLj/eP9aeo2AuP//////////v/9/AAD///+/Qfp4f42AuP//f/9/eTW72v9/AAD///+/eP9aeo6AuP+k8hJ2MYrk+qR/5P////+/XgDH/////7//f/9/UVFXF/9///////+/Efa0cjGK5fpeAMf/LYa8/HVySQBvANg//3//f7/Yn9N1ckkAUgDUP/////////+/XgDH/////7+DCYOY4IpjBf////////+/SHX5/dT95j7/f/9/////P0h1+f3S/ek+/3//f1FRVxd1ckkAaADYP4MJg5h7i2cF/3//f3k1u9pIdfn9yf3pPoMJg5ihiqUF/////////79Idfn90/3pPoMJg5h8iugFXgDH/y2GvPx1ckkAhgDaP4MJg5hXjGwF")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_eikt2")
+shadow_mesh = SubResource("ArrayMesh_5wl7l")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ea84t"]
 radius = 1.205
@@ -3789,7 +3789,6 @@ bone_idx = 10
 
 [node name="shield" type="MeshInstance3D" parent="Armature/Skeleton3D/BoneAttachment3D9"]
 transform = Transform3D(0.509466, 0.0270008, 0.0175314, -0.00429321, 0.3325, -0.387321, -0.0319053, 0.386403, 0.332065, 0.0285883, 0.205956, 0.0333945)
-visible = false
 mesh = SubResource("ArrayMesh_bagmj")
 skeleton = NodePath("")
 

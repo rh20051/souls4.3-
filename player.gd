@@ -42,7 +42,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var inventory = ["grass"]
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
-var weaponInventory = ["longsword", "parryingdagger", "flamberge", "lamp"]
+var weaponInventory = ["longsword", "shield", "flamberge", "lamp"]
 var acquiredArmor = [["flutedChest", "flutedGauntlets", "flutedHead", "flutedLegs"], ["nakedChest", "nakedGauntlets", "nakedHead", "nakedLegs"]]
 func _input(event):
 	if event is InputEventMouseMotion and !lockedOn:
