@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://dcnsu0i6mrat8"]
 
-[ext_resource type="Texture2D" uid="uid://4ec456fid7sh" path="res://locations/tent_barrel.png" id="1_kdjxm"]
-[ext_resource type="Texture2D" uid="uid://xux0cxjjolvu" path="res://locations/tent_table_wood2.png" id="2_12ton"]
+[ext_resource type="Texture2D" uid="uid://4ec456fid7sh" path="res://locations/dependencies/tent_barrel.png" id="1_kdjxm"]
+[ext_resource type="Texture2D" uid="uid://xux0cxjjolvu" path="res://locations/dependencies/tent_table_wood2.png" id="2_12ton"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vj3ln"]
 resource_name = "material"

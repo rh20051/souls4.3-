@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://kxoy6vs5vtpp"]
+
+[ext_resource type="Script" path="res://locations/enemies/scripts/mageProjectile.gd" id="1_uj0g0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ejn8s"]
+size = Vector3(0.295, 0.29, 0.29)
+
+[sub_resource type="Gradient" id="Gradient_lb6bx"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_infiy"]
+gradient = SubResource("Gradient_lb6bx")
+
+[sub_resource type="Curve" id="Curve_4wkp7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.126316), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ydi32"]
+curve = SubResource("Curve_4wkp7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iurhj"]
+particle_flag_rotate_y = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(-10.33, 0.12, 0)
+scale_curve = SubResource("CurveTexture_ydi32")
+color_ramp = SubResource("GradientTexture1D_infiy")
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o14yi"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nibbu"]
+material = SubResource("StandardMaterial3D_o14yi")
+size = Vector3(0.401, 0.405, 0.416)
+
+[node name="Node3D" type="Area3D"]
+script = ExtResource("1_uj0g0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ejn8s")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_iurhj")
+draw_pass_1 = SubResource("BoxMesh_nibbu")

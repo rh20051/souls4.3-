@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=4 uid="uid://df486vhh10mog"]
 
-[ext_resource type="Texture2D" uid="uid://cv852iy3kw26d" path="res://misc/lamp_Material.png" id="1_j1mum"]
-[ext_resource type="Texture2D" uid="uid://dsf22kjglqu3h" path="res://misc/lamp_bars_BaseColor.png" id="2_7uruo"]
-[ext_resource type="Texture2D" uid="uid://bhsl6d60jm4r3" path="res://misc/lamp_handle_BaseColor.png" id="3_1hujg"]
+[ext_resource type="Texture2D" uid="uid://cv852iy3kw26d" path="res://misc/dependencies/lamp_Material.png" id="1_j1mum"]
+[ext_resource type="Texture2D" uid="uid://dsf22kjglqu3h" path="res://misc/dependencies/lamp_bars_BaseColor.png" id="2_7uruo"]
+[ext_resource type="Texture2D" uid="uid://bhsl6d60jm4r3" path="res://misc/dependencies/lamp_handle_BaseColor.png" id="3_1hujg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6c5u"]
 resource_name = "Material.001"
