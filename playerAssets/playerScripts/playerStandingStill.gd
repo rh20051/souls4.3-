@@ -20,8 +20,8 @@ func physics_update(_delta: float):
 		cam.position.z = lerp(cam.position.z, 0.0, _delta*2)
 	if cam.position.x != 0:
 		cam.position.x = lerp(cam.position.x, 0.0, _delta*2)
-	if player.parrying:
-		transitioned.emit(self, "playerParry")
+	if player.blocking:
+		transitioned.emit(self, "playerBlock")
 	if player.direction:
 		transitioned.emit(self, "playerWalking")
 	if player.canAttack == false:

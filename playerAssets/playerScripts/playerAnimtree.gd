@@ -5,7 +5,7 @@ extends AnimationTree
 @onready var idle = get_parent().get_node("stateMachine/playerIdle")
 @onready var walk = get_parent().get_node("stateMachine/playerWalking")
 @onready var attack = get_parent().get_node("stateMachine/playerAttack")
-@onready var parry = get_parent().get_node("stateMachine/playerParry")
+@onready var block = get_parent().get_node("stateMachine/playerBlock")
 # Called when the node enters the scene tree for the first time.
 
 func _physics_process(delta: float) -> void:
@@ -56,7 +56,8 @@ func _physics_process(delta: float) -> void:
 		animTree["parameters/StateMachine/conditions/dodging"] = false
 		animTree["parameters/StateMachine/conditions/idle"] = true
 		animTree["parameters/StateMachine/conditions/moving"] = false
-		animTree["parameters/conditions/parrying"] = false
+		animTree["parameters/conditions/notBlocking"] = true
+		animTree["parameters/conditions/blocking"] = false
 		animTree["parameters/conditions/attack"] = false
 		animTree["parameters/StateMachine/conditions/attacking"] = false
 		animTree["parameters/StateMachine/conditions/chain"] = false
@@ -79,7 +80,7 @@ func _physics_process(delta: float) -> void:
 		animTree["parameters/conditions/running"] = false
 	if stateMachine.current_state.name == "playerWalking":
 		animTree["parameters/StateMachine/conditions/idle"] = false
-		animTree["parameters/conditions/parrying"] = false
+		animTree["parameters/conditions/blocking"] = false
 		animTree["parameters/conditions/attack"] = false
 		animTree["parameters/StateMachine/conditions/attacking"] = false
 		animTree["parameters/conditions/chain"] = false
@@ -93,7 +94,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				animTree["parameters/conditions/holdingFlamberge"] = false
 				animTree["parameters/conditions/notHoldingFlamberge"] = true
-	if stateMachine.current_state.name == "playerParry":
-		animTree["parameters/conditions/parrying"] = true
+	if stateMachine.current_state.name == "playerBlock":
+		
 		animTree["parameters/conditions/running"] = false
 		animTree["parameters/conditions/moving"] = false

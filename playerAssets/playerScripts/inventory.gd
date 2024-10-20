@@ -1,11 +1,15 @@
 extends ItemList
 @onready var player = get_parent().get_parent().get_parent()
-@onready var invArmor = get_parent().get_node("equipment/inventoryArmor")
+@onready var invHead = get_parent().get_node("equipment/armorEquipped/headArmor")
+@onready var invChest = get_parent().get_node("equipment/armorEquipped/chestArmor")
+@onready var invArms = get_parent().get_node("equipment/armorEquipped/armsArmor")
+@onready var invLegs = get_parent().get_node("equipment/armorEquipped/legsArmor")
 @onready var armorDisplay = get_parent().get_node("equipment/armorEquipped")
 @onready var itemDisplay = get_parent().get_node("itemDisplay")
 @onready var inventoryScreen = get_parent().get_parent()
 @onready var equipButtons = get_parent().get_parent().get_node("VBoxContainer")
-@onready var weaponInv = get_parent().get_node("equipment/weaponInventory")
+@onready var rWepInv = get_parent().get_node("equipment/weaponsEquipped/mainWeaponInventory")
+@onready var lWepInv = get_parent().get_node("equipment/weaponsEquipped/leftHandWeaponInventory")
 @onready var weaponDisplay = get_parent().get_node("equipment/weaponsEquipped")
 @onready var equip = get_parent().get_parent().get_node("VBoxContainer").get_node("equip")
 @onready var unequip = get_parent().get_parent().get_node("VBoxContainer").get_node("unequip")
@@ -36,31 +40,29 @@ func _physics_process(delta: float) -> void:
 				inventoryCycle = 0
 			if inventoryCycle == 1:
 					self.hide()
-					invArmor.show()
 					armorDisplay.show()
 					self.deselect_all()
-					weaponInv.hide()
-					invArmor.grab_focus()
+					rWepInv.hide()
+					lWepInv.hide()
+					armorDisplay.grab_focus()
 			elif inventoryCycle == 0:
 					self.show()
-					invArmor.hide()
 					weaponDisplay.hide()
 					armorDisplay.hide()
-					weaponInv.hide()
+					rWepInv.hide()
+					lWepInv.hide()
 					self.grab_focus()
 			elif inventoryCycle == 2:
 				self.hide()
-				invArmor.hide()
 				armorDisplay.hide()
-				weaponInv.show()
 				weaponDisplay.show()
-				weaponInv.grab_focus()
+				weaponDisplay.grab_focus()
 		if Input.is_action_just_pressed("menuRight"):
 			if self.has_focus():
 				if invItemSelected < len(player.inventory) -1:	
 					invItemSelected += 1
 				self.select(invItemSelected) #change currently selected inventory item
-			elif !invArmor.has_focus():
+			elif !armorDisplay.has_focus():
 				equipButtons.get_child(1).grab_focus() #if an inventory item is not selected,(but inventory is open) presume its equip/unequip selected and change between them
 		if Input.is_action_just_pressed("menuLeft"):
 			if invItemSelected > 0:
@@ -82,23 +84,22 @@ func openInventory():
 	if invOpen == false:
 		inventoryCycle = 0
 		self.show()
-		invArmor.hide()
 		armorDisplay.hide()
 		invOpen = true
 		invItemSelected = 0
 		inventoryScreen.visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		invArmor.release_focus()
+		armorDisplay.release_focus()
 		self.grab_focus() #inventory takes input priority
 		self.select(invItemSelected) #automatically select first item
 			
 	else:
 		invOpen = false
 		itemDisplay.hide()
-		invArmor.hide()
 		armorDisplay.hide()
 		weaponDisplay.hide()
-		weaponInv.hide()
+		rWepInv.hide()
+		lWepInv.hide()
 		self.hide()
 		inventoryScreen.get_node("VBoxContainer").visible = false
 
@@ -139,11 +140,18 @@ func checkInventory():
 	for i in range(len(player.acquiredArmor)):
 		for a in player.acquiredArmor[i]:
 				for g in armorInventoryLength:
-					if a in invArmor.get_item_text(g):
+					if a in invHead.get_item_text(g) or a in invChest.get_item_text(g) or a in invArms.get_item_text(g):
 						addArmor = false
 						
 				if addArmor == true:
-					invArmor.add_item(a)
+					if "Head" in a:
+						invHead.add_item(a)
+					elif "Chest" in a:
+						invChest.add_item(a)
+					elif "Gauntlets" in a:
+						invArms.add_item(a)
+					else:	
+						invLegs.add_item(a)
 					addArmor = true
 	for i in range(len(player.inventory)):
 	

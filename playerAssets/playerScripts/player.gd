@@ -17,7 +17,7 @@ var newItem
 var stamina = 100
 var rolling = false
 var lockedOn = false
-var parrying = false
+var blocking = false
 var itemSelected = null
 var canAttack = true
 var canPickUp = false
@@ -33,7 +33,7 @@ var running = false
 @onready var armature = $Armature/Skeleton3D
 @onready var animTree = $AnimationTree
 @onready var inv = $inventoryScreen/inventoryManager/inventory
-@onready var invArmor = $inventoryScreen/inventoryManager/equipment/inventoryArmor
+@onready var armorDisplay = $inventoryScreen/inventoryManager/equipment/armorEquipped
 @onready var wep = $Armature/Skeleton3D/weaponHolder
 @onready var leftwep = $Armature/Skeleton3D/parryWeaponHolder
 @onready var bottomPoint = $pickupArea/CollisionShape3D/Node3D
@@ -151,7 +151,7 @@ func _physics_process(delta):
 	if inv.invOpen != true:
 		if camera.position.y != 2.78:
 				camera.position.y = lerp(camera.position.y, 2.78, delta*2)
-	if invArmor.visible == true:
+	if armorDisplay.visible == true:
 			if camera.position.y != 1.4:
 				camera.position.y = lerp(camera.position.y, 1.4, delta*2)
 			if camera.position.z !=  3 * camera.basis.z.x:
@@ -174,10 +174,10 @@ func _physics_process(delta):
 
 	
 	if is_on_floor():
-		if Input.is_action_just_pressed("attack") and canAttack == true and wep.get_child_count() > 0:
+		if Input.is_action_just_pressed("attack") and canAttack == true and wep.get_child_count() > 0 and wep.get_child(0).name != "none":
 			canAttack = false
-		if Input.is_action_just_pressed("parry") and canAttack == true and leftwep.get_child_count() >0:
-			parrying = true
+		if Input.is_action_just_pressed("parry") and canAttack == true and leftwep.get_child_count() >0 and leftwep.get_child(0).name != "none":
+			blocking = true
 		if Input.is_action_just_pressed("roll") and stamina > 0 and inv.invOpen == false:
 			rolling = true
 		if Input.is_action_pressed("run") and canAttack == true and inv.invOpen == false:

@@ -7,17 +7,16 @@ signal successfulParry
 
 func physics_update(delta:float):
 	
-	var a = parryBox.get_overlapping_bodies()
-	for i in a:
-		if i.is_in_group("enemy"):
-			if i.parryable == true:
-				successfulParry.connect(i.parried)
-				successfulParry.emit()
+	if !Input.is_action_pressed("parry"):
+		
+		animTree["parameters/conditions/notBlocking"] = true
+		animTree["parameters/conditions/blocking"] = false
+		player.blocking = false
+		transitioned.emit(self, "playerIdle")
+		
+	else:
+		animTree["parameters/conditions/notBlocking"] = false
+		animTree["parameters/conditions/blocking"] = true
 	player.SPEED = 0
 	player.velocity = Vector3()
-	
-func endParry():
-	player.parrying = false
-	transitioned.emit(self,  "playerIdle")
-	
 	

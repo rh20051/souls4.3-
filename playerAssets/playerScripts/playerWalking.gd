@@ -18,8 +18,8 @@ func physics_update(delta: float):
 		transitioned.emit(self,"playerClimbing")
 	if !player.canAttack:
 		transitioned.emit(self,"playerAttack")
-	if player.parrying == true:
-		transitioned.emit(self, "playerParry")
+	if player.blocking == true:
+		transitioned.emit(self, "playerBlock")
 	if player.rolling and player.stamina > 0:
 		transitioned.emit(self,"playerRolling")
 	if player.running and !player.lockedOn and !player.rolling :
