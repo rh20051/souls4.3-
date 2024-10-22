@@ -111,7 +111,12 @@ func _physics_process(delta):
 	$staminaTexture/stamina.value = stamina
 	# Add the gravity.
 	if not is_on_floor() and climbing != true:
-		velocity.y -= gravity * delta
+		animTree["parameters/conditions/falling"] = true
+		animTree["parameters/conditions/onGround"] = false
+		velocity.y = -gravity * delta * 80
+	else:
+		animTree["parameters/conditions/onGround"] = true
+		animTree["parameters/conditions/falling"] = false
 	if canClimb == true:
 		$interact.show()
 		if Input.is_action_just_pressed("interact"):
@@ -190,7 +195,7 @@ func _physics_process(delta):
 			
 				#$Armature.look_at(global_position+direction)
 			elif !canAttack and !rolling:
-				$Armature.rotation.y = lerp_angle($Armature.rotation.y, atan2(-direction.x, -direction.z), delta )
+				$Armature.rotation.y = lerp_angle($Armature.rotation.y, atan2(-direction.x, -direction.z), delta *3)
 			elif lockedEnemy and !rolling:
 				$Armature.look_at(lockedEnemy.global_position, Vector3.UP)
 			$Armature.rotation.z = 0

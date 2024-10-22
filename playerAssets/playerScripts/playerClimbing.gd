@@ -7,7 +7,7 @@ func enter():
 	animTree["parameters/conditions/moving"] = false
 	animTree["parameters/conditions/idle"] = false
 	animTree["parameters/conditions/running"] = false
-	player.anim.play("default")
+
 
 func physics_update(delta:float):
 	if player.climbing == false:

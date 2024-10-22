@@ -11,8 +11,11 @@ extends AnimationTree
 func _physics_process(delta: float) -> void:
 	if player.currentParryWeapon:
 		if player.currentParryWeapon.name == "lamp":
-			
+			animTree["parameters/conditions/notHoldingLamp"] = false
 			animTree["parameters/conditions/holdingLamp"] = true
+		else:
+			animTree["parameters/conditions/holdingLamp"] = false
+			animTree["parameters/conditions/notHoldingLamp"] = true
 	if player.lockedOn:
 		if player.input_dir.x < -.2:
 			animTree["parameters/conditions/movingLeft"] = true

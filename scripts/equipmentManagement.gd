@@ -35,7 +35,11 @@ func _on_main_weapon_inventory_item_activated(index: int) -> void:
 		use.disabled = true
 
 func _on_left_hand_weapon_inventory_item_activated(index: int) -> void:
+	itemSelected = lWepInv.get_selected_items()[0]
+	itemSelected = lWepInv.get_item_text(itemSelected)
 	itemDisplayPoint.addSelectedItem(itemSelected)
+	get_parent().get_parent().get_node("VBoxContainer").show()
+	get_parent().get_parent().get_node("VBoxContainer").grab_focus()
 	itemDisplay.get_node("itemName").text = str(itemSelected)
 	itemDisplay.get_node("itemDesc").text = str(Global.leftHandWeapons[itemSelected][1])
 	equip.disabled = false
@@ -47,6 +51,8 @@ func updateArmorDisplay():
 	for i in player.weaponInventory:
 		if i in Global.weapons:
 			rWepInv.add_item(i)
+		elif i in Global.leftHandWeapons:
+			lWepInv.add_item(i)
 	for i in player.wep.get_children():
 		player.currentWeapon = i
 		weaponDisplay.add_item(player.currentWeapon.name)
@@ -86,10 +92,10 @@ func _on_equip_pressed():
 				player.equippedArmor[player.armorCatagories[a]] = itemSelected
 				updateArmorDisplay()
 				break
-	if player.wep.get_child_count() >0 and itemSelected in Global.weapons:
+	if itemSelected in Global.weapons:
 		for i in player.wep.get_children():
 			player.wep.remove_child(i)
-	if player.leftwep.get_child_count() > 0 and itemSelected in Global.leftHandWeapons:
+	if itemSelected in Global.leftHandWeapons:
 		for i in player.leftwep.get_children():
 			player.leftwep.remove_child(i)
 	if Global.weapons.has(itemSelected):
@@ -99,8 +105,7 @@ func _on_equip_pressed():
 			player.currentWeapon = i
 			updateArmorDisplay()
 	if Global.leftHandWeapons.has(itemSelected):
-		if player.currentWeapon:
-			if player.currentWeapon.name == "flamberge":
+		if player.currentWeapon.name == "flamberge":
 				pass
 		else:
 			player.leftwep.add_child(Global.leftHandWeapons[itemSelected][0].instantiate())

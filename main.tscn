@@ -186,7 +186,7 @@ emission_on_uv2 = true
 environment = ExtResource("1_if1ff")
 
 [node name="player" parent="." instance=ExtResource("2_vviug")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6904, 0.13117, -6.35267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4915, 21.2748, -6.35267)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_sgb14")
