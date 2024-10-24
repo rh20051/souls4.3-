@@ -24,9 +24,9 @@ func enter():
 	transitioned.emit(self,"playerIdle")
 
 func physics_update(delta:float):
-
+	
 		if player.lockedEnemy:
-
+			
 			player.get_node("Armature").rotation.x = 0
 			player.get_node("Armature").rotation.z = 0
 		var currentRotation = player.get_node("Armature").transform.basis.get_rotation_quaternion()

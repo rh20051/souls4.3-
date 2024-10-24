@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bajwjl0g57f7s"]
+[gd_scene load_steps=33 format=4 uid="uid://bajwjl0g57f7s"]
 
 [ext_resource type="Environment" uid="uid://0pesm0nbq1bn" path="res://world.tres" id="1_if1ff"]
 [ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://playerAssets/player.tscn" id="2_vviug"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b7sp24yq8mwbn" path="res://worldAssets/pillar.tscn" id="7_mn00k"]
 [ext_resource type="PackedScene" uid="uid://sisewd603yuo" path="res://worldAssets/wall.tscn" id="8_qrqtk"]
 [ext_resource type="PackedScene" uid="uid://pdc7shn5t8nh" path="res://worldAssets/well.tscn" id="9_at7sn"]
+[ext_resource type="Script" path="res://scripts/levelTransition.gd" id="10_m3vy5"]
+[ext_resource type="Texture2D" uid="uid://bprrmdjpsuw6m" path="res://addons/kenney_particle_pack/star_05.png" id="11_33bov"]
 [ext_resource type="PackedScene" uid="uid://cd8xepuvooxbb" path="res://itemPickup.tscn" id="11_uyyw6"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sgb14"]
@@ -173,6 +175,9 @@ shadow_mesh = SubResource("ArrayMesh_2var5")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_744yw"]
 points = PackedVector3Array(-1, -6.07774, -0.913861, -0.913861, -6.07774, -1, -1, -6.07774, 0.955364, -1, -0.914035, -1, 0.933242, -6.07774, -1, -0.95556, -6.07774, 1, -1, -0.956345, 1, -1, 0.651423, -1, 1, -6.07774, -0.933438, 1, -0.934228, -1, 0.923258, -6.07774, 1, -1, 0.651423, 1, -0.495497, 3.29097, 0.814409, -0.303446, 3.7458, 0.805403, -0.651919, 0.999517, -1, 1, -6.07774, 0.923258, 1, 0.787007, -1, 1, -0.923651, 1, -0.651919, 0.999517, 1, -0.298747, 3.5381, 0.875098, 0.544832, 3.60733, 0.828309, 0.787392, 0.999517, -1, 0.745106, 3.05827, 0.83379, 1, 0.787007, 1, 0.787392, 0.999517, 1, 0.54953, 3.39963, 0.897807)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7yx5d"]
+size = Vector3(1.87256, 1, 2.4917)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yd4yr"]
 albedo_color = Color(1, 0.909333, 0.68, 1)
 emission_enabled = true
@@ -180,13 +185,29 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 5.96
 emission_on_uv2 = true
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2prwx"]
+emission_shape = 3
+emission_box_extents = Vector3(6.78, 40.085, 12.395)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(3.84, -9.8, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adc57"]
+transparency = 1
+albedo_texture = ExtResource("11_33bov")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ubqwt"]
+material = SubResource("StandardMaterial3D_adc57")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_if1ff")
 
 [node name="player" parent="." instance=ExtResource("2_vviug")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4915, 21.2748, -6.35267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8839, 0.237122, 29.7457)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_sgb14")
@@ -270,7 +291,7 @@ ladderLength = 21
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.15188, -47.4192)
 
 [node name="Node3D2" parent="NavigationRegion3D/environment/props" instance=ExtResource("8_qrqtk")]
-transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, -1.65245, 5.93884, -47.1781)
+transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, -1.50948, 5.93884, -47.1693)
 
 [node name="Node3D3" parent="NavigationRegion3D/environment/props" instance=ExtResource("8_qrqtk")]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 11.4754, 5.93884, -47.1781)
@@ -428,18 +449,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.0956, 6.15188, 3.83682)
 [node name="well" parent="NavigationRegion3D/environment/props" instance=ExtResource("9_at7sn")]
 transform = Transform3D(3.72619, 0, 0, 0, 2.42322, 0, 0, 0, 3.6234, 86.1816, 0.17121, 28.8999)
 
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/environment/props/well"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.825644, 0)
+script = ExtResource("10_m3vy5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/environment/props/well/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00413895, -0.172778, -0.192075)
+shape = SubResource("BoxShape3D_7yx5d")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="NavigationRegion3D/environment/props"]
+transform = Transform3D(1, 0, 0, 0, 1.29651, 0, 0, 0, 1, 0, 0, 4.28646)
+size = Vector3(265.31, 80.2, 139.67)
+resolution = 0
+
 [node name="grassland" parent="NavigationRegion3D/environment" instance=ExtResource("3_0gs7g")]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="NavigationRegion3D/environment"]
 transform = Transform3D(1, 0, 0, 0, -0.990878, 0.134764, 0, -0.134764, -0.990878, 0, 50.8887, -143.935)
-light_color = Color(0.67, 0.4623, 0.268, 1)
-light_energy = 0.0
+light_color = Color(0.535618, 0.361636, 0.197394, 1)
+light_energy = 4.076
+light_indirect_energy = 0.0
+light_bake_mode = 1
+shadow_enabled = true
 sky_mode = 1
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="NavigationRegion3D/environment/DirectionalLight3D"]
 transform = Transform3D(6.77, 0, 0, 0, 6.77, 0, 0, 0, 6.77, 0, 0, 0)
 material = SubResource("StandardMaterial3D_yd4yr")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="NavigationRegion3D/environment"]
+transform = Transform3D(10.2473, 0, 0, 0, 2.38674, 0, 0, 0, 5.31311, 35.6762, -35.6038, 0)
+amount = 34523
+lifetime = 8.84
+preprocess = 2.0
+collision_base_size = 0.0
+visibility_aabb = AABB(-35.42, 9.25, -12.15, 56.495, 66.9, 25.7)
+process_material = SubResource("ParticleProcessMaterial_2prwx")
+draw_pass_1 = SubResource("QuadMesh_ubqwt")
+
 [node name="grass" parent="." instance=ExtResource("11_uyyw6")]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 66.4139, -1.38893e-06, -7.37378)
+
+[connection signal="body_entered" from="NavigationRegion3D/environment/props/well/Area3D" to="NavigationRegion3D/environment/props/well/Area3D" method="_on_body_entered"]

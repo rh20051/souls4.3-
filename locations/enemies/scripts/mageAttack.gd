@@ -1,7 +1,7 @@
 extends State
 class_name mageAttack
 @export var enemy: CharacterBody3D
-@onready var proj = preload("res://mageProjectile.tscn")
+@onready var proj = preload("res://locations/enemies/scenes/mageProjectile.tscn")
 var player
 var rand
 var angle

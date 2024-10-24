@@ -11,10 +11,11 @@ transform = Transform3D(1, 0, 0, 0, -0.00825531, -0.999966, 0, 0.999966, -0.0082
 script = ExtResource("1_g5glo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.27, -2.36041e-08, 0, 2.36041e-08, -0.27, 2.32831e-10, 0, 2.32831e-10, 0.27, 0, 0.41429, -2.32831e-10)
+transform = Transform3D(-0.267896, -0.0336378, -0.0002777, 0.0336378, -0.267896, 1.73671e-05, -0.0002777, -1.73657e-05, 0.27, 0.025807, 0.410534, -0.25941)
 mesh = ExtResource("2_rb4k1")
 
 [node name="hitbox" type="Area3D" parent="."]
+transform = Transform3D(0.992208, 0.124584, -0.00102852, -0.124584, 0.992209, 6.43227e-05, 0.00102852, 6.43209e-05, 0.999999, -0.025807, -0.00052783, -0.259436)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, -9.31323e-10, 0, -9.31323e-10, 1, 0, 0.903274, 0)

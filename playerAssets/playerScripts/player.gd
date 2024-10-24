@@ -3,7 +3,7 @@ extends CharacterBody3D
 const SENSITIVITY =.0007
 var SPEED = 5.0
 var input_dir
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 450
 const roll_distance = 130
 const roll_speed = 3.0
 var life = 30
@@ -196,7 +196,7 @@ func _physics_process(delta):
 				#$Armature.look_at(global_position+direction)
 			elif !canAttack and !rolling:
 				$Armature.rotation.y = lerp_angle($Armature.rotation.y, atan2(-direction.x, -direction.z), delta *3)
-			elif lockedEnemy and !rolling:
+			elif lockedEnemy:
 				$Armature.look_at(lockedEnemy.global_position, Vector3.UP)
 			$Armature.rotation.z = 0
 			$Armature.rotation.x = 0	
