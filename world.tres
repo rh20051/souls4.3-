@@ -156,7 +156,6 @@ glow_hdr_threshold = 0.97
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 163.95
 glow_map_strength = 1.0
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.315275, 0.311475, 0.291105, 1)
 fog_light_energy = 3.24

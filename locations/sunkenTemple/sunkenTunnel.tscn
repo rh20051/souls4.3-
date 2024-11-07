@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://h5xmcth0b3ix"]
+[gd_scene load_steps=11 format=4 uid="uid://h5xmcth0b3ix"]
 
 [ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_0fbke"]
 [ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_mslc7"]
@@ -69,20 +69,40 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_44wrx")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nmygh"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mkwcu"]
+frequency = 0.0169
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_idwj0"]
+noise = SubResource("FastNoiseLite_mkwcu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drk15"]
 render_priority = 0
 shader = ExtResource("1_0fbke")
-shader_parameter/scale_uniform = Vector2(2.72, 4.66)
+shader_parameter/scale_uniform = Vector2(8, 8)
 shader_parameter/rotate = 0.08
-shader_parameter/bricks = SubResource("NoiseTexture2D_nmygh")
-shader_parameter/noise = ExtResource("2_mslc7")
+shader_parameter/noiseRotate = 0.255
+shader_parameter/bricks = ExtResource("2_mslc7")
+shader_parameter/noise = SubResource("NoiseTexture2D_idwj0")
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_25vyp"]
+size = Vector3(3.97986, 0.0793457, 4.00665)
+
+[node name="StaticBody3D" type="StaticBody3D"]
 
 [node name="base" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.990647, 0, 0, 0, 0.990647, 0, 0, 0, 0.990647, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mkl1l")
 skeleton = NodePath("")
 surface_material_override/1 = SubResource("ShaderMaterial_drk15")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00130129, -1.99164, -0.0654299)
+shape = SubResource("BoxShape3D_25vyp")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00130129, -0.0107253, 1.98479)
+shape = SubResource("BoxShape3D_25vyp")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00130129, -0.0107253, -1.98806)
+shape = SubResource("BoxShape3D_25vyp")

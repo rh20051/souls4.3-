@@ -1,0 +1,52 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dm6uwiocfnojv"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1lu7d"]
+expanded_output_ports = [0]
+input_name = "normal"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2va5i"]
+frequency = 0.0215
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4i1l0"]
+noise = SubResource("FastNoiseLite_2va5i")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_w8hrw"]
+texture = SubResource("NoiseTexture2D_4i1l0")
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_ktk4q"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_3;
+
+
+
+void fragment() {
+// Input:2
+	vec3 n_out2p0 = NORMAL;
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+// Mix:4
+	float n_in4p1 = 1.00000;
+	float n_out4p0 = mix(n_out2p0.x, n_in4p1, n_out3p0.x);
+
+
+// Output:0
+	NORMAL_MAP = vec3(n_out4p0);
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_1lu7d")
+nodes/fragment/2/position = Vector2(-960, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_w8hrw")
+nodes/fragment/3/position = Vector2(-820, 440)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_ktk4q")
+nodes/fragment/4/position = Vector2(-248.669, 291.589)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 2, 4, 0, 0, 9)

@@ -1,3 +1,35 @@
-[gd_scene format=3 uid="uid://bdl2rm4yi1eaf"]
+[gd_scene load_steps=7 format=3 uid="uid://bdl2rm4yi1eaf"]
+
+[ext_resource type="PackedScene" uid="uid://h5xmcth0b3ix" path="res://locations/sunkenTemple/sunkenTunnel.tscn" id="1_hhxpt"]
+[ext_resource type="PackedScene" uid="uid://dtk8k3kp3r0dn" path="res://locations/sunkenTemple/sunkenJunction.tscn" id="2_k4pl3"]
+[ext_resource type="PackedScene" uid="uid://cg7isu7jw06s3" path="res://locations/sunkenTemple/sunkenCorner.tscn" id="3_3w7gr"]
+[ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://playerAssets/player.tscn" id="5_mvrj2"]
+[ext_resource type="PackedScene" uid="uid://biue2as3kehgi" path="res://locations/sunkenTemple/sunkenWater.tscn" id="6_6ygxw"]
+
+[sub_resource type="Environment" id="Environment_m0w0p"]
+ambient_light_energy = 3.07
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Node3D" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25937, 0, 8.87745)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D2" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32184, 0, 8.87745)
+
+[node name="SunkenJunction" parent="." instance=ExtResource("2_k4pl3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.357, -0.4, 42.478)
+
+[node name="Node3D3" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(-0.000907584, 0, -1, 0, 1, 0, 1, 0, -0.000907584, 7.255, -0.116, 1.393)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m0w0p")
+
+[node name="player" parent="." instance=ExtResource("5_mvrj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0196, -0.539385, 9.42679)
+
+[node name="sunkenWater" parent="." instance=ExtResource("6_6ygxw")]
+transform = Transform3D(21.755, 0, 0, 0, 12.469, 0, 0, 0, 21.755, 4.67986, -1.78642, 2.96656)

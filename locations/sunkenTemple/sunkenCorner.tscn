@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cg7isu7jw06s3"]
+[gd_scene load_steps=13 format=4 uid="uid://cg7isu7jw06s3"]
 
 [ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_f5u57"]
 [ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_d0igh"]
@@ -69,33 +69,73 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k4yx2")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_cyqd7"]
-noise_type = 3
-frequency = 0.0395
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6gh74"]
+frequency = 0.0125
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q83pa"]
-noise = SubResource("FastNoiseLite_cyqd7")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5mhye"]
+noise = SubResource("FastNoiseLite_6gh74")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jurdc"]
 render_priority = 0
 shader = ExtResource("1_f5u57")
-shader_parameter/scale_uniform = Vector2(5.025, 3.045)
+shader_parameter/scale_uniform = Vector2(8, 8)
 shader_parameter/rotate = 0.08
-shader_parameter/bricks = SubResource("NoiseTexture2D_q83pa")
-shader_parameter/noise = ExtResource("2_d0igh")
+shader_parameter/noiseRotate = 0.105
+shader_parameter/bricks = ExtResource("2_d0igh")
+shader_parameter/noise = SubResource("NoiseTexture2D_5mhye")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iq44a"]
-data = PackedVector3Array(-1, -1, -1, 0.9999, -1, 1, 0.9999, -1, -1, -1, -1, -1, -1, -1, 1, 0.9999, -1, 1, 0.9999, 1, -1, -1, 1, 1, -1, 1, -1, 0.9999, 1, -1, 0.9999, 1, 1, -1, 1, 1, 2.9963, -1, -2.9963, 0.9963, -1, -0.9963, 2.9963, -1, -0.9963, 2.9963, -1, -2.9963, 0.9963, -1, -2.9963, 0.9963, -1, -0.9963, 2.9963, 1, -0.9963, 0.9963, 1, -2.9963, 2.9963, 1, -2.9963, 2.9963, 1, -0.9963, 0.9963, 1, -0.9963, 0.9963, 1, -2.9963, 2.4336, 1, 0.5099, 0.9963, 1, -0.9963, 2.9963, 1, -0.9963, 0.9999, 1, -1, 2.4336, 1, 0.5099, 0.9999, 1, 1, 0.9963, 1, -0.9963, 2.4336, 1, 0.5099, 0.9999, 1, -1, 0.9963, -1, -0.9963, 2.4336, -1, 0.5099, 2.9963, -1, -0.9963, 2.4336, -1, 0.5099, 0.9999, -1, -1, 0.9999, -1, 1, 0.9963, -1, -0.9963, 0.9999, -1, -1, 2.4336, -1, 0.5099, 0.9963, 1, -0.9963, 0.9999, -1, -1, 0.9963, -1, -0.9963, 0.9963, 1, -0.9963, 0.9999, 1, -1, 0.9999, -1, -1, -1, -1, -1, 0.9999, 1, -1, -1, 1, -1, -1, -1, -1, 0.9999, -1, -1, 0.9999, 1, -1, 0.9999, -1, 1, -1, 1, 1, 0.9999, 1, 1, 0.9999, -1, 1, -1, -1, 1, -1, 1, 1, 2.9963, -1, -2.9963, 2.9963, 1, -0.9963, 2.9963, 1, -2.9963, 2.9963, -1, -2.9963, 2.9963, -1, -0.9963, 2.9963, 1, -0.9963, 0.9963, -1, -0.9963, 0.9963, 1, -2.9963, 0.9963, 1, -0.9963, 0.9963, -1, -0.9963, 0.9963, -1, -2.9963, 0.9963, 1, -2.9963, 2.4336, -1, 0.5099, 0.9999, 1, 1, 2.4336, 1, 0.5099, 2.4336, -1, 0.5099, 0.9999, -1, 1, 0.9999, 1, 1, 2.9963, -1, -0.9963, 2.4336, 1, 0.5099, 2.9963, 1, -0.9963, 2.9963, -1, -0.9963, 2.4336, -1, 0.5099, 2.4336, 1, 0.5099)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghgra"]
+size = Vector3(1.98706, 2.03882, 0.115723)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fbl7s"]
+size = Vector3(1.98466, 2.54391, 0.0186768)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngotu"]
+size = Vector3(2.01175, 0.0793457, 1.98535)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="turnLeft" type="MeshInstance3D" parent="."]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 7.48716, 0.12036, 4.58319)
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 7.48716, 0.12036, 4.58319)
 mesh = SubResource("ArrayMesh_x7ogc")
 skeleton = NodePath("")
 surface_material_override/1 = SubResource("ShaderMaterial_jurdc")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="turnLeft"]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 7.48716, 0.12036, 4.58319)
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="turnLeft/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_iq44a")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000857592, -0.000854485, -1.05052)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.995401, -0.241171, -1.99958)
+shape = SubResource("BoxShape3D_fbl7s")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000857592, -0.000854485, 1.05425)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.947679, 0, 0.319224, 0, 1, 0, -0.319224, 0, 0.947679, 1.85289, -0.000854485, 0.73958)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.365608, 0, 0.930769, 0, 1, 0, -0.930769, 0, 0.365608, 2.74443, -0.000854366, -0.277644)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.00438063, 0, 0.99999, 0, 1, 0, -0.99999, 0, -0.00438063, 3.03431, -0.000854485, -1.98063)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99921, -1.01188, -2.01002)
+shape = SubResource("BoxShape3D_ngotu")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00539255, -1.01188, -0.0173037)
+shape = SubResource("BoxShape3D_ngotu")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01014, -1.01188, -0.0173037)
+shape = SubResource("BoxShape3D_ngotu")
