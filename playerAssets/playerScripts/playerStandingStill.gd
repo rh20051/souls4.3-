@@ -12,7 +12,7 @@ func enter():
 
 func physics_update(_delta: float):
 	
-	player.velocity = Vector3()
+	
 	player.SPEED = 0
 	
 	

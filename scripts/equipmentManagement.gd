@@ -128,6 +128,8 @@ func _on_equip_pressed():
 	
 	
 func _on_use_pressed():
+	itemSelected = inv.get_selected_items()[0]
+	itemSelected = inv.get_item_text(itemSelected)
 	inv.invOpen = false
 	var item = Global.consumables[itemSelected][0].instantiate()
 	player.leftwep.add_child(item)

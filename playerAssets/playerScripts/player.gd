@@ -3,7 +3,7 @@ extends CharacterBody3D
 const SENSITIVITY =.0007
 var SPEED = 5.0
 var input_dir
-const JUMP_VELOCITY = 450
+const JUMP_VELOCITY = 4
 const roll_distance = 130
 const roll_speed = 3.0
 var life = 30
@@ -113,7 +113,7 @@ func _physics_process(delta):
 	if not is_on_floor() and climbing != true:
 		animTree["parameters/conditions/falling"] = true
 		animTree["parameters/conditions/onGround"] = false
-		velocity.y = -gravity * delta * 80
+		velocity.y -= gravity * delta
 	else:
 		animTree["parameters/conditions/onGround"] = true
 		animTree["parameters/conditions/falling"] = false
