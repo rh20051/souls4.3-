@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://dtk8k3kp3r0dn"]
+[gd_scene load_steps=16 format=4 uid="uid://cqn27hdye10uh"]
 
-[ext_resource type="Material" uid="uid://bgng3chpjb3if" path="res://locations/sunkenTemple/sunkenCeiling.tres" id="1_3isr8"]
-[ext_resource type="Material" uid="uid://dijgea7hhhigh" path="res://locations/sunkenTemple/sunkenWalls.tres" id="2_ti74t"]
+[ext_resource type="Material" uid="uid://dijgea7hhhigh" path="res://locations/sunkenTemple/sunkenWalls.tres" id="2_jgg0t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmsxu"]
 size = Vector3(3.8974, 3.98431, 0.28833)
@@ -106,6 +105,29 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3aclw")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dv8bf"]
+noise_type = 3
+frequency = 0.9785
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sdccf"]
+noise = SubResource("FastNoiseLite_dv8bf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s51t3"]
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_sdccf")
+texture_filter = 0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ppvbj"]
+frequency = 0.9998
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7t565"]
+noise = SubResource("FastNoiseLite_ppvbj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdlfc"]
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_7t565")
+texture_filter = 0
+
 [node name="SunkenJunction" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -149,5 +171,6 @@ shape = SubResource("BoxShape3D_h7qav")
 [node name="junction" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1dy1b")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_3isr8")
-surface_material_override/1 = ExtResource("2_ti74t")
+surface_material_override/0 = SubResource("StandardMaterial3D_s51t3")
+surface_material_override/1 = ExtResource("2_jgg0t")
+surface_material_override/2 = SubResource("StandardMaterial3D_cdlfc")

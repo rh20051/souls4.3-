@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dijgea7hhhigh"]
+
+[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_k1kh4"]
+[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_djou8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vsjsa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3rn4"]
+noise = SubResource("FastNoiseLite_vsjsa")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_k1kh4")
+shader_parameter/scale_uniform = Vector2(24, 24)
+shader_parameter/rotate = 0.08
+shader_parameter/noiseRotate = 0.125
+shader_parameter/bricks = ExtResource("2_djou8")
+shader_parameter/noise = SubResource("NoiseTexture2D_t3rn4")

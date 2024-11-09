@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdl2rm4yi1eaf"]
+[gd_scene load_steps=14 format=3 uid="uid://bdl2rm4yi1eaf"]
 
 [ext_resource type="PackedScene" uid="uid://h5xmcth0b3ix" path="res://locations/sunkenTemple/sunkenTunnel.tscn" id="1_hhxpt"]
 [ext_resource type="PackedScene" uid="uid://dtk8k3kp3r0dn" path="res://locations/sunkenTemple/sunkenJunction.tscn" id="2_k4pl3"]
 [ext_resource type="PackedScene" uid="uid://cg7isu7jw06s3" path="res://locations/sunkenTemple/sunkenCorner.tscn" id="3_3w7gr"]
 [ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://playerAssets/player.tscn" id="5_mvrj2"]
 [ext_resource type="PackedScene" uid="uid://biue2as3kehgi" path="res://locations/sunkenTemple/sunkenWater.tscn" id="6_6ygxw"]
-
-[sub_resource type="Environment" id="Environment_m0w0p"]
-ambient_light_energy = 3.07
+[ext_resource type="PackedScene" uid="uid://bsa3o3lwqlq7u" path="res://locations/sunkenTemple/sunkenEntrance.tscn" id="6_lidyw"]
+[ext_resource type="PackedScene" uid="uid://c641t7lf3dmvv" path="res://locations/sunkenTemple/sunkenWideRoom.tscn" id="7_g4tv0"]
+[ext_resource type="PackedScene" uid="uid://bpi8xj76eug2i" path="res://locations/sunkenTemple/sunkenStairwell.tscn" id="8_hjx8q"]
+[ext_resource type="PackedScene" uid="uid://iidjxf87c73f" path="res://locations/sunkenTemple/sunkenHall.tscn" id="9_ed5kl"]
+[ext_resource type="PackedScene" uid="uid://1sx2kung5kyn" path="res://locations/sunkenTemple/sunkenLadderWell.tscn" id="10_owwyv"]
+[ext_resource type="PackedScene" uid="uid://c7k1yvuxenpti" path="res://locations/sunkenTemple/sunkenSmallChurch.tscn" id="11_scdhc"]
+[ext_resource type="PackedScene" uid="uid://ei22i2u6sso5" path="res://locations/sunkenTemple/sunkenTunnel2F.tscn" id="12_2wg3e"]
+[ext_resource type="PackedScene" uid="uid://cqn27hdye10uh" path="res://locations/sunkenTemple/sunkenJunction2F.tscn" id="13_6bwk0"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -23,13 +28,135 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32184, 0, 8.87745)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.357, -0.4, 42.478)
 
 [node name="Node3D3" parent="." instance=ExtResource("3_3w7gr")]
-transform = Transform3D(-0.000907584, 0, -1, 0, 1, 0, 1, 0, -0.000907584, 7.255, -0.116, 1.393)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_m0w0p")
+transform = Transform3D(-0.000907584, 0, -1, 0, 1, 0, 1, 0, -0.000907584, 22.84, -0.116, 1.393)
 
 [node name="player" parent="." instance=ExtResource("5_mvrj2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0196, -0.539385, 9.42679)
 
 [node name="sunkenWater" parent="." instance=ExtResource("6_6ygxw")]
-transform = Transform3D(21.755, 0, 0, 0, 12.469, 0, 0, 0, 21.755, 4.67986, -1.78642, 2.96656)
+transform = Transform3D(73.855, 0, 0, 0, 73.855, 0, 0, 0, 73.855, 4.67986, -2.19124, -20.9851)
+
+[node name="sunkenWideRoom" parent="." instance=ExtResource("7_g4tv0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.9, -0.233, -14.606)
+
+[node name="entrance" parent="." instance=ExtResource("6_lidyw")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 12.28, -1.19209e-07, -37.626)
+
+[node name="Node3D4" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.952, -0.126, -22.358)
+
+[node name="Node3D5" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17.972, -0.126, -21.361)
+
+[node name="Node3D6" parent="." instance=ExtResource("8_hjx8q")]
+transform = Transform3D(0.00359526, 0, -2, 0, 2, 0, 2, 0, 0.00359526, 1.917, 0, -36.585)
+
+[node name="Node3D7" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63485, 0, 8.87745)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D8" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57238, 0, 8.87745)
+
+[node name="Node3D9" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.534, 0, 8.87745)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D10" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4291, 0, 8.87745)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D11" parent="." instance=ExtResource("9_ed5kl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -49.94, 0.018, -58.022)
+
+[node name="SunkenJunction2" parent="." instance=ExtResource("2_k4pl3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -35.882, -0.4, -24.733)
+
+[node name="Node3D12" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, 1.017)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D13" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -2.87956)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D14" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -6.77465)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D15" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -10.6712)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D16" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -14.5075)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D17" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -18.4041)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D18" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -22.2992)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D19" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -26.1957)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D20" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -30.0001)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D21" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.549, 0, -33.8967)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D23" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(1.19249e-08, 0, 1, 0, 1, 0, -1, 0, 1.19249e-08, -25.051, -0.126, -34.412)
+
+[node name="Node3D24" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -12.147, -0.126, -49.368)
+
+[node name="Node3D22" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4188, 0, 8.8629)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D25" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.3153, 0, 8.86491)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D26" parent="." instance=ExtResource("1_hhxpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.2103, 0, 8.86691)
+collision_layer = 7
+collision_mask = 0
+
+[node name="Node3D27" parent="." instance=ExtResource("3_3w7gr")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -40.7284, -0.116, 9.36608)
+
+[node name="Node3D28" parent="." instance=ExtResource("10_owwyv")]
+transform = Transform3D(-0.000418826, 0, 1, 0, 1, 0, -1, 0, -0.000418826, -48.195, 0, 18.727)
+
+[node name="Node3D29" parent="." instance=ExtResource("11_scdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.863, 6.457, -16.463)
+
+[node name="sunkenTunnel" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -48.206, 6.458, -10.671)
+
+[node name="SunkenJunction3" parent="." instance=ExtResource("13_6bwk0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.606, 6.067, -29.997)

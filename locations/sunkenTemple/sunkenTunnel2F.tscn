@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://h5xmcth0b3ix"]
+[gd_scene load_steps=14 format=4 uid="uid://ei22i2u6sso5"]
 
-[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_0fbke"]
-[ext_resource type="Material" uid="uid://bgng3chpjb3if" path="res://locations/sunkenTemple/sunkenCeiling.tres" id="1_oiaxu"]
-[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_mslc7"]
+[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="2_68cpx"]
+[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="3_rix6t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsy4w"]
 resource_name = "Material.001"
@@ -70,6 +69,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_44wrx")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rvlmv"]
+noise_type = 3
+frequency = 0.4101
+fractal_octaves = 10
+fractal_lacunarity = 4.87
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t6x8v"]
+seamless = true
+noise = SubResource("FastNoiseLite_rvlmv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1tvg"]
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_t6x8v")
+texture_filter = 0
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mkwcu"]
 frequency = 0.0169
 
@@ -78,11 +92,11 @@ noise = SubResource("FastNoiseLite_mkwcu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drk15"]
 render_priority = 0
-shader = ExtResource("1_0fbke")
+shader = ExtResource("2_68cpx")
 shader_parameter/scale_uniform = Vector2(8, 8)
 shader_parameter/rotate = 0.08
 shader_parameter/noiseRotate = 0.255
-shader_parameter/bricks = ExtResource("2_mslc7")
+shader_parameter/bricks = ExtResource("3_rix6t")
 shader_parameter/noise = SubResource("NoiseTexture2D_idwj0")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25vyp"]
@@ -94,7 +108,7 @@ size = Vector3(3.97986, 0.0793457, 4.00665)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mkl1l")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_oiaxu")
+surface_material_override/0 = SubResource("StandardMaterial3D_y1tvg")
 surface_material_override/1 = SubResource("ShaderMaterial_drk15")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="."]

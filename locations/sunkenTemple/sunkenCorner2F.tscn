@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://cg7isu7jw06s3"]
+[gd_scene load_steps=20 format=4 uid="uid://hri3u0klo7u2"]
 
-[ext_resource type="Material" uid="uid://cj6612y88v86h" path="res://shaders/sunkenCeiling.tres" id="1_8wwnl"]
-[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_f5u57"]
-[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_d0igh"]
+[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="2_oi3nu"]
+[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="3_jsytg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ghgra"]
 size = Vector3(1.98706, 2.03882, 0.115723)
@@ -107,6 +106,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jxuyb")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5xow2"]
+noise_type = 3
+frequency = 0.552
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oi8qx"]
+noise = SubResource("FastNoiseLite_5xow2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uletl"]
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_oi8qx")
+uv1_scale = Vector3(2.215, 2.215, 2.215)
+texture_filter = 0
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gqasa"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iqcku"]
@@ -114,15 +126,23 @@ noise = SubResource("FastNoiseLite_gqasa")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jqlgo"]
 render_priority = 0
-shader = ExtResource("1_f5u57")
+shader = ExtResource("2_oi3nu")
 shader_parameter/scale_uniform = Vector2(32, 32)
 shader_parameter/rotate = 0.02
 shader_parameter/noiseRotate = 0.2
-shader_parameter/bricks = ExtResource("2_d0igh")
+shader_parameter/bricks = ExtResource("3_jsytg")
 shader_parameter/noise = SubResource("NoiseTexture2D_iqcku")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ngs3"]
-albedo_color = Color(0.439216, 0.470588, 0.486275, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o2keh"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_62ylu"]
+noise = SubResource("FastNoiseLite_o2keh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8qql"]
+albedo_texture = SubResource("NoiseTexture2D_62ylu")
+uv1_scale = Vector3(2.895, 2.895, 2.895)
+texture_filter = 0
 
 [node name="sunkenCorner" type="Node3D"]
 
@@ -169,6 +189,6 @@ shape = SubResource("BoxShape3D_ngotu")
 transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 2.94141, -0.0996742, -10.5928)
 mesh = SubResource("ArrayMesh_m7wpo")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_8wwnl")
+surface_material_override/0 = SubResource("StandardMaterial3D_uletl")
 surface_material_override/1 = SubResource("ShaderMaterial_jqlgo")
-surface_material_override/2 = SubResource("StandardMaterial3D_1ngs3")
+surface_material_override/2 = SubResource("StandardMaterial3D_i8qql")

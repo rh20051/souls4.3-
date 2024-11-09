@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://biue2as3kehgi"]
+[gd_scene load_steps=9 format=3 uid="uid://biue2as3kehgi"]
 
 [ext_resource type="Shader" path="res://shaders/sunkenWater.gdshader" id="1_dtgo3"]
+[ext_resource type="Texture2D" uid="uid://cvvfw4kt8cbr2" path="res://locations/dependencies/sunkenWater.png" id="2_al5ic"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_foyba"]
 subdivide_width = 32
@@ -33,9 +34,9 @@ noise = SubResource("FastNoiseLite_46vs1")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h6ii4"]
 render_priority = 0
 shader = ExtResource("1_dtgo3")
-shader_parameter/color = Vector3(0.032, 0.092, 0.127)
 shader_parameter/noise = SubResource("NoiseTexture2D_y2nmn")
 shader_parameter/moreNoise = SubResource("NoiseTexture2D_ksh3r")
+shader_parameter/albd = ExtResource("2_al5ic")
 
 [node name="sunkenWater" type="Node3D"]
 
@@ -43,3 +44,13 @@ shader_parameter/moreNoise = SubResource("NoiseTexture2D_ksh3r")
 transform = Transform3D(1, 0, 0, 0, 0.027, 0, 0, 0, 1.014, 0, 0, 0)
 mesh = SubResource("PlaneMesh_foyba")
 surface_material_override/0 = SubResource("ShaderMaterial_h6ii4")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -0.135101, -37.0368, 0, 0.986187, -0.00359736, 0, -26.7604, 0)
+light_color = Color(0, 1, 1, 1)
+light_energy = 1.985
+light_indirect_energy = 16.0
+spot_range = 103.304
+spot_attenuation = 0.2
+spot_angle = 55.52
+spot_angle_attenuation = 1.7411
