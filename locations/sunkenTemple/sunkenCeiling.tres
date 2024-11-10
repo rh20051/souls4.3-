@@ -26,7 +26,6 @@ backlight_enabled = true
 backlight = Color(0.243137, 1, 1, 1)
 refraction_scale = -0.17
 detail_blend_mode = 3
-uv1_scale = Vector3(0.66, 0.66, 0.66)
 texture_filter = 0
 disable_receive_shadows = true
 shadow_to_opacity = true

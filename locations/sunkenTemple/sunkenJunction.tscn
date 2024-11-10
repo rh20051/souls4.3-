@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://dtk8k3kp3r0dn"]
+[gd_scene load_steps=15 format=4 uid="uid://dtk8k3kp3r0dn"]
 
 [ext_resource type="Material" uid="uid://bgng3chpjb3if" path="res://locations/sunkenTemple/sunkenCeiling.tres" id="1_3isr8"]
-[ext_resource type="Material" uid="uid://dijgea7hhhigh" path="res://locations/sunkenTemple/sunkenWalls.tres" id="2_ti74t"]
+[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="2_yji2f"]
+[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="3_sn16s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gmsxu"]
 size = Vector3(3.8974, 3.98431, 0.28833)
@@ -12,25 +13,25 @@ size = Vector3(11.8635, 0.148315, 4.04004)
 [sub_resource type="BoxShape3D" id="BoxShape3D_h7qav"]
 size = Vector3(4.03052, 0.0546875, 4.05083)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2nad"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m864k"]
 resource_name = "ceiling.002"
 cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o88xp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t06a"]
 resource_name = "walls.001"
 cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ga68q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdicx"]
 resource_name = "floor.007"
 cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3aclw"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_p88ee"]
 _surfaces = [{
 "aabb": AABB(-17.3413, 2.39428, -35.6013, 11.8972, 1e-05, 7.99606),
 "format": 34896613377,
@@ -64,47 +65,61 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1dy1b"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bpuaa"]
 resource_name = "sunkenTemple1_Cube_021"
 _surfaces = [{
 "aabb": AABB(-17.3413, 2.39428, -35.6013, 11.8972, 1e-05, 7.99606),
-"attribute_data": PackedByteArray("e7jz14a4+Os8pPHXPKQ97M/MsuuDuP//z8z//264qcO6zKnDusz21w=="),
+"attribute_data": PackedByteArray("UI8ezeyDJM1Sj5jBxIOYwROEsNiGeCLNhniw2NyaFs3cmqTYT4+k2A=="),
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AwAAAAEAAwACAAAABgABAAQABgAFAAEACQAHAAgACQAAAAcAAAAEAAEAAAAJAAQA"),
-"material": SubResource("StandardMaterial3D_q2nad"),
+"material": SubResource("StandardMaterial3D_m864k"),
 "name": "ceiling.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 10,
-"vertex_data": PackedByteArray("BlYAAP9/SNXmqgAA/39I1c5VAAC7/0jV4KsAAP//SNXtqQAAAABI1dH/AABTgEjV//8AAEMASNUAAAAAD4BI1S0AAAAAAEjVP1YAAEMASNVc1bkqXNW5KlzVuSpc1bkqXNW5KlzVuSpc1bkqXNW5KlzVuSpc1bkq")
+"vertex_data": PackedByteArray("BlYAAP9/7//mqgAA/3/v/85VAAC7/+//4KsAAP//7//tqQAAAADv/9H/AABTgO////8AAEMA7/8AAAAAD4Dv/y0AAAAAAO//P1YAAEMA7/8HwBAAB8AQAAfAEAAHwBAAB8AQAAfAEAAHwBAAB8AQAAfAEAAHwBAA")
 }, {
 "aabb": AABB(-17.3413, -1.60572, -35.6013, 11.8972, 4, 7.99606),
-"attribute_data": PackedByteArray("I7yyb86nVg0jvP+DzqejITykXa8q9IarPKSpwyr00r+Pk1YNj5OjIYa4Xa+GuKnDjs4PWo7OD1pBug9aQboPWiPghqsj4NK/js5cbkG6XG5t0LJvbdD/g47OBzJBugcyjs5TRo7OU0ZBulNGQbpTRg=="),
+"attribute_data": PackedByteArray("R5GkKyizpCtHkTI3KLMyN+t6pCtdyaQr63oyN13JMjeip6QroqcyN3iGpCt4hjI3E4TJthOEybYThDurE4Q7q/e9pCv3vTI3hnjJtoZ4O6vTnKQr05wyN9yaybbcmjurT4/Jtk+PybZPjzurT487qw=="),
 "format": 34896613399,
 "index_count": 42,
 "index_data": PackedByteArray("BAALAAYABAAKAAsACAADAAkACAABAAMADAATAA4ADAASABMAEAAHABEAEAAFAAcAFgAaABcAFgAYABoAAAAVAAIAAAAUABUADQAbABkADQAPABsA"),
-"material": SubResource("StandardMaterial3D_o88xp"),
+"material": SubResource("StandardMaterial3D_6t06a"),
 "name": "walls.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 28,
-"vertex_data": PackedByteArray("BlYAAP9///8GVgAA/3///wZW////f///Blb///9////mqgAA/3///+aqAAD/f///5qr///9////mqv///3///85VAAC7////zlX//7v////gqwAA/////+Cr////////7akAAAAA7//tqQAAAADv/+2p//8AAO//7an//wAA7//R/wAAU4D//9H///9TgP////8AAEMA7///////QwDv/wAAAAAPgP//AAD//w+A//8tAAAAAADv/y0A//8AAO//P1YAAEMA7/8/VgAAQwDv/z9W//9DAO//P1b//0MA7/8HgP9////pvweA/3///+m/W8D/f9R//39bwP9/1H//f///6b///+m/W8D/f1vA/3/2vwhACED2v/a/CEAIQPa/1H//f9R//3/2vwhA9r8IQAeA/38HgP9/9r8IQPa/CED2vwhACED2v/a/CEAIQPa/")
+"vertex_data": PackedByteArray("BlYAAP9///8GVgAA/3///wZW////f///Blb///9////mqgAA/3///+aqAAD/f///5qr///9////mqv///3///85VAAC7////zlX//7v////gqwAA/////+Cr////////7akAAAAA6f/tqQAAAADp/+2p//8AAOn/7an//wAA6f/R/wAAU4D//9H///9TgP////8AAEMA6f//////QwDp/wAAAAAPgP//AAD//w+A//8tAAAAAADp/y0A//8AAOn/P1YAAEMA6f8/VgAAQwDp/z9W//9DAOn/P1b//0MA6f8HgP9////pvweA/3///+m/W8D/f9R//39bwP9/1H//f///6b///+m/W8D/f1vA/3//fwAA/3////9/AAD/f///1H//f9R//3//fwAA/38AAAeA/38HgP9//38AAP9/AAD/fwAA/3////9/AAD/f///")
 }, {
 "aabb": AABB(-17.3413, -1.60572, -35.6013, 11.8972, 1e-05, 7.99606),
-"attribute_data": PackedByteArray("5KemgtmnqpYjvKOCI7zwlo+TZJbcp7Gqj5OxqvGnXG6kk1xupJOogg=="),
+"attribute_data": PackedByteArray("UI8R7+yDC+9Sj5f6xIOX+hOEf+OGeAzvhnh/49yaGe/cmovjT4+L4w=="),
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AQACAAMAAQAAAAIABAAFAAYABAABAAUACAAAAAkACAAHAAAAAAAEAAkAAAABAAQA"),
-"material": SubResource("StandardMaterial3D_ga68q"),
+"material": SubResource("StandardMaterial3D_rdicx"),
 "name": "floor.007",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 10,
-"vertex_data": PackedByteArray("BlYAAP9/YNXmqgAA/39g1c5VAAC7/2DV4KsAAP//YNXtqQAAAABg1dH/AABTgGDV//8AAEMAYNUAAAAAD4Bg1S0AAAAAAGDVP1YAAEMAYNWyKmPVsipj1bIqY9WyKmPVsipj1bIqY9WyKmPVsipj1bIqY9WyKmPV")
+"vertex_data": PackedByteArray("BlYAAP9/7//mqgAA/3/v/85VAAC7/+//4KsAAP//7//tqQAAAADv/9H/AABTgO////8AAEMA7/8AAAAAD4Dv/y0AAAAAAO//P1YAAEMA7//ufwhA7n8IQO5/CEDufwhA7n8IQO5/CEDufwhA7n8IQO5/CEDufwhA")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_3aclw")
+shadow_mesh = SubResource("ArrayMesh_p88ee")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_go7r0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_km6jv"]
+noise = SubResource("FastNoiseLite_go7r0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6q8f2"]
+render_priority = 0
+shader = ExtResource("2_yji2f")
+shader_parameter/scale_uniform = Vector2(32, 32)
+shader_parameter/rotate = 0.04
+shader_parameter/noiseRotate = 0.57
+shader_parameter/bricks = ExtResource("3_sn16s")
+shader_parameter/noise = SubResource("NoiseTexture2D_km6jv")
 
 [node name="SunkenJunction" type="Node3D"]
 
@@ -146,8 +161,8 @@ shape = SubResource("BoxShape3D_0ocfs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3485, -1.56709, -29.5975)
 shape = SubResource("BoxShape3D_h7qav")
 
-[node name="junction" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_1dy1b")
+[node name="junction2" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_bpuaa")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_3isr8")
-surface_material_override/1 = ExtResource("2_ti74t")
+surface_material_override/1 = SubResource("ShaderMaterial_6q8f2")

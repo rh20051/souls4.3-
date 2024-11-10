@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdl2rm4yi1eaf"]
+[gd_scene load_steps=16 format=3 uid="uid://bdl2rm4yi1eaf"]
 
 [ext_resource type="PackedScene" uid="uid://h5xmcth0b3ix" path="res://locations/sunkenTemple/sunkenTunnel.tscn" id="1_hhxpt"]
 [ext_resource type="PackedScene" uid="uid://dtk8k3kp3r0dn" path="res://locations/sunkenTemple/sunkenJunction.tscn" id="2_k4pl3"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://c7k1yvuxenpti" path="res://locations/sunkenTemple/sunkenSmallChurch.tscn" id="11_scdhc"]
 [ext_resource type="PackedScene" uid="uid://ei22i2u6sso5" path="res://locations/sunkenTemple/sunkenTunnel2F.tscn" id="12_2wg3e"]
 [ext_resource type="PackedScene" uid="uid://cqn27hdye10uh" path="res://locations/sunkenTemple/sunkenJunction2F.tscn" id="13_6bwk0"]
+[ext_resource type="PackedScene" uid="uid://hri3u0klo7u2" path="res://locations/sunkenTemple/sunkenCorner2F.tscn" id="14_neesw"]
+[ext_resource type="PackedScene" uid="uid://mk6m0lxfh5jl" path="res://locations/sunkenTemple/sunkenBedroom2F.tscn" id="15_air5t"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -49,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.952, -0.126, -22.358)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17.972, -0.126, -21.361)
 
 [node name="Node3D6" parent="." instance=ExtResource("8_hjx8q")]
-transform = Transform3D(0.00359526, 0, -2, 0, 2, 0, 2, 0, 0.00359526, 1.917, 0, -36.585)
+transform = Transform3D(-8.74229e-08, 0, 2, 0, 2, 0, -2, 0, -8.74229e-08, 19.035, 0, -29.9288)
 
 [node name="Node3D7" parent="." instance=ExtResource("1_hhxpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63485, 0, 8.87745)
@@ -160,3 +162,72 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -48.20
 
 [node name="SunkenJunction3" parent="." instance=ExtResource("13_6bwk0")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.606, 6.067, -29.997)
+
+[node name="sunkenCorner2" parent="." instance=ExtResource("14_neesw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.24244, 6.337, -37.0013)
+
+[node name="SunkenJunction4" parent="." instance=ExtResource("13_6bwk0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.843, 6.084, -10.875)
+
+[node name="sunkenBedroom" parent="." instance=ExtResource("15_air5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.487, 6.483, -29.875)
+
+[node name="sunkenTunnel2" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.74948, 6.479, -36.4783)
+
+[node name="sunkenTunnel3" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.74948, 6.479, -32.5934)
+
+[node name="sunkenTunnel4" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.74948, 6.479, -28.6211)
+
+[node name="SunkenJunction5" parent="." instance=ExtResource("13_6bwk0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23.9516, 6.067, -52.235)
+
+[node name="sunkenTunnel5" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(0.345317, 0, 0, 0, 1, 0, 0, 0, 1, 3.89578, 6.47304, -44.4753)
+
+[node name="sunkenTunnel6" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-2.33817e-08, 0, 1, 0, 1, 0, -0.534911, 0, -4.37114e-08, -2.74948, 6.469, -25.672)
+
+[node name="SunkenJunction6" parent="." instance=ExtResource("13_6bwk0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36.348, 6.067, -7.314)
+
+[node name="sunkenBedroom2" parent="." instance=ExtResource("15_air5t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.343, 6.483, -29.615)
+
+[node name="Node3D30" parent="." instance=ExtResource("8_hjx8q")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -41.097, -6.405, -55.5463)
+
+[node name="sunkenTunnel7" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -26.5823)
+
+[node name="sunkenTunnel8" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -30.5326)
+
+[node name="sunkenTunnel9" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -34.4636)
+
+[node name="sunkenTunnel10" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -38.4139)
+
+[node name="sunkenTunnel11" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -42.2578)
+
+[node name="sunkenTunnel12" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -46.2081)
+
+[node name="sunkenTunnel13" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -50.1391)
+
+[node name="sunkenTunnel14" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -54.0895)
+
+[node name="sunkenTunnel15" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.5736, 6.479, -58.0428)
+
+[node name="sunkenTunnel16" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(-5.71735e-08, 0, 1, 0, 1, 0, -1.30798, 0, -4.37114e-08, -12.5736, 6.479, -62.591)
+
+[node name="sunkenTunnel17" parent="." instance=ExtResource("12_2wg3e")]
+transform = Transform3D(1.215, 0, 0, 0, 1, 0, 0, 0, 1, -19.5699, 6.48389, -18.6813)

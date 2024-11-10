@@ -21,7 +21,7 @@ COLOR = texture(moreNoise, UV);
 void fragment() {
 	
 	vec4 noiseText = texture(moreNoise, UV);
-	ALPHA = 1.0;
+	ALPHA = 0.5;
 	ALBEDO = texture(albd,vec2(UV.x * 10.0, UV.y * 10.0)).rgb;
 	RIM = 0.2;
   	METALLIC = 0.0;
