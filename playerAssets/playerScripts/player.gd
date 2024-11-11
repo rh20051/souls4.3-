@@ -39,7 +39,7 @@ var running = false
 @onready var bottomPoint = $pickupArea/CollisionShape3D/Node3D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var inventory = ["grass"]
+var inventory = ["grass", "mushroom"]
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
 var weaponInventory = ["longsword", "shield", "flamberge", "lamp"]

@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://OmniLight3D.gd" id="6_6nf0y"]
 [ext_resource type="Script" path="res://scripts/equipmentManagement.gd" id="7_415b7"]
 [ext_resource type="FontFile" uid="uid://b8xv27ccw4r5o" path="res://PositionsByArixbored-Regular .otf" id="8_g163j"]
+[ext_resource type="StyleBox" uid="uid://gqjta8srjak8" path="res://playerAssets/texturesAndDependencies/equiphover.tres" id="8_xj7xa"]
 [ext_resource type="Script" path="res://button.gd" id="9_uie5x"]
+[ext_resource type="StyleBox" uid="uid://ombc4q5hbv7l" path="res://playerAssets/texturesAndDependencies/buttonNormal.tres" id="9_vay5s"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/stateMachine.gd" id="10_xp8io"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerWalking.gd" id="11_3d22o"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerStandingStill.gd" id="12_2wcao"]
@@ -80,24 +82,6 @@ border_width_top = 200
 border_width_right = 200
 border_width_bottom = 200
 border_color = Color(0.216151, 0.00327893, 0.0420241, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfg2h"]
-bg_color = Color(0.427451, 0.866667, 0.768627, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.121569, 0.682353, 0.411765, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvrqd"]
-bg_color = Color(0.360784, 0.815686, 0.882353, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0, 0.698039, 0.509804, 1)
 border_blend = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4bj26"]
@@ -842,7 +826,10 @@ border_width_bottom = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3uw08"]
 bg_color = Color(0.286275, 0.709804, 0.313726, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wrbvd"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_de05e"]
+custom_solver_bias = 1.0
+margin = 0.001
+radius = 0.001
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3wct"]
 bg_color = Color(0.862745, 0.454902, 0.113725, 1)
@@ -11774,41 +11761,75 @@ offset_top = 78.0
 offset_right = 881.0
 offset_bottom = 339.0
 
+[node name="crafting" type="Node" parent="inventoryScreen/inventoryManager"]
+
+[node name="craftingInventory" type="ItemList" parent="inventoryScreen/inventoryManager/crafting"]
+offset_left = 150.0
+offset_top = 37.0
+offset_right = 190.0
+offset_bottom = 77.0
+scale = Vector2(12.1554, 20.2591)
+
+[node name="combo1" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
+offset_left = 890.0
+offset_top = 91.0
+offset_right = 930.0
+offset_bottom = 131.0
+scale = Vector2(5.13406, 4.75758)
+
+[node name="combo2" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
+offset_left = 1349.0
+offset_top = 86.0
+offset_right = 1389.0
+offset_bottom = 126.0
+scale = Vector2(5.13406, 4.75758)
+
+[node name="result" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
+offset_left = 1003.0
+offset_top = 396.0
+offset_right = 1388.0
+offset_bottom = 751.0
+
 [node name="VBoxContainer" type="VBoxContainer" parent="inventoryScreen"]
 visible = false
 layout_mode = 0
 offset_left = 944.0
 offset_top = 727.0
-offset_right = 1273.0
-offset_bottom = 965.0
+offset_right = 1267.0
+offset_bottom = 945.0
+alignment = 1
 
 [node name="equip" type="Button" parent="inventoryScreen/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.729412, 0.231373, 0.72549, 1)
-theme_override_fonts/font = ExtResource("8_g163j")
-theme_override_font_sizes/font_size = 86
-theme_override_styles/normal = SubResource("StyleBoxFlat_yfg2h")
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
 text = "EQUIP
 "
 script = ExtResource("9_uie5x")
 
 [node name="unequip" type="Button" parent="inventoryScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.752941, 0.309804, 1, 1)
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_constants/h_separation = 165
-theme_override_fonts/font = ExtResource("8_g163j")
-theme_override_font_sizes/font_size = 76
-theme_override_styles/normal = SubResource("StyleBoxFlat_bvrqd")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
 text = "UNEQUIP"
 script = ExtResource("9_uie5x")
 
 [node name="use" type="Button" parent="inventoryScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("8_g163j")
-theme_override_font_sizes/font_size = 76
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
 text = "USE"
 script = ExtResource("9_uie5x")
 
@@ -12421,10 +12442,10 @@ show_percentage = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.055, 2.78256, 0.184326)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="cameraPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, -0.546, 0.649)
-shape = SubResource("SphereShape3D_wrbvd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, -0.546, -0.18623)
+shape = SubResource("SphereShape3D_de05e")
 spring_length = 2.0
-margin = 0.5
+margin = 0.001
 
 [node name="Camera3D" type="Camera3D" parent="cameraPoint/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00340569, 0.187657, 1.19267)
