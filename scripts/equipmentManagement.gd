@@ -12,10 +12,10 @@ var itemSelected = null
 @onready var armorDisplay = get_node("armorEquipped")
 @onready var rWepInv = get_node("weaponsEquipped/mainWeaponInventory")
 @onready var lWepInv = get_node("weaponsEquipped/leftHandWeaponInventory")
-@onready var equipButtons = get_parent().get_parent().get_node("VBoxContainer")
-@onready var equip = get_parent().get_parent().get_node("VBoxContainer/equip")
-@onready var use = get_parent().get_parent().get_node("VBoxContainer/use")
-@onready var unequip = get_parent().get_parent().get_node("VBoxContainer/unequip")
+@onready var equipButtons = get_parent().get_node("VBoxContainer")
+@onready var equip = get_parent().get_node("VBoxContainer/equip")
+@onready var use = get_parent().get_node("VBoxContainer/use")
+@onready var unequip = get_parent().get_node("VBoxContainer/unequip")
 
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout

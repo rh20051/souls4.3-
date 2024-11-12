@@ -1,4 +1,4 @@
-[gd_scene load_steps=235 format=4 uid="uid://ben3knwvkf60e"]
+[gd_scene load_steps=236 format=4 uid="uid://ben3knwvkf60e"]
 
 [ext_resource type="Script" path="res://playerAssets/playerScripts/player.gd" id="1_rwfsj"]
 [ext_resource type="Texture2D" uid="uid://de7exiijy3gir" path="res://misc/dependencies/shale.png" id="2_iokfa"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://OmniLight3D.gd" id="6_6nf0y"]
 [ext_resource type="Script" path="res://scripts/equipmentManagement.gd" id="7_415b7"]
 [ext_resource type="FontFile" uid="uid://b8xv27ccw4r5o" path="res://PositionsByArixbored-Regular .otf" id="8_g163j"]
+[ext_resource type="Script" path="res://playerAssets/playerScripts/crafting.gd" id="8_o372q"]
 [ext_resource type="StyleBox" uid="uid://gqjta8srjak8" path="res://playerAssets/texturesAndDependencies/equiphover.tres" id="8_xj7xa"]
 [ext_resource type="Script" path="res://button.gd" id="9_uie5x"]
 [ext_resource type="StyleBox" uid="uid://ombc4q5hbv7l" path="res://playerAssets/texturesAndDependencies/buttonNormal.tres" id="9_vay5s"]
@@ -11762,44 +11763,50 @@ offset_right = 881.0
 offset_bottom = 339.0
 
 [node name="crafting" type="Node" parent="inventoryScreen/inventoryManager"]
+script = ExtResource("8_o372q")
 
 [node name="craftingInventory" type="ItemList" parent="inventoryScreen/inventoryManager/crafting"]
-offset_left = 150.0
-offset_top = 37.0
-offset_right = 190.0
-offset_bottom = 77.0
-scale = Vector2(12.1554, 20.2591)
-
-[node name="combo1" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
-offset_left = 890.0
-offset_top = 91.0
-offset_right = 930.0
-offset_bottom = 131.0
-scale = Vector2(5.13406, 4.75758)
-
-[node name="combo2" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
-offset_left = 1349.0
-offset_top = 86.0
-offset_right = 1389.0
-offset_bottom = 126.0
-scale = Vector2(5.13406, 4.75758)
-
-[node name="result" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting"]
-offset_left = 1003.0
-offset_top = 396.0
-offset_right = 1388.0
-offset_bottom = 751.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="inventoryScreen"]
 visible = false
-layout_mode = 0
+layout_direction = 2
+offset_left = 91.0
+offset_top = 37.0
+offset_right = 544.0
+offset_bottom = 858.0
+theme_override_font_sizes/font_size = 31
+max_columns = 2
+same_column_width = true
+fixed_column_width = 10
+fixed_icon_size = Vector2i(20, 20)
+
+[node name="combo1" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+offset_left = 60.8783
+offset_top = 2.66547
+offset_right = 100.878
+offset_bottom = 42.6655
+scale = Vector2(5.13406, 4.75758)
+
+[node name="combo2" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+offset_left = 98.6393
+offset_top = 2.41867
+offset_right = 138.639
+offset_bottom = 42.4187
+scale = Vector2(5.13406, 4.75758)
+
+[node name="result" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+offset_left = 78.895
+offset_top = 18.214
+offset_right = 327.895
+offset_bottom = 224.214
+
+[node name="VBoxContainer" type="VBoxContainer" parent="inventoryScreen/inventoryManager"]
+visible = false
 offset_left = 944.0
 offset_top = 727.0
 offset_right = 1267.0
 offset_bottom = 945.0
 alignment = 1
 
-[node name="equip" type="Button" parent="inventoryScreen/VBoxContainer"]
+[node name="equip" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
 clip_contents = true
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
@@ -11811,7 +11818,7 @@ text = "EQUIP
 "
 script = ExtResource("9_uie5x")
 
-[node name="unequip" type="Button" parent="inventoryScreen/VBoxContainer"]
+[node name="unequip" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
 theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
@@ -11823,7 +11830,7 @@ theme_override_styles/normal = ExtResource("9_vay5s")
 text = "UNEQUIP"
 script = ExtResource("9_uie5x")
 
-[node name="use" type="Button" parent="inventoryScreen/VBoxContainer"]
+[node name="use" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
 theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
@@ -12542,9 +12549,10 @@ libraries = {
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped" to="inventoryScreen/inventoryManager/equipment" method="_on_weapons_equipped_item_activated"]
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped/mainWeaponInventory" to="inventoryScreen/inventoryManager/equipment" method="_on_main_weapon_inventory_item_activated"]
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped/leftHandWeaponInventory" to="inventoryScreen/inventoryManager/equipment" method="_on_left_hand_weapon_inventory_item_activated"]
-[connection signal="pressed" from="inventoryScreen/VBoxContainer/equip" to="inventoryScreen/inventoryManager/equipment" method="_on_equip_pressed"]
-[connection signal="pressed" from="inventoryScreen/VBoxContainer/unequip" to="inventoryScreen/inventoryManager/equipment" method="_on_unequip_pressed"]
-[connection signal="pressed" from="inventoryScreen/VBoxContainer/use" to="inventoryScreen/inventoryManager/equipment" method="_on_use_pressed"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/crafting/craftingInventory" to="inventoryScreen/inventoryManager/crafting" method="onCraftInvItemActivated"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/equip" to="inventoryScreen/inventoryManager/equipment" method="_on_equip_pressed"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/unequip" to="inventoryScreen/inventoryManager/equipment" method="_on_unequip_pressed"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/use" to="inventoryScreen/inventoryManager/equipment" method="_on_use_pressed"]
 [connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]
 [connection signal="area_exited" from="pickupArea" to="." method="_on_pickup_area_area_exited"]
 [connection signal="timeout" from="rallyTimer" to="." method="_on_rally_timer_timeout"]

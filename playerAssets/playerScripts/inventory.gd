@@ -6,14 +6,15 @@ extends ItemList
 @onready var invLegs = get_parent().get_node("equipment/armorEquipped/legsArmor")
 @onready var armorDisplay = get_parent().get_node("equipment/armorEquipped")
 @onready var itemDisplay = get_parent().get_node("itemDisplay")
+@onready var craftingInventory = get_parent().get_node("crafting/craftingInventory")
 @onready var inventoryScreen = get_parent().get_parent()
 @onready var equipButtons = get_parent().get_parent().get_node("VBoxContainer")
 @onready var rWepInv = get_parent().get_node("equipment/weaponsEquipped/mainWeaponInventory")
 @onready var lWepInv = get_parent().get_node("equipment/weaponsEquipped/leftHandWeaponInventory")
 @onready var weaponDisplay = get_parent().get_node("equipment/weaponsEquipped")
-@onready var equip = get_parent().get_parent().get_node("VBoxContainer").get_node("equip")
-@onready var unequip = get_parent().get_parent().get_node("VBoxContainer").get_node("unequip")
-@onready var use = get_parent().get_parent().get_node("VBoxContainer").get_node("use")
+@onready var equip = get_parent().get_node("VBoxContainer").get_node("equip")
+@onready var unequip = get_parent().get_node("VBoxContainer").get_node("unequip")
+@onready var use = get_parent().get_node("VBoxContainer").get_node("use")
 @onready var itemDisplayPoint = get_parent().get_parent().get_node("inventoryManager/itemDisplay/SubViewportContainer/SubViewport/itemPoint") 
 var itemSelected = null
 var invOpen = false
@@ -35,11 +36,15 @@ func _physics_process(delta: float) -> void:
 			if self.has_focus(): 
 				_on_item_activated(invItemSelected)
 		if Input.is_action_just_pressed("heavyAttack"):
+			equip.text = "EQUIP"
+			unequip.text = "UNEQUIP"
+			use.text = "USE"
 			inventoryCycle += 1
-			if inventoryCycle == 3:
+			if inventoryCycle == 4:
 				inventoryCycle = 0
 			if inventoryCycle == 1:
 					self.hide()
+					craftingInventory.hide()
 					armorDisplay.show()
 					self.deselect_all()
 					rWepInv.hide()
@@ -48,6 +53,7 @@ func _physics_process(delta: float) -> void:
 			elif inventoryCycle == 0:
 					self.show()
 					weaponDisplay.hide()
+					craftingInventory.hide()
 					armorDisplay.hide()
 					rWepInv.hide()
 					lWepInv.hide()
@@ -55,8 +61,17 @@ func _physics_process(delta: float) -> void:
 			elif inventoryCycle == 2:
 				self.hide()
 				armorDisplay.hide()
+				craftingInventory.hide()
 				weaponDisplay.show()
 				weaponDisplay.grab_focus()
+			elif inventoryCycle == 3:
+				self.hide()
+				armorDisplay.hide()
+				weaponDisplay.hide()
+				craftingInventory.show()
+				equip.text = "add"
+				unequip.text = "remove"
+				use.text = "combo"
 		if Input.is_action_just_pressed("menuRight"):
 			if self.has_focus():
 				if invItemSelected < len(player.inventory) -1:	
@@ -82,6 +97,9 @@ func _physics_process(delta: float) -> void:
 		Global.increment = 0
 func openInventory():
 	if invOpen == false:
+		equip.text = "EQUIP"
+		unequip.text = "UNEQUIP"
+		use.text = "USE"
 		inventoryCycle = 0
 		self.show()
 		armorDisplay.hide()
@@ -100,6 +118,7 @@ func openInventory():
 		weaponDisplay.hide()
 		rWepInv.hide()
 		lWepInv.hide()
+		craftingInventory.hide()
 		self.hide()
 		inventoryScreen.get_node("VBoxContainer").visible = false
 
@@ -163,4 +182,6 @@ func checkInventory():
 				var image = Image.load_from_file(Global.inventoryDisplays[player.inventory[i]][0])
 				var texture = ImageTexture.create_from_image(image)
 				add_item(str(player.inventory[i]), texture, true)
+				if player.inventory[i] in Global.craftingMaterials:
+					craftingInventory.add_item(str(player.inventory[i]), texture, true)
 			
