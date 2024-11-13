@@ -10,7 +10,7 @@ float height(vec2 position, float time) {
   return texture(noise, (position / 20.0) - offset).x;
 }
 void vertex() {
-  
+
   vec2 pos = VERTEX.xz;
   float k = height(pos, TIME/5.0);
   VERTEX.y = k;
@@ -19,14 +19,14 @@ COLOR = texture(moreNoise, UV);
 }
 
 void fragment() {
-	
+
 	vec4 noiseText = texture(moreNoise, UV);
 	ALPHA = 0.5;
 	ALBEDO = texture(albd,vec2(UV.x * 10.0, UV.y * 10.0)).rgb;
 	RIM = 0.2;
   	METALLIC = 0.0;
 	ROUGHNESS = 0.0;
-	
+
 }
 
 //void light() {

@@ -1,20 +1,20 @@
 extends ItemList
 @onready var player = get_parent().get_parent().get_parent()
-@onready var invHead = get_parent().get_node("equipment/armorEquipped/headArmor")
-@onready var invChest = get_parent().get_node("equipment/armorEquipped/chestArmor")
-@onready var invArms = get_parent().get_node("equipment/armorEquipped/armsArmor")
-@onready var invLegs = get_parent().get_node("equipment/armorEquipped/legsArmor")
-@onready var armorDisplay = get_parent().get_node("equipment/armorEquipped")
+@onready var invHead = $equipment/armorEquipped/headArmor
+@onready var invChest = $equipment/armorEquipped/chestArmor
+@onready var invArms = $equipment/armorEquipped/armsArmor
+@onready var invLegs = $equipment/armorEquipped/legsArmor
+@onready var armorDisplay = $equipment/armorEquipped
 @onready var itemDisplay = get_parent().get_node("itemDisplay")
 @onready var craftingInventory = get_parent().get_node("crafting/craftingInventory")
 @onready var inventoryScreen = get_parent().get_parent()
-@onready var equipButtons = get_parent().get_parent().get_node("VBoxContainer")
-@onready var rWepInv = get_parent().get_node("equipment/weaponsEquipped/mainWeaponInventory")
-@onready var lWepInv = get_parent().get_node("equipment/weaponsEquipped/leftHandWeaponInventory")
-@onready var weaponDisplay = get_parent().get_node("equipment/weaponsEquipped")
-@onready var equip = get_parent().get_node("VBoxContainer").get_node("equip")
-@onready var unequip = get_parent().get_node("VBoxContainer").get_node("unequip")
-@onready var use = get_parent().get_node("VBoxContainer").get_node("use")
+@onready var equipButtons = $equipment/VBoxContainer
+@onready var rWepInv = $equipment/weaponsEquipped/mainWeaponInventory
+@onready var lWepInv = $equipment/weaponsEquipped/leftHandWeaponInventory
+@onready var weaponDisplay = $equipment/weaponsEquipped
+@onready var equip = $equipment/VBoxContainer/equip
+@onready var unequip = $equipment/VBoxContainer/unequip
+@onready var use = $equipment/VBoxContainer/use
 @onready var itemDisplayPoint = get_parent().get_parent().get_node("inventoryManager/itemDisplay/SubViewportContainer/SubViewport/itemPoint") 
 var itemSelected = null
 var invOpen = false
@@ -27,6 +27,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	if Input.is_action_just_pressed("openInventory"):
 		openInventory()
 	if invOpen == true:
@@ -46,6 +47,9 @@ func _physics_process(delta: float) -> void:
 					self.hide()
 					craftingInventory.hide()
 					armorDisplay.show()
+					use.disabled = true
+					equip.disabled = false
+					unequip.disabled = false
 					self.deselect_all()
 					rWepInv.hide()
 					lWepInv.hide()
@@ -54,6 +58,9 @@ func _physics_process(delta: float) -> void:
 					self.show()
 					weaponDisplay.hide()
 					craftingInventory.hide()
+					use.disabled = false
+					equip.disabled = true
+					unequip.disabled = true
 					armorDisplay.hide()
 					rWepInv.hide()
 					lWepInv.hide()
@@ -63,15 +70,22 @@ func _physics_process(delta: float) -> void:
 				armorDisplay.hide()
 				craftingInventory.hide()
 				weaponDisplay.show()
+				use.disabled = true
+				equip.disabled = false
+				unequip.disabled = false
 				weaponDisplay.grab_focus()
 			elif inventoryCycle == 3:
 				self.hide()
 				armorDisplay.hide()
 				weaponDisplay.hide()
 				craftingInventory.show()
+				craftingInventory.grab_focus()
 				equip.text = "add"
 				unequip.text = "remove"
 				use.text = "combo"
+				use.disabled = false
+				equip.disabled = false
+				unequip.disabled = false
 		if Input.is_action_just_pressed("menuRight"):
 			if self.has_focus():
 				if invItemSelected < len(player.inventory) -1:	
@@ -100,6 +114,9 @@ func openInventory():
 		equip.text = "EQUIP"
 		unequip.text = "UNEQUIP"
 		use.text = "USE"
+		equip.disabled = false
+		unequip.disabled = false
+		use.disabled = false
 		inventoryCycle = 0
 		self.show()
 		armorDisplay.hide()
@@ -115,12 +132,16 @@ func openInventory():
 		invOpen = false
 		itemDisplay.hide()
 		armorDisplay.hide()
+		invHead.hide()
+		invChest.hide()
+		invLegs.hide()
+		invArms.hide()
 		weaponDisplay.hide()
 		rWepInv.hide()
 		lWepInv.hide()
 		craftingInventory.hide()
 		self.hide()
-		inventoryScreen.get_node("VBoxContainer").visible = false
+		equipButtons.visible = false
 
 func _on_item_clicked(index, at_position, mouse_button_index):
 	if self.has_focus():
@@ -172,16 +193,16 @@ func checkInventory():
 					else:	
 						invLegs.add_item(a)
 					addArmor = true
-	for i in range(len(player.inventory)):
-	
-		if player.inventory[i] in Global.inventoryDisplays:
-			if player.inventory[i] in get_item_text(i):
+	for i in player.inventory.keys():
+		
+		if i in Global.inventoryDisplays:
+			if i in get_item_text(player.inventory[i]):
 				pass
 			else:
 				
-				var image = Image.load_from_file(Global.inventoryDisplays[player.inventory[i]][0])
+				var image = Image.load_from_file(Global.inventoryDisplays[i][0])
 				var texture = ImageTexture.create_from_image(image)
-				add_item(str(player.inventory[i]), texture, true)
-				if player.inventory[i] in Global.craftingMaterials:
-					craftingInventory.add_item(str(player.inventory[i]), texture, true)
+				add_item(str(i + "  " +str(player.inventory[i])), texture, true)
+				if i in Global.craftingMaterials:
+					craftingInventory.add_item(str(i + "  " +str(player.inventory[i])), texture, true)
 			

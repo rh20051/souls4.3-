@@ -1,6 +1,7 @@
-[gd_scene load_steps=236 format=4 uid="uid://ben3knwvkf60e"]
+[gd_scene load_steps=238 format=4 uid="uid://ben3knwvkf60e"]
 
 [ext_resource type="Script" path="res://playerAssets/playerScripts/player.gd" id="1_rwfsj"]
+[ext_resource type="Script" path="res://playerAssets/playerScripts/InvManager.gd" id="2_73tha"]
 [ext_resource type="Texture2D" uid="uid://de7exiijy3gir" path="res://misc/dependencies/shale.png" id="2_iokfa"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/inventory.gd" id="3_16356"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/itemCamera.gd" id="4_7tm5j"]
@@ -12,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://gqjta8srjak8" path="res://playerAssets/texturesAndDependencies/equiphover.tres" id="8_xj7xa"]
 [ext_resource type="Script" path="res://button.gd" id="9_uie5x"]
 [ext_resource type="StyleBox" uid="uid://ombc4q5hbv7l" path="res://playerAssets/texturesAndDependencies/buttonNormal.tres" id="9_vay5s"]
+[ext_resource type="Script" path="res://playerAssets/playerScripts/combo1.gd" id="10_1xepr"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/stateMachine.gd" id="10_xp8io"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerWalking.gd" id="11_3d22o"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerStandingStill.gd" id="12_2wcao"]
@@ -46,13 +48,6 @@
 texture = ExtResource("2_iokfa")
 modulate_color = Color(0.08784, 0.0396, 0.12, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_pf2jy"]
-
-[sub_resource type="Environment" id="Environment_1qtmx"]
-background_mode = 1
-background_color = Color(0.282353, 0.431373, 0.392157, 1)
-background_energy_multiplier = 0.6
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujltf"]
 bg_color = Color(0.254902, 0.0509804, 0, 1)
 border_width_left = 5
@@ -84,6 +79,13 @@ border_width_right = 200
 border_width_bottom = 200
 border_color = Color(0.216151, 0.00327893, 0.0420241, 1)
 border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_pf2jy"]
+
+[sub_resource type="Environment" id="Environment_1qtmx"]
+background_mode = 1
+background_color = Color(0.282353, 0.431373, 0.392157, 1)
+background_energy_multiplier = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4bj26"]
 radius = 10.7612
@@ -11615,6 +11617,7 @@ offset_right = 1039.0
 offset_bottom = 673.0
 
 [node name="inventoryManager" type="Node2D" parent="inventoryScreen"]
+script = ExtResource("2_73tha")
 
 [node name="inventory" type="ItemList" parent="inventoryScreen/inventoryManager"]
 visible = false
@@ -11629,12 +11632,194 @@ fixed_column_width = 200
 fixed_icon_size = Vector2i(55, 55)
 script = ExtResource("3_16356")
 
+[node name="equipment" type="Node" parent="inventoryScreen/inventoryManager/inventory"]
+script = ExtResource("7_415b7")
+
+[node name="armorEquipped" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment"]
+visible = false
+layout_direction = 3
+offset_left = 765.0
+offset_top = 70.0
+offset_right = 1336.0
+offset_bottom = 807.0
+size_flags_stretch_ratio = 20.0
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_constants/v_separation = 40
+theme_override_font_sizes/font_size = 56
+theme_override_styles/panel = SubResource("StyleBoxFlat_ujltf")
+allow_search = false
+max_text_lines = 2
+same_column_width = true
+
+[node name="headArmor" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped"]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.003
+anchor_bottom = 0.003
+offset_left = 418.0
+offset_top = 80.76
+offset_right = 735.0
+offset_bottom = 571.76
+theme = SubResource("Theme_0cjv5")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
+theme_override_styles/panel = SubResource("StyleBoxFlat_v73bg")
+allow_search = false
+max_columns = 2
+fixed_column_width = 200
+fixed_icon_size = Vector2i(55, 55)
+
+[node name="chestArmor" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 417.0
+offset_top = 88.0
+offset_right = 732.0
+offset_bottom = 568.0
+item_count = 1
+
+[node name="armsArmor" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 417.0
+offset_top = 83.0
+offset_right = 740.0
+offset_bottom = 598.0
+
+[node name="legsArmor" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 419.0
+offset_top = 82.0
+offset_right = 758.0
+offset_bottom = 611.0
+
+[node name="weaponsEquipped" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment"]
+visible = false
+offset_left = 205.0
+offset_top = 75.0
+offset_right = 561.0
+offset_bottom = 662.0
+theme_override_font_sizes/font_size = 56
+
+[node name="mainWeaponInventory" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/weaponsEquipped"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 596.0
+offset_top = 79.0
+offset_right = 880.0
+offset_bottom = 342.0
+
+[node name="leftHandWeaponInventory" type="ItemList" parent="inventoryScreen/inventoryManager/inventory/equipment/weaponsEquipped"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 601.0
+offset_top = 78.0
+offset_right = 881.0
+offset_bottom = 339.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="inventoryScreen/inventoryManager/inventory/equipment"]
+visible = false
+offset_left = 1073.0
+offset_top = 757.0
+offset_right = 1396.0
+offset_bottom = 975.0
+alignment = 1
+
+[node name="equip" type="Button" parent="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
+text = "EQUIP
+"
+script = ExtResource("9_uie5x")
+
+[node name="unequip" type="Button" parent="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
+text = "UNEQUIP"
+script = ExtResource("9_uie5x")
+
+[node name="use" type="Button" parent="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
+theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = ExtResource("8_xj7xa")
+theme_override_styles/normal = ExtResource("9_vay5s")
+text = "USE"
+script = ExtResource("9_uie5x")
+
+[node name="crafting" type="Node" parent="inventoryScreen/inventoryManager"]
+script = ExtResource("8_o372q")
+
+[node name="craftingInventory" type="ItemList" parent="inventoryScreen/inventoryManager/crafting"]
+layout_direction = 2
+offset_left = 91.0
+offset_top = 37.0
+offset_right = 544.0
+offset_bottom = 858.0
+theme_override_font_sizes/font_size = 16
+max_columns = 2
+same_column_width = true
+fixed_column_width = 200
+fixed_icon_size = Vector2i(50, 50)
+
+[node name="combo1" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+top_level = true
+layout_mode = 0
+offset_left = 763.0
+offset_top = 66.0
+offset_right = 922.0
+offset_bottom = 228.0
+scale = Vector2(1, 0.927)
+expand_mode = 1
+script = ExtResource("10_1xepr")
+
+[node name="combo2" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+top_level = true
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 80.0
+offset_right = 1175.0
+offset_bottom = 230.0
+scale = Vector2(1, 0.927)
+expand_mode = 1
+script = ExtResource("10_1xepr")
+
+[node name="result" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
+layout_mode = 0
+offset_left = 982.0
+offset_top = 469.0
+offset_right = 1231.0
+offset_bottom = 675.0
+expand_mode = 2
+
 [node name="itemDisplay" type="GridContainer" parent="inventoryScreen/inventoryManager"]
 visible = false
 offset_left = 1052.0
 offset_top = 32.0
 offset_right = 1587.0
-offset_bottom = 537.0
+offset_bottom = 598.0
 
 [node name="itemName" type="Label" parent="inventoryScreen/inventoryManager/itemDisplay"]
 layout_mode = 2
@@ -11666,179 +11851,6 @@ light_size = 0.359
 omni_range = 5.318
 omni_attenuation = 3.03143
 script = ExtResource("6_6nf0y")
-
-[node name="equipment" type="Node" parent="inventoryScreen/inventoryManager"]
-script = ExtResource("7_415b7")
-
-[node name="armorEquipped" type="ItemList" parent="inventoryScreen/inventoryManager/equipment"]
-visible = false
-layout_direction = 3
-offset_left = 765.0
-offset_top = 70.0
-offset_right = 1336.0
-offset_bottom = 807.0
-size_flags_stretch_ratio = 20.0
-theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
-theme_override_constants/v_separation = 40
-theme_override_font_sizes/font_size = 56
-theme_override_styles/panel = SubResource("StyleBoxFlat_ujltf")
-allow_search = false
-max_text_lines = 2
-same_column_width = true
-
-[node name="headArmor" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/armorEquipped"]
-visible = false
-top_level = true
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.003
-anchor_bottom = 0.003
-offset_left = 418.0
-offset_top = 80.76
-offset_right = 735.0
-offset_bottom = 571.76
-theme = SubResource("Theme_0cjv5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-theme_override_styles/panel = SubResource("StyleBoxFlat_v73bg")
-allow_search = false
-max_columns = 2
-fixed_column_width = 200
-fixed_icon_size = Vector2i(55, 55)
-
-[node name="chestArmor" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/armorEquipped"]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = 417.0
-offset_top = 88.0
-offset_right = 732.0
-offset_bottom = 568.0
-item_count = 1
-
-[node name="armsArmor" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/armorEquipped"]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = 417.0
-offset_top = 83.0
-offset_right = 740.0
-offset_bottom = 598.0
-
-[node name="legsArmor" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/armorEquipped"]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = 419.0
-offset_top = 82.0
-offset_right = 758.0
-offset_bottom = 611.0
-
-[node name="weaponsEquipped" type="ItemList" parent="inventoryScreen/inventoryManager/equipment"]
-visible = false
-offset_left = 205.0
-offset_top = 75.0
-offset_right = 561.0
-offset_bottom = 662.0
-theme_override_font_sizes/font_size = 56
-
-[node name="mainWeaponInventory" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/weaponsEquipped"]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = 596.0
-offset_top = 79.0
-offset_right = 880.0
-offset_bottom = 342.0
-
-[node name="leftHandWeaponInventory" type="ItemList" parent="inventoryScreen/inventoryManager/equipment/weaponsEquipped"]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = 601.0
-offset_top = 78.0
-offset_right = 881.0
-offset_bottom = 339.0
-
-[node name="crafting" type="Node" parent="inventoryScreen/inventoryManager"]
-script = ExtResource("8_o372q")
-
-[node name="craftingInventory" type="ItemList" parent="inventoryScreen/inventoryManager/crafting"]
-visible = false
-layout_direction = 2
-offset_left = 91.0
-offset_top = 37.0
-offset_right = 544.0
-offset_bottom = 858.0
-theme_override_font_sizes/font_size = 31
-max_columns = 2
-same_column_width = true
-fixed_column_width = 10
-fixed_icon_size = Vector2i(20, 20)
-
-[node name="combo1" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
-offset_left = 60.8783
-offset_top = 2.66547
-offset_right = 100.878
-offset_bottom = 42.6655
-scale = Vector2(5.13406, 4.75758)
-
-[node name="combo2" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
-offset_left = 98.6393
-offset_top = 2.41867
-offset_right = 138.639
-offset_bottom = 42.4187
-scale = Vector2(5.13406, 4.75758)
-
-[node name="result" type="TextureRect" parent="inventoryScreen/inventoryManager/crafting/craftingInventory"]
-offset_left = 78.895
-offset_top = 18.214
-offset_right = 327.895
-offset_bottom = 224.214
-
-[node name="VBoxContainer" type="VBoxContainer" parent="inventoryScreen/inventoryManager"]
-visible = false
-offset_left = 944.0
-offset_top = 727.0
-offset_right = 1267.0
-offset_bottom = 945.0
-alignment = 1
-
-[node name="equip" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
-clip_contents = true
-layout_mode = 2
-theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
-theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
-theme_override_font_sizes/font_size = 41
-theme_override_styles/focus = ExtResource("8_xj7xa")
-theme_override_styles/normal = ExtResource("9_vay5s")
-text = "EQUIP
-"
-script = ExtResource("9_uie5x")
-
-[node name="unequip" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
-theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 41
-theme_override_styles/focus = ExtResource("8_xj7xa")
-theme_override_styles/normal = ExtResource("9_vay5s")
-text = "UNEQUIP"
-script = ExtResource("9_uie5x")
-
-[node name="use" type="Button" parent="inventoryScreen/inventoryManager/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_focus_color = Color(0.777344, 0.726198, 0.18219, 1)
-theme_override_colors/font_color = Color(0.545166, 0.677492, 0.6875, 1)
-theme_override_font_sizes/font_size = 41
-theme_override_styles/focus = ExtResource("8_xj7xa")
-theme_override_styles/normal = ExtResource("9_vay5s")
-text = "USE"
-script = ExtResource("9_uie5x")
 
 [node name="lockOnArea" type="Area3D" parent="."]
 
@@ -12541,18 +12553,19 @@ libraries = {
 
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory" to="inventoryScreen/inventoryManager/inventory" method="_on_item_activated"]
 [connection signal="item_clicked" from="inventoryScreen/inventoryManager/inventory" to="inventoryScreen/inventoryManager/inventory" method="_on_item_clicked"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/armorEquipped" to="inventoryScreen/inventoryManager/equipment" method="_on_armor_equipped_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/armorEquipped/headArmor" to="inventoryScreen/inventoryManager/equipment" method="_on_head_armor_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/armorEquipped/chestArmor" to="inventoryScreen/inventoryManager/equipment" method="_on_chest_armor_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/armorEquipped/armsArmor" to="inventoryScreen/inventoryManager/equipment" method="_on_arms_armor_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/armorEquipped/legsArmor" to="inventoryScreen/inventoryManager/equipment" method="_on_legs_armor_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped" to="inventoryScreen/inventoryManager/equipment" method="_on_weapons_equipped_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped/mainWeaponInventory" to="inventoryScreen/inventoryManager/equipment" method="_on_main_weapon_inventory_item_activated"]
-[connection signal="item_activated" from="inventoryScreen/inventoryManager/equipment/weaponsEquipped/leftHandWeaponInventory" to="inventoryScreen/inventoryManager/equipment" method="_on_left_hand_weapon_inventory_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_armor_equipped_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped/headArmor" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_head_armor_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped/chestArmor" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_chest_armor_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped/armsArmor" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_arms_armor_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/armorEquipped/legsArmor" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_legs_armor_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/weaponsEquipped" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_weapons_equipped_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/weaponsEquipped/mainWeaponInventory" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_main_weapon_inventory_item_activated"]
+[connection signal="item_activated" from="inventoryScreen/inventoryManager/inventory/equipment/weaponsEquipped/leftHandWeaponInventory" to="inventoryScreen/inventoryManager/inventory/equipment" method="_on_left_hand_weapon_inventory_item_activated"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer/equip" to="inventoryScreen/inventoryManager" method="_on_equip_pressed"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer/unequip" to="inventoryScreen/inventoryManager" method="_on_unequip_pressed"]
+[connection signal="pressed" from="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer/use" to="inventoryScreen/inventoryManager" method="_on_use_pressed"]
+[connection signal="send" from="inventoryScreen/inventoryManager/crafting" to="inventoryScreen/inventoryManager" method="_on_crafting_send"]
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/crafting/craftingInventory" to="inventoryScreen/inventoryManager/crafting" method="onCraftInvItemActivated"]
-[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/equip" to="inventoryScreen/inventoryManager/equipment" method="_on_equip_pressed"]
-[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/unequip" to="inventoryScreen/inventoryManager/equipment" method="_on_unequip_pressed"]
-[connection signal="pressed" from="inventoryScreen/inventoryManager/VBoxContainer/use" to="inventoryScreen/inventoryManager/equipment" method="_on_use_pressed"]
 [connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]
 [connection signal="area_exited" from="pickupArea" to="." method="_on_pickup_area_area_exited"]
 [connection signal="timeout" from="rallyTimer" to="." method="_on_rally_timer_timeout"]

@@ -33,13 +33,13 @@ var running = false
 @onready var armature = $Armature/Skeleton3D
 @onready var animTree = $AnimationTree
 @onready var inv = $inventoryScreen/inventoryManager/inventory
-@onready var armorDisplay = $inventoryScreen/inventoryManager/equipment/armorEquipped
+@onready var armorDisplay = $inventoryScreen/inventoryManager/inventory/equipment/armorEquipped
 @onready var wep = $Armature/Skeleton3D/weaponHolder
 @onready var leftwep = $Armature/Skeleton3D/parryWeaponHolder
 @onready var bottomPoint = $pickupArea/CollisionShape3D/Node3D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var inventory = ["grass", "mushroom"]
+var inventory = {"mushroom":1, "herb":2}
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
 var weaponInventory = ["longsword", "shield", "flamberge", "lamp"]
