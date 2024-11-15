@@ -15,6 +15,7 @@ extends ItemList
 @onready var equip = $equipment/VBoxContainer/equip
 @onready var unequip = $equipment/VBoxContainer/unequip
 @onready var use = $equipment/VBoxContainer/use
+@onready var amountLabel = preload("res://playerAssets/inventoryLabel.tscn")
 @onready var itemDisplayPoint = get_parent().get_parent().get_node("inventoryManager/itemDisplay/SubViewportContainer/SubViewport/itemPoint") 
 var itemSelected = null
 var invOpen = false
@@ -81,8 +82,8 @@ func _physics_process(delta: float) -> void:
 				craftingInventory.show()
 				craftingInventory.grab_focus()
 				equip.text = "add"
-				unequip.text = "remove"
-				use.text = "combo"
+				unequip.text = "combo"
+				use.text = "remove"
 				use.disabled = false
 				equip.disabled = false
 				unequip.disabled = false
@@ -105,7 +106,11 @@ func _physics_process(delta: float) -> void:
 		inventoryScreen.visible = false
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Global.increment != Global.oldIncrement:
-		player.inventory.append(Global.newItem[0])
+		
+		if Global.newItem[0][0] not in player.inventory.keys():
+			for i in player.inventory.keys():
+				if i == Global.newItem[0]:
+					player.inventory[i] +=1
 		checkInventory()
 		Global.oldIncrement = 0
 		Global.increment = 0
@@ -175,6 +180,7 @@ func _on_item_activated(index):
 		use.disabled = false
 func checkInventory():
 	var addArmor = true
+	var row = 0
 	var armorInventoryLength = len(player.acquiredArmor) * 4
 
 	for i in range(len(player.acquiredArmor)):
@@ -193,16 +199,37 @@ func checkInventory():
 					else:	
 						invLegs.add_item(a)
 					addArmor = true
+	#self.clear()
+	#craftingInventory.clear()
+	var itemNotAdded
 	for i in player.inventory.keys():
-		
+		itemNotAdded = true
 		if i in Global.inventoryDisplays:
-			if i in get_item_text(player.inventory[i]):
-				pass
-			else:
+			for a in range(0, item_count):
+				print(i)
+				if self.get_item_text(a) == i:
+					itemNotAdded = false
+					
+					self.get_node(i).text = str(player.inventory[i])
+					
+	
+		if itemNotAdded == true:
+					
+			var image = Image.load_from_file(Global.inventoryDisplays[i][0])
+			var texture = ImageTexture.create_from_image(image)
+			var lastidx = add_item(str(i), texture, true)
+			var amount = amountLabel.instantiate()
+			self.add_child(amount)
+			var col = lastidx
+			amount.text = str(player.inventory[i])
+			col +=1
+			if lastidx / 5 == 1:
+				row +=1
+				col = 1
+			
+			amount.global_position = Vector2(131 + (310* (col)), 70 +(65 * (row)))
+			amount.name = str(i)
 				
-				var image = Image.load_from_file(Global.inventoryDisplays[i][0])
-				var texture = ImageTexture.create_from_image(image)
-				add_item(str(i + "  " +str(player.inventory[i])), texture, true)
-				if i in Global.craftingMaterials:
-					craftingInventory.add_item(str(i + "  " +str(player.inventory[i])), texture, true)
+			if i in Global.craftingMaterials:
+				craftingInventory.add_item(str(i), texture, true)
 			

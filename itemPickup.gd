@@ -11,6 +11,8 @@ func _process(delta):
 	pass
 
 func pickUp():
+	Global.increment += 1
+	Global.newItem = [str(self.name)]
 	if Global.consumables.has(str(self.name)): #if the item is in the database of consumable items
 		
 		type = "consumable"

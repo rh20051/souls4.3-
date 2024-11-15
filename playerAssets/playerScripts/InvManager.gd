@@ -22,16 +22,22 @@ var craftItemSelected = null
 var craftingItem1
 var craftingItem2
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
+var removeList = ["1","2","3","4","5","6","7","8","9"," "]
+func cleanString(str):
+	for i in str:
+		for a in removeList:
+			if i == a:
+				str = str.replace(i,"")
+				
+	return str
+			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	pass
 	
 func _on_unequip_pressed():
-	if unequip.text != "remove":
+	if unequip.text != "combo":
 		inv.invOpen = false
 		if inv.visible == true:
 			if player.wep.get_child_count() >0:
@@ -44,8 +50,13 @@ func _on_unequip_pressed():
 			for a in range(2):
 				if Global.craftingRecipes[i][a] == craftingItem1:
 					for b in range(2):
-						if Global.craftingRecipes[i][b] == craftingItem2:	
-							player.inventory.append(i)
+						if Global.craftingRecipes[i][b] == craftingItem2:
+							for c in player.inventory.keys():
+								if c == i:
+									player.inventory[c] +=1
+								else:
+									player.inventory[i] = 1
+							
 							print(player.inventory)
 							inv.checkInventory()
 func _on_use_pressed():
@@ -102,11 +113,11 @@ func _on_equip_pressed():
 		rWepInv.hide()
 		lWepInv.hide()
 	elif craftingCombo1.itemHeld == false:
-		craftingCombo1.itemInserted(craftItemSelected)
-		craftingItem1 = craftItemSelected
+		craftingCombo1.itemInserted(cleanString(craftItemSelected))
+		craftingItem1 = cleanString(craftItemSelected)
 	else:
-		craftingCombo2.itemInserted(craftItemSelected)
-		craftingItem2 = craftItemSelected
+		craftingCombo2.itemInserted(cleanString(craftItemSelected))
+		craftingItem2 = cleanString(craftItemSelected)
 
 
 func _on_crafting_send(item) -> void:

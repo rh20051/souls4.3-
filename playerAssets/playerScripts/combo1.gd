@@ -6,3 +6,7 @@ func itemInserted(item):
 	image = ImageTexture.create_from_image(image)
 	self.texture = image
 	itemHeld = true
+
+func comboComplete():
+	itemHeld = false
+	self.texture = null

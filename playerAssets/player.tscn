@@ -11617,18 +11617,23 @@ offset_right = 1039.0
 offset_bottom = 673.0
 
 [node name="inventoryManager" type="Node2D" parent="inventoryScreen"]
+position = Vector2(-128, -29)
 script = ExtResource("2_73tha")
 
 [node name="inventory" type="ItemList" parent="inventoryScreen/inventoryManager"]
-visible = false
-offset_left = 21.0
-offset_top = 7.0
-offset_right = 1670.0
-offset_bottom = 992.0
+custom_minimum_size = Vector2(1500, 1000)
+offset_left = 161.0
+offset_top = 54.0
+offset_right = 1736.0
+offset_bottom = 1054.0
+theme_override_constants/v_separation = 10
+theme_override_constants/h_separation = 10
+theme_override_font_sizes/font_size = 20
 theme_override_styles/panel = SubResource("StyleBoxTexture_urgip")
 allow_search = false
-max_columns = 2
-fixed_column_width = 200
+max_columns = 5
+same_column_width = true
+fixed_column_width = 300
 fixed_icon_size = Vector2i(55, 55)
 script = ExtResource("3_16356")
 
@@ -11773,6 +11778,7 @@ script = ExtResource("9_uie5x")
 script = ExtResource("8_o372q")
 
 [node name="craftingInventory" type="ItemList" parent="inventoryScreen/inventoryManager/crafting"]
+visible = false
 layout_direction = 2
 offset_left = 91.0
 offset_top = 37.0

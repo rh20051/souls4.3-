@@ -488,7 +488,7 @@ visibility_aabb = AABB(-35.42, 9.25, -12.15, 56.495, 66.9, 25.7)
 process_material = SubResource("ParticleProcessMaterial_2prwx")
 draw_pass_1 = SubResource("QuadMesh_ubqwt")
 
-[node name="grass" parent="." instance=ExtResource("11_uyyw6")]
+[node name="item1" parent="." instance=ExtResource("11_uyyw6")]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 66.4139, -1.38893e-06, -7.37378)
 
 [connection signal="body_entered" from="NavigationRegion3D/environment/props/well/Area3D" to="NavigationRegion3D/environment/props/well/Area3D" method="_on_body_entered"]
