@@ -18,13 +18,13 @@ output_port_for_preview = 0
 constant = Vector3(0, 1, 0)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_ouapj"]
-constant = Color(0.580709, 0.632324, 0.651178, 1)
+constant = Color(0.55, 0.55, 0.341, 1)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_mp4w1"]
 
 [sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_8i3jr"]
 output_port_for_preview = 0
-default_input_values = [0, 0.0, 1, 0.975, 2, 0.0, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+default_input_values = [0, 0.0, 1, 4.145, 2, 0.0, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_4f1rd"]
 input_name = "view_matrix"
@@ -63,7 +63,7 @@ void fragment() {
 
 
 // ColorConstant:5
-	vec4 n_out5p0 = vec4(0.580709, 0.632324, 0.651178, 1.000000);
+	vec4 n_out5p0 = vec4(0.550000, 0.550000, 0.341000, 1.000000);
 
 
 // Mix:10
@@ -91,7 +91,7 @@ void fragment() {
 
 	vec3 n_out7p0;
 // If:7
-	float n_in7p1 = 0.97500;
+	float n_in7p1 = 4.14500;
 	float n_in7p2 = 0.00000;
 	if(abs(n_out3p0 - n_in7p1) < n_in7p2)
 	{

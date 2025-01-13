@@ -49,12 +49,12 @@ func _input(event):
 	if event is InputEventMouseMotion and !lockedOn:
 		camera.rotation.y += (-event.relative.x * SENSITIVITY)
 		camera.rotation.x +=(event.relative.y * SENSITIVITY * 1.4)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70.0), deg_to_rad(70.0))
 
 func _process(delta):
 	if Input.is_action_pressed("camStickDown"):
 		camera.rotation.x -=(40 * SENSITIVITY * 1.4)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-70.0), deg_to_rad(70.0))
 	if Input.is_action_pressed("camStickUp"):
 		camera.rotation.x +=(40 * SENSITIVITY * 1.4)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(70.0))
@@ -167,8 +167,10 @@ func _physics_process(delta):
 		
 
 	input_dir = Input.get_vector("left", "right", "forward", "back")
-
+	
 	direction = (camera.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction.y = 0
+	direction = direction.normalized() 
 
 	
 	if running:
