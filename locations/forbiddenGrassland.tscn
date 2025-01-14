@@ -405,7 +405,7 @@ shadow_mesh = SubResource("ArrayMesh_bu3ck")
 [node name="Node3D" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_0kaos")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 323.282, 76.0319, 222.194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 275.143, 76.0319, 222.194)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_h7fag")
