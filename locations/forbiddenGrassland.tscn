@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://usekt3jk2b5g"]
+[gd_scene load_steps=41 format=4 uid="uid://usekt3jk2b5g"]
 
 [ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://playerAssets/player.tscn" id="1_0kaos"]
 [ext_resource type="Environment" uid="uid://0pesm0nbq1bn" path="res://world.tres" id="2_h7fag"]
@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://jgi1chm4d0f3" path="res://locations/houses/lando_mountainOutside Base Color.png" id="6_m58fq"]
 [ext_resource type="Texture2D" uid="uid://crsrnsdpixty3" path="res://locations/houses/lando_tunnel Base Color.png" id="7_0q1od"]
 [ext_resource type="Texture2D" uid="uid://hu1sxqgi1wui" path="res://locations/houses/lando_mountain_BaseColor.png" id="8_p1rfj"]
+[ext_resource type="PackedScene" uid="uid://c2bfr0q0q43hy" path="res://locations/houses/house_2.tscn" id="9_5hlh5"]
+[ext_resource type="PackedScene" uid="uid://ch5mlulj4g8w0" path="res://locations/houses/house_3.tscn" id="10_v328p"]
+[ext_resource type="PackedScene" uid="uid://dyqnxtwurftfs" path="res://locations/houses/house_5.tscn" id="11_i8p3i"]
+[ext_resource type="PackedScene" uid="uid://bjxc08tm2vqmp" path="res://locations/houses/house_4.tscn" id="12_g278g"]
+[ext_resource type="PackedScene" uid="uid://72mxe8y2dluq" path="res://locations/houses/house_1.tscn" id="13_r21cf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqopo"]
 resource_name = "mountainClimb"
@@ -405,7 +410,7 @@ shadow_mesh = SubResource("ArrayMesh_bu3ck")
 [node name="Node3D" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_0kaos")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 275.143, 76.0319, 222.194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7461, -11.7223, 224.786)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_h7fag")
@@ -448,7 +453,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19.665, 402.688)
 shape = SubResource("BoxShape3D_c33fh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.55802, 0, 0.829827, 0, 1, 0, -0.829827, 0, 0.55802, 811.026, 179.073, 266.628)
+transform = Transform3D(-0.0947895, -0.0579952, 0.993807, 0.7332, 0.671203, 0.109103, -0.673373, 0.739002, -0.0211006, 811.026, 179.073, 266.628)
 light_color = Color(0.925781, 0.508914, 0.104874, 1)
 light_energy = 2.2
 light_volumetric_fog_energy = 0.0
@@ -477,6 +482,23 @@ mesh = SubResource("ArrayMesh_jlom3")
 skeleton = NodePath("")
 
 [node name="Cube_025" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.889612, 0, -0.13635, 0, 0.9, 0, 0.13635, 0, 0.889612, -303.32, 1.32199, 844.638)
+transform = Transform3D(0.889612, 0, -0.13635, 0, 0.9, 0, 0.13635, 0, 0.889612, -320.58, 1.322, 844.638)
 mesh = SubResource("ArrayMesh_crfg5")
 skeleton = NodePath("")
+
+[node name="houses" type="Node" parent="."]
+
+[node name="house2" parent="houses" instance=ExtResource("9_5hlh5")]
+transform = Transform3D(1.21, 0, 0, 0, 1.21, 0, 0, 0, 1.21, 18.661, -10.948, 212.937)
+
+[node name="house3" parent="houses" instance=ExtResource("10_v328p")]
+transform = Transform3D(-0.186666, 0, 1.18539, 0, 1.2, 0, -1.18539, 0, -0.186666, -119.996, -10.752, 185.829)
+
+[node name="house5" parent="houses" instance=ExtResource("11_i8p3i")]
+transform = Transform3D(1.10736, 0, -0.462334, 0, 1.2, 0, 0.462334, 0, 1.10736, 0, -10.76, 163.821)
+
+[node name="house4" parent="houses" instance=ExtResource("12_g278g")]
+transform = Transform3D(-1.49846, -0.00011876, -0.0680444, 0, 1.5, -0.00261799, 0.0680445, -0.0026153, -1.49845, -7.304, -7.543, 248.074)
+
+[node name="house1" parent="houses" instance=ExtResource("13_r21cf")]
+transform = Transform3D(-0.129204, 0, -1.19302, 0, 1.2, 0, 1.19302, 0, -0.129204, 57.079, -11.008, 274.839)

@@ -12,7 +12,7 @@ func enter():
 	animTree["parameters/StateMachine/conditions/attacking"] = true
 	
 	#player.direction = Vector3()
-	player.SPEED  = 0
+	
 
 	await animTree.animation_finished
 	transitioned.emit(self, "playerIdle")

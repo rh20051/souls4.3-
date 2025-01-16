@@ -31,7 +31,7 @@ void fragment() {
 // Texture2D:7
 	vec4 n_out7p0 = texture(bricks, rotateUV(UV, vec2(0.5), PI/rotate));
 
-	
+
 	vec3 n_out2p0;
 // ColorFunc:2
 	vec3 n_in2p0 = vec3(0.38000, 0.22000, 0.60000);

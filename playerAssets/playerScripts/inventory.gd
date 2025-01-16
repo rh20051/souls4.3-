@@ -20,6 +20,7 @@ extends ItemList
 var itemSelected = null
 var invOpen = false
 var invItemSelected
+var craftItemSelected
 var inventoryCycle = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,6 +38,13 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("interact"): #interacting with item in inventory to open equip,unequip etc
 			if self.has_focus(): 
 				_on_item_activated(invItemSelected)
+		if Input.is_action_just_pressed("roll"):
+			if equipButtons.visible == true:
+				equipButtons.visible = false
+				if self.visible == true:
+					self.grab_focus()
+				elif craftingInventory.visible == true:
+					craftingInventory.grab_focus()
 		if Input.is_action_just_pressed("heavyAttack"):
 			equip.text = "EQUIP"
 			unequip.text = "UNEQUIP"
@@ -81,6 +89,8 @@ func _physics_process(delta: float) -> void:
 				weaponDisplay.hide()
 				craftingInventory.show()
 				craftingInventory.grab_focus()
+				craftItemSelected = 0
+				craftingInventory.select(craftItemSelected)
 				equip.text = "add"
 				unequip.text = "combo"
 				use.text = "remove"
@@ -92,6 +102,11 @@ func _physics_process(delta: float) -> void:
 				if invItemSelected < len(player.inventory) -1:	
 					invItemSelected += 1
 				self.select(invItemSelected) #change currently selected inventory item
+			elif craftingInventory.has_focus():
+				if craftItemSelected < craftingInventory.get_item_count() -1:
+					craftItemSelected += 1
+				craftingInventory.select(craftItemSelected)
+				
 			elif !armorDisplay.has_focus():
 				equipButtons.get_child(1).grab_focus() #if an inventory item is not selected,(but inventory is open) presume its equip/unequip selected and change between them
 		if Input.is_action_just_pressed("menuLeft"):
@@ -223,9 +238,10 @@ func checkInventory():
 			var col = lastidx
 			amount.text = str(player.inventory[i])
 			col +=1
-			if lastidx / 5 == 1:
+			if lastidx / 5 == 1.0:
 				row +=1
 				col = 1
+				
 			
 			amount.global_position = Vector2(131 + (310* (col)), 70 +(65 * (row)))
 			amount.name = str(i)

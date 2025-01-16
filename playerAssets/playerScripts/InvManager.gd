@@ -6,6 +6,7 @@ extends Node2D
 @onready var player = get_parent().get_parent()
 @onready var craftingCombo1 = $crafting/craftingInventory/combo1
 @onready var craftingCombo2 = $crafting/craftingInventory/combo2
+@onready var craftingResult = $crafting/craftingInventory/resultText
 @onready var armorDisplay = $inventory/equipment/armorEquipped
 @onready var invHead = $inventory/equipment/armorEquipped/headArmor
 @onready var invChest = $inventory/equipment/armorEquipped/chestArmor
@@ -56,8 +57,8 @@ func _on_unequip_pressed():
 									player.inventory[c] +=1
 								else:
 									player.inventory[i] = 1
+							craftingResult.text = "crafted " + i
 							
-							print(player.inventory)
 							inv.checkInventory()
 func _on_use_pressed():
 	inv.itemSelected = inv.get_selected_items()[0]
