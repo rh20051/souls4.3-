@@ -40,7 +40,7 @@ var running = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var inventory = {"mushroom":1, "herb":2, "item1":2, "item3":4, "item2":1, "item4":7}
+var inventory = {"mushroom":1, "herb":2, "item1":2, "item3":4, "potion":1, "item4":7}
 var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
 var weaponInventory = ["longsword", "shield", "flamberge", "lamp"]
@@ -238,8 +238,21 @@ func parryEnd():
 
 
 func consume(item):
-	if item.is_in_group("healingItem"):
-		life += item.restoredLife
+	if item in Global.consumables:
+		if Global.consumables[item][2] == "consume":
+			life += Global.consumables[item][0]
+			inventory[item] -=1
+			if inventory[item] < 1:
+				for a in inv.get_children():
+					if a.name == item:
+						a.queue_free()
+				inventory.erase(item)
+				for i in inv.get_item_count():
+					if inv.get_item_text(i) == item:
+						inv.remove_item(i)
+				
+				
+			
 
 
 

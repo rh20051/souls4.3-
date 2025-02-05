@@ -1,4 +1,4 @@
-[gd_scene load_steps=274 format=4 uid="uid://ben3knwvkf60e"]
+[gd_scene load_steps=273 format=4 uid="uid://ben3knwvkf60e"]
 
 [ext_resource type="Script" path="res://playerAssets/playerScripts/player.gd" id="1_rwfsj"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/InvManager.gd" id="2_73tha"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://playerAssets/playerScripts/combo1.gd" id="10_1xepr"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/stateMachine.gd" id="10_xp8io"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerWalking.gd" id="11_3d22o"]
-[ext_resource type="Script" path="res://playerAssets/playerScripts/craftResultText.gd" id="11_jrgv0"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerStandingStill.gd" id="12_2wcao"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerAttack.gd" id="13_hrlp5"]
 [ext_resource type="Script" path="res://playerAssets/playerScripts/playerRolling.gd" id="14_6vrer"]
@@ -422,58 +421,57 @@ size = Vector3(0.562576, 1.75826, 0.767096)
 resource_name = "Material.001"
 cull_mode = 2
 albedo_texture = ExtResource("28_0c42n")
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qexk"]
 resource_name = "underarmor"
 cull_mode = 2
 albedo_texture = ExtResource("29_30rgv")
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wclpr"]
 resource_name = "chest"
 cull_mode = 2
 albedo_texture = ExtResource("30_ctrso")
 metallic = 0.547619
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwriv"]
 resource_name = "arms"
 cull_mode = 2
 albedo_texture = ExtResource("31_ax0ev")
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asixj"]
 resource_name = "shoulders"
 cull_mode = 2
 albedo_texture = ExtResource("32_bh8bw")
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbir1"]
 resource_name = "pants"
 cull_mode = 2
 albedo_texture = ExtResource("33_i04lf")
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hif0q"]
 resource_name = "shoulderplateR"
 cull_mode = 2
 albedo_texture = ExtResource("34_qxn4t")
 metallic = 0.579365
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xge4t"]
 resource_name = "shoulderplateL"
 cull_mode = 2
 albedo_texture = ExtResource("35_ely4f")
 metallic = 0.849639
-texture_filter = 1
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jtd8"]
 resource_name = "hidingmask"
 cull_mode = 2
 albedo_color = Color(0.113632, 0.113632, 0.113632, 1)
-texture_filter = 1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hqulh"]
 resource_name = "MC_Cube_004"
@@ -13052,10 +13050,6 @@ offset_right = 1372.0
 offset_bottom = 734.0
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("11_jrgv0")
-
-[node name="Timer" type="Timer" parent="inventoryScreen/inventoryManager/crafting/craftingInventory/resultText"]
-wait_time = 5.0
 
 [node name="itemDisplay" type="GridContainer" parent="inventoryScreen/inventoryManager"]
 visible = false
@@ -13814,7 +13808,6 @@ libraries = {
 [connection signal="pressed" from="inventoryScreen/inventoryManager/inventory/equipment/VBoxContainer/use" to="inventoryScreen/inventoryManager" method="_on_use_pressed"]
 [connection signal="send" from="inventoryScreen/inventoryManager/crafting" to="inventoryScreen/inventoryManager" method="_on_crafting_send"]
 [connection signal="item_activated" from="inventoryScreen/inventoryManager/crafting/craftingInventory" to="inventoryScreen/inventoryManager/crafting" method="onCraftInvItemActivated"]
-[connection signal="timeout" from="inventoryScreen/inventoryManager/crafting/craftingInventory/resultText/Timer" to="inventoryScreen/inventoryManager/crafting/craftingInventory/resultText" method="_on_timer_timeout"]
 [connection signal="area_entered" from="pickupArea" to="." method="_on_pickup_area_area_entered"]
 [connection signal="area_exited" from="pickupArea" to="." method="_on_pickup_area_area_exited"]
 [connection signal="timeout" from="rallyTimer" to="." method="_on_rally_timer_timeout"]

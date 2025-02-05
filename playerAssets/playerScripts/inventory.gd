@@ -22,8 +22,10 @@ var invOpen = false
 var invItemSelected
 var craftItemSelected
 var inventoryCycle = 0
+var invLength
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	invLength = len(player.inventory)
 	checkInventory()
 
 
@@ -64,6 +66,7 @@ func _physics_process(delta: float) -> void:
 					lWepInv.hide()
 					armorDisplay.grab_focus()
 			elif inventoryCycle == 0:
+					
 					self.show()
 					weaponDisplay.hide()
 					craftingInventory.hide()
@@ -194,8 +197,10 @@ func _on_item_activated(index):
 	else:
 		use.disabled = false
 func checkInventory():
+	invLength = len(player.inventory)
+	rearrangeQuantityLabels(invLength)
 	var addArmor = true
-	var row = 0
+	var row = -1
 	var armorInventoryLength = len(player.acquiredArmor) * 4
 
 	for i in range(len(player.acquiredArmor)):
@@ -221,7 +226,6 @@ func checkInventory():
 		itemNotAdded = true
 		if i in Global.inventoryDisplays:
 			for a in range(0, item_count):
-				print(i)
 				if self.get_item_text(a) == i:
 					itemNotAdded = false
 					
@@ -237,15 +241,21 @@ func checkInventory():
 			self.add_child(amount)
 			var col = lastidx
 			amount.text = str(player.inventory[i])
-			col +=1
-			if lastidx / 5 == 1.0:
-				row +=1
-				col = 1
-				
-			
+			row = lastidx / 5
+			col = (lastidx % 5) +1
 			amount.global_position = Vector2(131 + (310* (col)), 70 +(65 * (row)))
 			amount.name = str(i)
 				
 			if i in Global.craftingMaterials:
 				craftingInventory.add_item(str(i), texture, true)
 			
+func rearrangeQuantityLabels(length):
+	var idx
+	for i in self.get_item_count():
+		var item = self.get_item_text(i)
+		idx = i
+		for a in self.get_children():
+			if a.name == item:
+				var row = idx /5
+				var col = (idx % 5) + 1
+				a.global_position = Vector2(131 + (310* (col)), 70 +(65 * (row)))

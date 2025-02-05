@@ -40,6 +40,7 @@ roughness = 0.5
 resource_name = "roof"
 cull_mode = 2
 albedo_texture = ExtResource("6_tn3uo")
+metallic_specular = 0.0
 roughness = 0.5
 normal_enabled = true
 normal_texture = ExtResource("7_48xn1")

@@ -58,15 +58,18 @@ func _on_unequip_pressed():
 								else:
 									player.inventory[i] = 1
 							craftingResult.text = "crafted " + i
+							craftingResult.get_node("Timer").start(5)
+							craftingCombo1.comboComplete()
+							craftingCombo2.comboComplete()
 							
 							inv.checkInventory()
 func _on_use_pressed():
 	inv.itemSelected = inv.get_selected_items()[0]
 	inv.itemSelected = inv.get_item_text(inv.itemSelected)
 	inv.invOpen = false
-	var item = Global.consumables[inv.itemSelected][0].instantiate()
-	player.leftwep.add_child(item)
+	var item = inv.itemSelected
 	player.consume(item)
+	inv.checkInventory()
 
 func _on_equip_pressed():
 	if equip.text != "add":
