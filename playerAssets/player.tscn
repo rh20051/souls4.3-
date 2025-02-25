@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://1ali1sdq4nv2" path="res://playerAssets/texturesAndDependencies/MC_feet_BaseColor.png" id="41_fvyyx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_076op"]
+radius = 0.410706
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_urgip"]
 texture = ExtResource("2_iokfa")
