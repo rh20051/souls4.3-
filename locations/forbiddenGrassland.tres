@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=23 format=3 uid="uid://buimq57ldh5s1"]
 
 [ext_resource type="Texture2D" uid="uid://dp7d144ase84e" path="res://locations/dependencies/Ground003_9K_Color.jpg" id="1_jo3u1"]
-[ext_resource type="Texture2D" uid="uid://clkfwdbirucuu" path="res://locations/dependencies/newerchapel_stone.jpg" id="2_67ks4"]
+[ext_resource type="Texture2D" uid="uid://clkfwdbirucuu" path="res://currentlyUnused/dependencies/newerchapel_stone.jpg" id="2_67ks4"]
 [ext_resource type="Texture2D" uid="uid://dtb80vqv5phc7" path="res://locations/dependencies/grassShade.png" id="2_e83qc"]
 
 [sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_0iai1"]
@@ -208,7 +208,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1036.94, 98.354)
 modes/depth_draw = 1
 modes/cull = 2
 modes/specular = 2

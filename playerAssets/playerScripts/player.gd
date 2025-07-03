@@ -41,7 +41,7 @@ var running = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var inventory = {"mushroom":1, "herb":2, "item1":2, "item3":4, "potion":1, "item4":7}
-var equippedArmor = {"chest": "flutedChest", "hands": "flutedGauntlets", "legs": "flutedLegs", "head": "flutedHead"}
+var equippedArmor = {"chest": "nakedChest", "hands": "nakedGauntlets", "legs": "nakedLegs", "head": "nakedHead"}
 var armorCatagories = ["chest", "hands", "legs", "head"]
 var weaponInventory = ["longsword", "shield", "flamberge", "lamp"]
 var acquiredArmor = [["flutedChest", "flutedGauntlets", "flutedHead", "flutedLegs"], ["nakedChest", "nakedGauntlets", "nakedHead", "nakedLegs"]]

@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bofhfb3bbhpho"
+uid="uid://2bteutthnwea"
 path.s3tc="res://.godot/imported/flamberge_material_BaseColor.png-e0ec4d1c74779a4714941efef4c76d0e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "179f4bd5d76444457bf7af609f4e3865"
 }
 
 [deps]

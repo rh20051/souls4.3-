@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5dt7ctuootns"
+uid="uid://c12p31eadfsy1"
 path.s3tc="res://.godot/imported/soldieranimsupdate_shawl_BaseColor.png-2fe6cf424b083507b4e664e98827873b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "afd9f88e2d067cc5ddad3e7f2aeac8f2"
 }
 
 [deps]

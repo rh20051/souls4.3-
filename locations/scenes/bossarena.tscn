@@ -1,10 +1,10 @@
 [gd_scene load_steps=24 format=4 uid="uid://ccj6jaxgjifac"]
 
-[ext_resource type="Texture2D" uid="uid://db6i0a4s2ls6h" path="res://locations/dependencies/bossarena_material_BaseColor.png" id="1_am0xe"]
-[ext_resource type="Texture2D" uid="uid://nae44b8vvn0x" path="res://locations/dependencies/bossarena_dog1_BaseColor.png" id="2_70dsr"]
-[ext_resource type="Texture2D" uid="uid://b5dmy1pb52w4h" path="res://locations/dependencies/bossarena_window1_BaseColor.png" id="3_e2tfg"]
-[ext_resource type="Texture2D" uid="uid://juws1p4djmr8" path="res://locations/dependencies/bossarena_chains_BaseColor.png" id="4_qagkh"]
-[ext_resource type="Texture2D" uid="uid://dkrsy8qx1pftq" path="res://locations/dependencies/bossarena_lamps_BaseColor.png" id="5_jg6t8"]
+[ext_resource type="Texture2D" uid="uid://db6i0a4s2ls6h" path="res://currentlyUnused/dependencies/bossarena_material_BaseColor.png" id="1_am0xe"]
+[ext_resource type="Texture2D" uid="uid://nae44b8vvn0x" path="res://currentlyUnused/dependencies/bossarena_dog1_BaseColor.png" id="2_70dsr"]
+[ext_resource type="Texture2D" uid="uid://b5dmy1pb52w4h" path="res://currentlyUnused/dependencies/bossarena_window1_BaseColor.png" id="3_e2tfg"]
+[ext_resource type="Texture2D" uid="uid://juws1p4djmr8" path="res://currentlyUnused/dependencies/bossarena_chains_BaseColor.png" id="4_qagkh"]
+[ext_resource type="Texture2D" uid="uid://dkrsy8qx1pftq" path="res://currentlyUnused/dependencies/bossarena_lamps_BaseColor.png" id="5_jg6t8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oggnt"]
 resource_name = "material"

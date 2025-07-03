@@ -1,15 +1,10 @@
 extends State
 class_name soldierIdle
 @export var enemy: CharacterBody3D
-var animPlayer
+@export var animTree: AnimationTree
 
 
-func _ready():
-	if enemy.type == "S":
-		animPlayer = enemy.get_node("SAnimationPlayer")
-	else:
-		animPlayer= enemy.get_node("SNSAnimationPlayer")
-	animPlayer.play("default")
+
 	
 func physics_update(_delta: float):
 	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle + deg_to_rad(180), _delta * 3)

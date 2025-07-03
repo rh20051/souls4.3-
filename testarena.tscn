@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8auwwwipl5qn"]
+
+[ext_resource type="PackedScene" uid="uid://ben3knwvkf60e" path="res://playerAssets/player.tscn" id="1_bgnwv"]
+[ext_resource type="PackedScene" uid="uid://vslx3bq44l2n" path="res://locations/enemies/footsoldier.tscn" id="2_5gip8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_towy3"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7qrx7"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(17.9224, 0, 0, 0, 0.417292, 0, 0, 0, 20.4288, 0, 0, -6.69667)
+mesh = SubResource("BoxMesh_towy3")
+
+[node name="player" parent="." instance=ExtResource("1_bgnwv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.280191, -0.655)
+
+[node name="Node3D" parent="." instance=ExtResource("2_5gip8")]
+transform = Transform3D(-0.499799, 0, 0.014179, 0, 0.5, 0, -0.014179, 0, -0.499799, 0.257202, 1.86331, -14.1371)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(17.9224, 0, 0, 0, 0.417292, 0, 0, 0, 20.4288, 0, 0, -6.69667)
+shape = SubResource("ConcavePolygonShape3D_7qrx7")

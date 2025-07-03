@@ -1,0 +1,170 @@
+[gd_scene load_steps=15 format=4 uid="uid://cg7isu7jw06s3"]
+
+[ext_resource type="Material" uid="uid://bgng3chpjb3if" path="res://currentlyUnused/dependencies/sunkenTemple/sunkenCeiling.tres" id="1_dfwv7"]
+[ext_resource type="Shader" path="res://scripts/sunkenTunnel.gdshader" id="1_f5u57"]
+[ext_resource type="Texture2D" uid="uid://bddx8nrqfis1u" path="res://locations/dependencies/bricks.png" id="2_d0igh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghgra"]
+size = Vector3(1.98706, 2.03882, 0.115723)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fbl7s"]
+size = Vector3(1.98466, 2.54391, 0.0186768)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngotu"]
+size = Vector3(2.01175, 0.0793457, 1.98535)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m864k"]
+resource_name = "ceiling.002"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t06a"]
+resource_name = "walls.001"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxa5t"]
+resource_name = "floor.002"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6vkmn"]
+_surfaces = [{
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 2, 4.00399),
+"format": 34896613377,
+"index_count": 27,
+"index_data": PackedByteArray("BAAAAAEABAACAAAACQAFAAYACQAIAAUACgAIAAkABAAKAAIACAAKAAQACAADAAcACAAEAAMA"),
+"name": "ceiling.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("PwD/////AABdgP//v/8AAAAA//8ggAAAHYAAAOF/AAAdgP//4X8AAP/////efwAAv////wAAAADhfwAAHYAAAOF///8dgAAAoX///z8AAAA3H///ZyQAAA==")
+}, {
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 2, 4.00399),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AgAHAAMAAgAGAAcABAABAAUABAAAAAEACgAPAAsACgAOAA8ADAAJAA0ADAAIAAkAEQAFABAAEQAEAAUADgAQAA8ADgARABAA"),
+"name": "walls.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("PwAAAP//AAA/AP////8AAF2AAAC//wAAXYD//7//AAAAAAAAIIAAAAAA//8ggAAAHYAAAOF/AAAdgP//4X8AAP//AADefwAA/////95/AAC//wAAAAAAAL////8AAAAA4X8AAB2AAADhf///HYAAAKF/AAA/AAAAoX///z8AAAA3H///ZyQAADcfAABnJAAA")
+}, {
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 1e-05, 4.00399),
+"format": 34896613377,
+"index_count": 21,
+"index_data": PackedByteArray("AQACAAMAAQAAAAIABQAGAAcABQAEAAYABgAIAAcACAADAAIABgADAAgA"),
+"name": "floor.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("PwAAAP//AABdgAAAv/8AAAAAAAAggAAAHYAAAOF/AAD//wAA3n8AAL//AAAAAAAA4X8AAB2AAAChfwAAPwAAADcfAABnJAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f32ed"]
+resource_name = "sunkenTemple1_Cube_018"
+_surfaces = [{
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 2, 4.00399),
+"attribute_data": PackedByteArray("dd+Kt3Xfw7E75Yq33JRnBTvlw7HclC4LOeX/q//q/6vflGcFOeXGsd+ULgv/6saxX+kftg=="),
+"format": 34896613399,
+"index_count": 27,
+"index_data": PackedByteArray("BAAAAAEABAACAAAACwAGAAcACwAJAAYADAAJAAsABAAMAAIACQAMAAQACgADAAgACgAFAAMA"),
+"material": SubResource("StandardMaterial3D_m864k"),
+"name": "ceiling.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("PwD/////YNVdgP//v/9g1QAA//8ggGDVHYAAAOF///8dgP//4X9j1R2A///hf////////95/YNW/////AABg1eF/AAAdgP//4X///x2AY9Xhf///HYD//6F///8/AGDVNx///2ckY9VjVU1VY1VNVWNVTVWOpf9/Z1VLVY6l/39jVU1VY1VNVY6l/39nVUtVjqX/f2NVTVVnVUtV")
+}, {
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 2, 4.00399),
+"attribute_data": PackedByteArray("vloyN/dUMjf9FWcF/RUuC75afzG+Wn8x91R/MfdUfzHDG2cFwxsuC1ksZwVZLC4LvlrqKfdU6imSJmcFkiYuC75a3Sq+Wt0q91TdKvdU3Sr3VC4t91QuLb5aLi2+Wi4t"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgAJAAMAAgAIAAkABQABAAcABQAAAAEADAASAA0ADAAQABIADgALAA8ADgAKAAsAFwAGABUAFwAEAAYAEQAUABMAEQAWABQA"),
+"material": SubResource("StandardMaterial3D_6t06a"),
+"name": "walls.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("PwAAAP//X9U/AP////9f1V2AAAC/////XYD//7////8AAAAAIIAYzgAAAAAggF/VAAD//yCAGM4AAP//IIBf1R2AAADhf///HYD//+F//////wAA3n/////////ef///v/8AAAAA/7+/////AAD/v+F/AAAdgP//4X///x2A//+hfwAAPwD/v6F/AAA/AEzBoX///z8A/7+hf///PwBMwTcf//9nJEzBNx///2ckGM43HwAAZyRMwTcfAABnJBjOsKpOVbCqTlUPQP9/D0D/f7GlTVqwqk5VsaVNWrCqTlUPQP9/D0D/f///HoD//x6AHoDgfx6A4H///x6A//8egB6A4H8NkfFuHoDgfw2R8W4NkfFusaVNWg2R8W6xpU1a")
+}, {
+"aabb": AABB(4.5433, -0.87964, -3.26766, 3.99628, 1e-05, 4.00399),
+"attribute_data": PackedByteArray("dd8M73Xf0/Q75QzvO+XT9Dnll/r/6pf6OeXQ9P/q0PRf6Xfw"),
+"format": 34896613399,
+"index_count": 21,
+"index_data": PackedByteArray("AQACAAMAAQAAAAIABQAGAAcABQAEAAYABgAIAAcACAADAAIABgADAAgA"),
+"material": SubResource("StandardMaterial3D_jxa5t"),
+"name": "floor.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("PwAAAP//YNVdgAAAv/9g1QAAAAAggGDVHYAAAOF/X9X//wAA3n9g1b//AAAAAGDV4X8AAB2AX9WhfwAAPwBg1TcfAABnJF/VTdWcKk3VnCpN1ZwqTtWdKk3VnCpN1ZwqTtWdKk3VnCpO1Z0q")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6vkmn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_36vse"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0aq7x"]
+noise = SubResource("FastNoiseLite_36vse")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d55i2"]
+render_priority = 0
+shader = ExtResource("1_f5u57")
+shader_parameter/scale_uniform = Vector2(40, 40)
+shader_parameter/rotate = 0.08
+shader_parameter/noiseRotate = 0.34
+shader_parameter/bricks = ExtResource("2_d0igh")
+shader_parameter/noise = SubResource("NoiseTexture2D_0aq7x")
+
+[node name="sunkenCorner" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 7.48716, 0.12036, 4.58319)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000857592, -0.000854485, -1.05052)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.995401, -0.241171, -1.99958)
+shape = SubResource("BoxShape3D_fbl7s")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000857592, -0.000854485, 1.05425)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.947679, 0, 0.319224, 0, 1, 0, -0.319224, 0, 0.947679, 1.85289, -0.000854485, 0.73958)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.365608, 0, 0.930769, 0, 1, 0, -0.930769, 0, 0.365608, 2.74443, -0.000854366, -0.277644)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.00438063, 0, 0.99999, 0, 1, 0, -0.99999, 0, -0.00438063, 3.03431, -0.000854485, -1.98063)
+shape = SubResource("BoxShape3D_ghgra")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99921, -1.01188, -2.01002)
+shape = SubResource("BoxShape3D_ngotu")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00539255, -1.01188, -0.0173037)
+shape = SubResource("BoxShape3D_ngotu")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01014, -1.01188, -0.0173037)
+shape = SubResource("BoxShape3D_ngotu")
+
+[node name="turnRight2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 2.94, -0.1, -10.582)
+mesh = SubResource("ArrayMesh_f32ed")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_dfwv7")
+surface_material_override/1 = SubResource("ShaderMaterial_d55i2")

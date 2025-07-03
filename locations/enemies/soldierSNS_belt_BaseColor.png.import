@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oa0te1fgs8ao"
+uid="uid://b8kv5yd6h3ft"
 path.s3tc="res://.godot/imported/soldierSNS_belt_BaseColor.png-375aced0437eb092763959cb115ff11e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "2d261b0f183a09968d6619fd43f94d06"
 }
 
 [deps]

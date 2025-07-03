@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bxq4gnlr6682o"
+path.s3tc="res://.godot/imported/MC_neck Base Color.png-25842170f547c742b1be7fe18f73b415.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b60ae90ce00e4a5aae7ff0310869bbbf"
+}
+
+[deps]
+
+source_file="res://playerAssets/texturesAndDependencies/MC_neck Base Color.png"
+dest_files=["res://.godot/imported/MC_neck Base Color.png-25842170f547c742b1be7fe18f73b415.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

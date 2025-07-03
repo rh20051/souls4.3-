@@ -6,7 +6,7 @@ class_name playerWalking
 @onready var cam = player.get_node("cameraPoint")
 func enter():
 	animTree["parameters/conditions/running"] = false
-	player.SPEED = 5
+	player.SPEED = 3
 func physics_update(delta: float):
 
 	if cam.position.x != -1 * player.direction.x:
@@ -23,7 +23,7 @@ func physics_update(delta: float):
 	if player.rolling and player.stamina > 0:
 		transitioned.emit(self,"playerRolling")
 	if player.running and !player.lockedOn and !player.rolling :
-		player.SPEED = 8
+		player.SPEED = 6
 		animTree["parameters/conditions/walking"] = false
 		animTree["parameters/conditions/running"] = true
 		animTree["parameters/StateMachine/conditions/running"] = true
@@ -34,7 +34,7 @@ func physics_update(delta: float):
 		animTree["parameters/StateMachine/conditions/running"] = false
 		animTree["parameters/StateMachine/conditions/walking"] = true
 		animTree["parameters/conditions/walking"] = true
-		player.SPEED = 5
+		player.SPEED = 3.5
 	elif !player.lockedOn:
 		transitioned.emit(self,"playerIdle")
 

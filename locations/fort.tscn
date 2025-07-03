@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=4 uid="uid://bhpwun3vob3k8"]
 
-[ext_resource type="Texture2D" uid="uid://cl7b0nmku1yg" path="res://locations/dependencies/realFort_grey_stone_path_diff_1k.jpg" id="1_wq7rs"]
+[ext_resource type="Texture2D" uid="uid://d362rspyb1na6" path="res://locations/dependencies/realFort_grey_stone_path_diff_1k.jpg" id="1_wq7rs"]
 [ext_resource type="Texture2D" uid="uid://b7w86y6kbux1h" path="res://locations/dependencies/shadowTexRoofEdges.png" id="2_hyhan"]
 [ext_resource type="Texture2D" uid="uid://clw5ufqlrwu4q" path="res://locations/dependencies/realFort_stone_brick_wall_001_diff_1k.jpg" id="2_ryhmi"]
 [ext_resource type="Shader" uid="uid://bxuaqroh2g72" path="res://outerWalls.tres" id="3_gqkha"]

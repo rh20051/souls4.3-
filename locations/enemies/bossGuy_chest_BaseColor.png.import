@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq513y8ooj16i"
+uid="uid://bcpbgsy3scvfc"
 path.s3tc="res://.godot/imported/bossGuy_chest_BaseColor.png-ef255cd240898249d762d57d912d8dff.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "93e663aed79db9ea84ccb6fdebc681a3"
 }
 
 [deps]

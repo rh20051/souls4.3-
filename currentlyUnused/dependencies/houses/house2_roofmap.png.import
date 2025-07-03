@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b7tr5tc3gi1f1"
+path.s3tc="res://.godot/imported/house2_roofmap.png-ee65032b97db93f7f66060eed11e3a6d.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "eff731ed32ca8a511dc1d6e5262aad96"
+}
+
+[deps]
+
+source_file="res://currentlyUnused/dependencies/houses/house2_roofmap.png"
+dest_files=["res://.godot/imported/house2_roofmap.png-ee65032b97db93f7f66060eed11e3a6d.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://locations/houses/house2_roofmap.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

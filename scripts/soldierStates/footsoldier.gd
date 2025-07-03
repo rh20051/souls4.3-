@@ -7,6 +7,7 @@ var direction
 var damaged = false
 var angle
 @export var type: String
+
 func _ready() -> void:
 	if type == "S":
 		$Armature/Skeleton3D/BoneAttachment3D/sword.visible = false

@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl7b0nmku1yg"
+uid="uid://d362rspyb1na6"
 path.s3tc="res://.godot/imported/realFort_grey_stone_path_diff_1k.jpg-d8db9967e207968557e43f1e7f1b0aa1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "771deff6a240064df2cb31af90dd1f29"
 }
 
 [deps]
