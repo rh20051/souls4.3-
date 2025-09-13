@@ -21,11 +21,11 @@ mesh = SubResource("BoxMesh_towy3")
 [node name="player" parent="." instance=ExtResource("1_bgnwv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.280191, -0.655)
 
-[node name="Node3D" parent="." instance=ExtResource("2_5gip8")]
-transform = Transform3D(-0.499799, 0, 0.014179, 0, 0.5, 0, -0.014179, 0, -0.499799, 0.257202, 1.86331, -14.1371)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(17.9224, 0, 0, 0, 0.417292, 0, 0, 0, 20.4288, 0, 0, -6.69667)
 shape = SubResource("ConcavePolygonShape3D_7qrx7")
+
+[node name="Node3D" parent="." instance=ExtResource("2_5gip8")]
+transform = Transform3D(-0.509795, 0, 0.0144625, 0, 0.51, 0, -0.0144625, 0, -0.509795, 0, 2.09358, -11.8958)

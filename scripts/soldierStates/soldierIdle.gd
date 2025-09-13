@@ -4,7 +4,8 @@ class_name soldierIdle
 @export var animTree: AnimationTree
 
 
-
+func _ready():
+	animTree["parameters/conditions/idle"] = true
 	
 func physics_update(_delta: float):
 	enemy.rotation.y = lerp_angle(enemy.rotation.y, enemy.angle + deg_to_rad(180), _delta * 3)
