@@ -2,7 +2,7 @@ extends CharacterBody3D
 var life = 100
 var player
 var target
-const SPEED = 5.0
+const SPEED = 4.0
 var direction 
 var damaged = false
 var angle
